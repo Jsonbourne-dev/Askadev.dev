@@ -1,0 +1,95 @@
+/* QuestionContainer.css */
+.question-box {
+    font-family: 'Press Start 2P', cursive;
+    border: 4px solid #007bff;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 16px;
+    box-shadow: 0 0 0 4px #ffc107;
+    background-color: #f8f9fa;
+    color: #007bff;
+    position: relative;
+    width: 1000px;
+    height: auto; /* Adjusted to auto to fit content */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.question-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed #007bff;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+.date {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.question-text {
+    margin: 12px 0;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.question-box-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stats-item {
+    margin-right: 8px;
+    font-size: 14px;
+    color: #ffc107;
+}
+
+.stats-item i {
+    margin-right: 4px;
+}
+
+.flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px; /* Adds space between flags */
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+}
+
+.flag-item {
+    background-color: #6c757d; /* Gray background */
+    color: #f8f9fa; /* Light text color */
+    border: 1px solid #6c757d; /* Matching border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 4px 8px;
+    font-size: 14px;
+    margin-left: 4px;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+.question-box-footer i {
+    color: #007bff;
+}

@@ -1,0 +1,125 @@
+.app-bar {
+  background-color: black;
+  height: 100px;
+  width: calc(100% - 400px); 
+  position: fixed;
+  top: 0;
+  left: 200px; 
+  border-bottom: 3px solid yellow; 
+  padding: 0 20px; 
+  box-sizing: border-box; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.logo {
+  height: 50px; 
+}
+
+.app-bar-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  position: relative;
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  border-radius: 20px;
+  border: 2px solid #f1c40f;
+  padding: 5px 10px;
+  width: 50%;
+  max-width: 800px;
+  box-sizing: border-box;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 40px;
+  border: none; 
+  background-color: transparent; 
+  color: #00FFFF; 
+  font-size: 20px; /* Increased font size for larger caret */
+  outline: none;
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.7), 0 0 4px rgba(255, 255, 255, 0.5), 0 0 6px rgba(255, 255, 255, 0.3);
+  transition: border-color 0.2s;
+  position: relative; /* Required for pseudo-element positioning */
+}
+
+.search-input::placeholder {
+  color: #f1c40f; 
+}
+
+.search-input:focus {
+  border-bottom-color: #e1b91e; 
+}
+
+.search-input::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10px; /* Adjust as needed */
+  height: 1em; /* Adjust as needed */
+  width: 2px; /* Adjust as needed */
+  background-color: #00FFFF; /* Same as text color for consistency */
+  transform: translateY(-50%);
+  transition: opacity 0.1s;
+}
+
+.search-input:focus::before {
+  opacity: 1;
+}
+
+.search-icon {
+  color: white;
+  font-size: 24px; 
+  margin-right: 10px; 
+}
+
+.user-button {
+  background: transparent; 
+  border: none;
+  color: #f1c40f;
+  font-size: 25px;
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: none;
+  border-bottom: 2.3px solid #f1c40f; 
+  padding: 5px 15px;
+  margin-left: 30px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.user-button:hover {
+  color: #00c7b6;
+  border-bottom-color: #00ffbf;
+}
+
+.retro-key {
+  background: #f1c40f;
+  border: 4px solid #e1b91e;
+  border-radius: 6px;
+  color: #000000 !important;
+  padding: 12px 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  margin-left: auto;
+}
+
+.retro-key:active {
+  background: #e1b91e;
+  border-color: #d0a10d;
+  box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
+  transform: translateY(2px);
+}
+

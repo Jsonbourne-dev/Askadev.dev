@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './Welcome';
-
+import RouterPage from './routes';
 
 ReactDOM.render(
-  <App />,
+  <RouterPage />,
   document.getElementById('root')
 );

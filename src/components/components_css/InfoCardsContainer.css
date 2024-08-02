@@ -1,0 +1,9 @@
+.info-cards-container {
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+    padding: 20px;
+    margin: 130px 200px; 
+    box-sizing: border-box;
+  }
+  
