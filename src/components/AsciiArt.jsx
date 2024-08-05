@@ -5,7 +5,7 @@ import './components_css/AsciiArt.css';
 const AsciiArt = () => (
   <div className="ascii-art-container">
     <pre className="ascii-art">
-      {`                                 ....
+      {`                           ....
                                 .'' .'''
 .                             .'   :
 \\                          .:    :

@@ -1,14 +1,27 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './components_css/QuestionContainer.css';
 
-const QuestionBox = ({ date, title, questionText, flags = [], votes, answers, views }) => {
-  // Ensure flags is an array
-  const flagsArray = Array.isArray(flags) ? flags : [];
+const QuestionContainer = ({ date, title, questionText, flags = [], votes, answers, views, code, DID }) => {
+  const navigate = useNavigate();
 
-  const displayedFlags = flagsArray.slice(0, 4);
+  const handleClick = () => {
+    // Increment view count in localStorage
+    const questions = JSON.parse(localStorage.getItem('questions')) || [];
+    const updatedQuestions = questions.map(q => {
+      if (q.DID === DID) {
+        return { ...q, views: q.views + 1 };
+      }
+      return q;
+    });
+    localStorage.setItem('questions', JSON.stringify(updatedQuestions));
+
+
+    navigate(`/question/${DID}`);
+  };
 
   return (
-    <div className="question-box">
+    <div className="question-box" onClick={handleClick}>
       <div className="question-box-header">
         <span className="date">{new Date(date).toLocaleDateString()}</span>
         <h2 className="title">{title}</h2>
@@ -20,14 +33,14 @@ const QuestionBox = ({ date, title, questionText, flags = [], votes, answers, vi
             <i className="fas fa-thumbs-up"></i> {votes} votes
           </span>
           <span className="stats-item">
-            <i className="fas fa-reply"></i> {answers} answers
+            <i className="fas fa-reply"></i> {answers.length} answers
           </span>
           <span className="stats-item">
             <i className="fas fa-eye"></i> {views} views
           </span>
         </div>
         <div className="flags">
-          {displayedFlags.map((flag, index) => (
+          {flags.slice(0, 4).map((flag, index) => (
             <span key={index} className="flag-item">#{flag}</span>
           ))}
         </div>
@@ -36,4 +49,4 @@ const QuestionBox = ({ date, title, questionText, flags = [], votes, answers, vi
   );
 };
 
-export default QuestionBox;
+export default QuestionContainer;

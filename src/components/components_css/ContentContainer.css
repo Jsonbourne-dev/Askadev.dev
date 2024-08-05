@@ -14,7 +14,7 @@
 }
 
 .title-text {
-  color: #00FFFF; 
+  color: #00FFFF;
   font-family: 'Courier New', Courier, monospace; 
   font-size: 56px; 
   font-weight: bold; 
@@ -24,7 +24,7 @@
 }
 
 .description-text {
-  color: #00FFFF; 
+  color: #00FFFF;
   font-family: 'Courier New', Courier, monospace; 
   font-size: 22px; 
   line-height: 1.6; 
@@ -34,17 +34,43 @@
 }
 
 .highlight {
-  color: #FFFF00; 
-  background-color: #333333; 
+  color: #FFFF00;
+  background-color: #333333;
   padding: 2px 4px; 
   border-radius: 3px; 
   font-weight: bold; 
 }
 
+
+@media (max-width: 900px) {
+  .content-container {
+      margin: 100px 20px 20px 20px; 
+      width: calc(100% - 40px); 
+      flex-direction: column; 
+      align-items: center;
+  }
+
+  .text-container {
+      margin-right: 0; 
+      max-width: 100%; 
+      text-align: center; 
+  }
+
+  .title-text {
+      font-size: 32px; 
+      text-align: center; 
+  }
+
+  .description-text {
+      font-size: 18px; 
+      text-align: center; 
+  }
+}
+
 @media (max-width: 500px) {
   .content-container {
-      margin: 20px auto; 
-      width: 90%; 
+      margin: 80px 10px 10px 10px; 
+      width: calc(100% - 20px); 
       flex-direction: column; 
       align-items: center;
   }

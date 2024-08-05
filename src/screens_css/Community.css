@@ -7,6 +7,7 @@
   padding-top: 100px;
   align-items: center;
 }
+
 .question-panel-container {
   width: 100%;
   max-width: 1000px;
@@ -24,11 +25,12 @@
 .questions-container {
   width: 100%;
   max-width: 1300px;
-  position: relative;
   padding-bottom: 60px;
   padding-left: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  position: relative; 
 }
 
 .questions-section {
@@ -42,6 +44,8 @@
   position: absolute;
   bottom: 10px;
   left: 150px;
+  display: flex;
+  justify-content: flex-start; 
 }
 
 .pagination {
@@ -78,4 +82,17 @@
 
 .footer {
   padding: 20px;
+}
+
+
+@media (max-width: 900px) {
+  .pagination-container {
+    left: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pagination-container {
+    left: 20px; 
+  }
 }

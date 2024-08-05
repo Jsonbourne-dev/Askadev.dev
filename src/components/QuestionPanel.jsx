@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './components_css/QuestionPanel.css';
 
-const QuestionsPanel = ({ onTabChange, onAskQuestion }) => {
+const QuestionsPanel = ({ onTabChange }) => {
   const [selectedTab, setSelectedTab] = useState('Latest');
+  const navigate = useNavigate();
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
     onTabChange(tab);
+  };
+
+  const generateRandomDID = () => {
+    return 'DID-' + Math.random().toString(36).substr(2, 16).toUpperCase();
+  };
+
+  const handleAskQuestion = () => {
+    let did = localStorage.getItem('DID');
+    
+    if (!did) {
+      did = generateRandomDID();
+      localStorage.setItem('DID', did);
+    }
+
+    navigate(`/askquestion/${did}`);
   };
 
   const getTitle = () => {
@@ -31,7 +48,7 @@ const QuestionsPanel = ({ onTabChange, onAskQuestion }) => {
         <div className="questions-count">140,233 Questions</div>
       </div>
       <div className="tabs-and-button-container">
-        <button className="ask-question-button" onClick={onAskQuestion}>Ask Question</button>
+        <button className="ask-question-button" onClick={handleAskQuestion}>Ask Question</button>
         <div className="tabs">
           {['Latest', 'Old', 'Unanswered', 'Bountied'].map((tab) => (
             <div
