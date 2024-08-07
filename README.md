@@ -31,5 +31,7 @@ npx cypress open
 ## To-Do List
 
 - **Fix Redux Store:** Ensure the Redux store is working correctly.
+- 
 - **CSS Cleanup:** Reorganize CSS files to follow a consistent order, color palette, and font sizes.
+- 
 - **Cypress Tests:** Complete and properly implement Cypress tests; some tests are currently incomplete or incorrectly configured.
