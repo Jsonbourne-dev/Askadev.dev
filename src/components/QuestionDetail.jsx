@@ -3,24 +3,32 @@ import { useParams, useNavigate } from 'react-router-dom';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-monokai';
+import { useSelector, useDispatch } from 'react-redux';
+import { setQuestions, addAnswer } from '../redux/actions/questionsActions';
 import './components_css/QuestionDetail.css';
 
 const QuestionDetail = () => {
   const { did } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const questions = useSelector(state => state.questions.questions);
   const [question, setQuestion] = useState(null);
   const [answer, setAnswer] = useState('');
   const [code, setCode] = useState('');
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    const questions = JSON.parse(localStorage.getItem('questions')) || [];
+    const storedQuestions = JSON.parse(localStorage.getItem('questions')) || [];
+    dispatch(setQuestions(storedQuestions));
+  }, [dispatch]);
+
+  useEffect(() => {
     const foundQuestion = questions.find(q => q.DID === did);
     if (foundQuestion) {
       foundQuestion.answers = Array.isArray(foundQuestion.answers) ? foundQuestion.answers : [];
       setQuestion(foundQuestion);
     }
-  }, [did]);
+  }, [did, questions]);
 
   const handleSubmitAnswer = () => {
     if (answer.trim() === '' && code.trim() === '') return;
@@ -32,9 +40,10 @@ const QuestionDetail = () => {
       date: new Date().toISOString()
     };
 
-    const questions = JSON.parse(localStorage.getItem('questions')) || [];
+    dispatch(addAnswer(did, newAnswer));
+
     const updatedQuestions = questions.map(q => {
-      if (q.DID === question.DID) {
+      if (q.DID === did) {
         q.answers = Array.isArray(q.answers) ? q.answers : [];
         return {
           ...q,
@@ -45,7 +54,8 @@ const QuestionDetail = () => {
     });
 
     localStorage.setItem('questions', JSON.stringify(updatedQuestions));
-    setQuestion(updatedQuestions.find(q => q.DID === question.DID));
+    dispatch(setQuestions(updatedQuestions));
+    setQuestion(updatedQuestions.find(q => q.DID === did));
     setAnswer('');
     setCode('');
 
@@ -65,7 +75,7 @@ const QuestionDetail = () => {
   return (
     <div className="question-detail-container">
       <div className="left-panel">
-        <button className="back-button" onClick={handleBackClick}>Back</button> {/* Moved inside the left panel */}
+        <button className="back-button" onClick={handleBackClick}>Back</button>
         <div className="question-container">
           <h1 className="question-title">{question.title}</h1>
           <p className="question-date">{new Date(question.date).toLocaleDateString()}</p>
