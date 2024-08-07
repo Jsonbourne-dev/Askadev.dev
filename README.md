@@ -24,9 +24,9 @@ Welcome to Askadev.dev, a platform designed to streamline development. Follow th
 
 4. **To open the Cypress test runner, use the following command:**
 
-```bash
-npx cypress open
-```
+   ```bash
+   npx cypress open
+   ```
 
 ## To-Do List
 
