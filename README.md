@@ -8,25 +8,25 @@ Welcome to Askadev.dev, a platform designed to streamline development. Follow th
 
    ```bash
    git clone https://github.com/Jsonbourne-dev/Askadev.dev.git
-
+   ```
 
 2. **Install Dependencies:**
 
    ```bash
    npm install
-
+   ```
 
 3. **Start the Application:**
 
    ```bash
    npm start
-
+   ```
 
 4. **To open the Cypress test runner, use the following command:**
 
 ```bash
 npx cypress open
-
+```
 
 ## To-Do List
 
