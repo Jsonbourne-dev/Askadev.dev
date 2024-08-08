@@ -1,3 +1,4 @@
+
 .content-container {
   margin-top: 150px; 
   margin-left: 200px; 
@@ -10,7 +11,7 @@
 
 .text-container {
   margin-right: 20px; 
-  max-width: 70%; 
+  max-width: 60%; 
 }
 
 .title-text {
@@ -42,52 +43,52 @@
 }
 
 
-@media (max-width: 900px) {
+@media (max-width: 1600px) {
   .content-container {
-      margin: 100px 20px 20px 20px; 
-      width: calc(100% - 40px); 
-      flex-direction: column; 
-      align-items: center;
+    margin: 100px 20px 20px 20px; 
+    width: calc(100% - 40px); 
+    flex-direction: column; 
+    align-items: center;
   }
 
   .text-container {
-      margin-right: 0; 
-      max-width: 100%; 
-      text-align: center; 
+    margin-right: 0; 
+    max-width: 50%; 
+    text-align: center; 
   }
 
   .title-text {
-      font-size: 32px; 
-      text-align: center; 
+    font-size: 32px; 
+    text-align: center; 
   }
 
   .description-text {
-      font-size: 18px; 
-      text-align: center; 
+    font-size: 18px; 
+    text-align: center; 
   }
 }
 
 @media (max-width: 500px) {
   .content-container {
-      margin: 80px 10px 10px 10px; 
-      width: calc(100% - 20px); 
-      flex-direction: column; 
-      align-items: center;
+    margin: 150px 10px 10px 10px; 
+    width: calc(100% - 20px); 
+    flex-direction: column; 
+    align-items: center;
   }
 
   .text-container {
-      margin-right: 0; 
-      max-width: 100%; 
-      text-align: center; 
+    margin-right: 0; 
+    max-width: 100%; 
+    text-align: center; 
   }
 
   .title-text {
-      font-size: 28px; 
-      text-align: center; 
+    font-size: 28px; 
+    text-align: center; 
   }
 
   .description-text {
-      font-size: 16px; 
-      text-align: center; 
+    font-size: 16px; 
+    text-align: center; 
   }
 }

@@ -3,6 +3,7 @@
   justify-content: center; 
   align-items: center; 
   flex-wrap: wrap;
+  padding: 10px; 
 }
 
 .ascii-art {
@@ -10,17 +11,22 @@
   font-family: 'Courier New', Courier, monospace;
   text-align: left; 
   white-space: pre; 
+  overflow-x: auto; 
+  max-width: 100%; 
 }
+
 
 @media (max-width: 900px) {
   .ascii-art {
     text-align: center;
-    font-size: 0.75em; 
+    font-size: 0.75em;
+    line-height: 1.2;
   }
 }
 
 @media (max-width: 500px) {
   .ascii-art {
     font-size: 0.60em;
+    line-height: 1.2;
   }
 }

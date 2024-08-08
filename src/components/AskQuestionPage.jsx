@@ -44,13 +44,13 @@ const AskQuestionPage = () => {
 
     if (title && questionText) {
       const newQuestion = {
-        id: Date.now(), 
+        id: Date.now(),
         date: new Date().toISOString(),
         title,
         questionText,
         code,
         flags: filteredFlags,
-        DID, 
+        DID,
         votes: 0,
         answers: 0,
         views: 0,
@@ -69,6 +69,10 @@ const AskQuestionPage = () => {
     } else {
       alert("Please fill out the title and question text.");
     }
+  };
+
+  const handleBackClick = () => {
+    navigate('/community');
   };
 
   return (
@@ -127,6 +131,7 @@ const AskQuestionPage = () => {
             <button type="submit" className="aq-submit-button">Submit Question</button>
           </div>
         </form>
+        <button className="aq-back-button" onClick={handleBackClick}>Back to Community</button>
       </div>
     </div>
   );
