@@ -80,6 +80,23 @@ const QuestionDetail = () => {
           <h1 className="question-title">{question.title}</h1>
           <p className="question-date">{new Date(question.date).toLocaleDateString()}</p>
           <p className="question-text">{question.questionText}</p>
+          {question.code && (
+            <div className="ace-editor-container">
+              <AceEditor
+                mode="javascript"
+                theme="monokai"
+                name="questionCodeEditor"
+                value={question.code}
+                readOnly={true}
+                fontSize={14}
+                width="100%"
+                setOptions={{ useWorker: false }}
+                maxLines={Infinity}
+                highlightActiveLine={false}
+                showGutter={false}
+              />
+            </div>
+          )}
           <div className="submit-answer">
             <textarea
               value={answer}
@@ -89,7 +106,7 @@ const QuestionDetail = () => {
             <AceEditor
               mode="javascript"
               theme="monokai"
-              name="codeEditor"
+              name="answerCodeEditor"
               value={code}
               onChange={(newCode) => setCode(newCode)}
               fontSize={14}
@@ -109,7 +126,7 @@ const QuestionDetail = () => {
                     <AceEditor
                       mode="javascript"
                       theme="monokai"
-                      name={`answer-code-${index}`}
+                      name={`answerCodeEditor-${index}`}
                       value={ans.code}
                       readOnly={true}
                       fontSize={14}
@@ -131,7 +148,7 @@ const QuestionDetail = () => {
                 <AceEditor
                   mode="javascript"
                   theme="monokai"
-                  name="message-code"
+                  name="messageCodeEditor"
                   value={message.code}
                   readOnly={true}
                   fontSize={14}
@@ -144,21 +161,6 @@ const QuestionDetail = () => {
               <small>{new Date(message.date).toLocaleDateString()}</small>
             </div>
           )}
-        </div>
-      </div>
-      <div className="right-panel">
-        <div className="ace-editor-container">
-          <AceEditor
-            mode="javascript"
-            theme="monokai"
-            name="codeEditor"
-            value={question ? question.code : ''}
-            readOnly={true}
-            fontSize={14}
-            width="100%"
-            height="100%"
-            setOptions={{ useWorker: false }}
-          />
         </div>
       </div>
     </div>

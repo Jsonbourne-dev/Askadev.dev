@@ -1,70 +1,106 @@
-/* AskQuestionPage.css */
-
 .aq-page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #000000;
-    color: #00FFFF;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 20px;
-  }
-  
-  .aq-form-wrapper {
-    max-width: 800px;
-    width: 100%;
-    background-color: #1a1a1a;
-    border: 2px solid #00FFFF;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-    box-sizing: border-box;
-  }
-  
-  .aq-form-header {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #FFFF00;
-  }
-  
-  .aq-form-item {
-    margin-bottom: 15px;
-  }
-  
-  .aq-form-item input, .aq-form-item textarea {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #00FFFF;
-    border-radius: 5px;
-    background-color: #000000;
-    color: #00FFFF;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-  
-  .aq-form-item input::placeholder, .aq-form-item textarea::placeholder {
-    color: #FFFF00;
-  }
-  
-  .aq-submit-button {
-    background: #FFFF00;
-    border: 4px solid #e1b91e; 
-    border-radius: 6px;
-    color: #000000; 
-    padding: 12px 24px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, border-color 0.2s, transform 0.1s;
-    box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000000;
+  color: #00FFFF;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
 }
 
-.aq-submit-button:active {
-    background: #e1b91e; 
-    border-color: #d0a10d; 
-    box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
-    transform: translateY(2px);
+.aq-form-wrapper {
+  max-width: 800px;
+  width: 100%;
+  background-color: #1a1a1a;
+  border: 2px solid #00FFFF;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  box-sizing: border-box;
+}
+
+.aq-form-header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FFFF00;
+}
+
+.aq-form-item {
+  margin-bottom: 15px;
+}
+
+.aq-form-item input,
+.aq-form-item textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #00FFFF;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #00FFFF;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.aq-form-item input::placeholder,
+.aq-form-item textarea::placeholder {
+  color: #FFFF00;
+}
+
+.aq-submit-button,
+.aq-back-button {
+  background: #FFFF00;
+  border: 4px solid #e1b91e;
+  border-radius: 6px;
+  color: #000000;
+  padding: 12px 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  display: inline-block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.aq-submit-button:active,
+.aq-back-button:active {
+  background: #e1b91e;
+  border-color: #d0a10d;
+  box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
+  transform: translateY(2px);
+}
+
+@media (max-width: 900px) {
+  .aq-form-wrapper {
+    max-width: 90%;
+  }
+
+  .aq-code-editor {
+    height: 250px;
+  }
+}
+
+@media (max-width: 500px) {
+  .aq-form-wrapper {
+    padding: 15px;
+  }
+
+  .aq-form-header {
+    font-size: 18px;
+  }
+
+  .aq-submit-button,
+  .aq-back-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .aq-code-editor {
+    font-size: 12px;
+    height: 200px;
+  }
 }

@@ -4,7 +4,6 @@ import Fuse from 'fuse.js';
 import AppBar from '../components/AppBar.jsx';
 import QuestionsPanel from '../components/QuestionPanel.jsx';
 import QuestionContainer from '../components/QuestionContainer.jsx';
-import '../components/components_css/Modal.css';
 import '../screens_css/Community.css';
 import Footer from '../components/Footer.jsx';
 
@@ -69,7 +68,6 @@ const Community = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedTab, setSelectedTab] = useState('Latest');
-  const [isModalVisible, setModalVisible] = useState(false);
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -99,9 +97,6 @@ const Community = () => {
     setModalVisible(true);
   };
 
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  };
 
   const filteredQuestions = useMemo(() => {
     let results = questions;

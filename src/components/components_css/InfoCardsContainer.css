@@ -1,3 +1,4 @@
+
 .info-cards-container {
   display: flex;
   justify-content: space-around;
@@ -9,10 +10,6 @@
 
 
 @media (max-width: 1200px) {
-  .info-cards-container {
-    justify-content: center;
-  }
-
   .info-card {
     width: 45%; 
   }

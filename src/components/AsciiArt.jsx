@@ -1,11 +1,11 @@
 import React from 'react';
 import './components_css/AsciiArt.css';
 
-
 const AsciiArt = () => (
   <div className="ascii-art-container">
-    <pre className="ascii-art">
-      {`                           ....
+    <div className="ascii-art-wrapper">
+      <pre className="ascii-art">
+        {`                                  ....
                                 .'' .'''
 .                             .'   :
 \\                          .:    :
@@ -37,8 +37,9 @@ const AsciiArt = () => (
                   .:..... \\:       :            ..''
                  '._____|'.\\......'''''''.:..'''
                             \\
-      `}
-    </pre>
+        `}
+      </pre>
+    </div>
   </div>
 );
 

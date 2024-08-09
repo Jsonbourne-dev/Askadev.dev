@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   height: 100vh;
-  position: relative; 
+  position: relative;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -26,10 +26,10 @@
 }
 
 .ace-editor-container {
+  margin-top: 20px;
   border: 2px solid #FFD700;
   border-radius: 8px;
   width: 100%;
-  height: 100%;
   box-sizing: border-box;
 }
 
@@ -174,4 +174,86 @@
 
 .back-button:focus {
   outline: 2px solid #FFC107;
+}
+
+
+@media (max-width: 900px) {
+  .question-detail-container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    border-right: none;
+    border-bottom: 2px solid #333;
+  }
+
+  .right-panel {
+    height: 50vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .question-title {
+    font-size: 1.8rem;
+  }
+
+  .question-date,
+  .question-text {
+    font-size: 1rem;
+  }
+
+  .submit-answer textarea {
+    height: 100px;
+  }
+
+  .submit-answer button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .answers-list h2 {
+    font-size: 1.3rem;
+  }
+
+  .answer-item {
+    padding: 10px;
+  }
+
+  .back-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .question-title {
+    font-size: 1.5rem;
+  }
+
+  .question-date,
+  .question-text {
+    font-size: 0.9rem;
+  }
+
+  .submit-answer textarea {
+    height: 80px;
+  }
+
+  .submit-answer button {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+
+  .answers-list h2 {
+    font-size: 1.2rem;
+  }
+
+  .answer-item {
+    padding: 8px;
+  }
+
+  .back-button {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
 }
