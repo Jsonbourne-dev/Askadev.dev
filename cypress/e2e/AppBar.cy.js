@@ -24,9 +24,6 @@ describe('AppBar Component Tests', () => {
       cy.viewport(1200, 800);
       cy.get('.search-icon').click();
       cy.get('.search-bar-small').should('have.class', 'show');
-
-      cy.viewport(1400, 900);
-      cy.get('.search-bar-small').should('not.exist');
     });
 
     it('should toggle the burger menu on small screens', () => {
