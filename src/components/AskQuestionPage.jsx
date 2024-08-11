@@ -3,7 +3,120 @@ import { useNavigate } from 'react-router-dom';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-monokai';
-import './components_css/AskQuestionPage.css';
+import styled from 'styled-components';
+
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000000;
+  color: #00FFFF;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  box-sizing: border-box;
+`;
+
+const FormWrapper = styled.div`
+  max-width: 800px;
+  width: 100%;
+  background-color: #1a1a1a;
+  border: 2px solid #00FFFF;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 90vh;
+`;
+
+const FormHeader = styled.h2`
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FFFF00;
+`;
+
+const FormItem = styled.div`
+  margin-bottom: 15px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #00FFFF;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #00FFFF;
+  font-size: 16px;
+  box-sizing: border-box;
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #00FFFF;
+  border-radius: 5px;
+  background-color: #000000;
+  color: #00FFFF;
+  font-size: 16px;
+  box-sizing: border-box;
+  resize: none;
+`;
+
+const SubmitButton = styled.button`
+  background: #FFFF00;
+  border: 4px solid #e1b91e;
+  border-radius: 6px;
+  color: #000000;
+  padding: 12px 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  display: inline-block;
+  margin-top: 10px;
+
+  &:active {
+    background: #e1b91e;
+    border-color: #d0a10d;
+    box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
+    transform: translateY(2px);
+  }
+`;
+
+const BackButton = styled.button`
+  background: #FFFF00;
+  border: 4px solid #e1b91e;
+  border-radius: 6px;
+  color: #000000;
+  padding: 12px 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  display: inline-block;
+  margin-top: 10px;
+
+  &:active {
+    background: #e1b91e;
+    border-color: #d0a10d;
+    box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
+    transform: translateY(2px);
+  }
+`;
+
+const CodeEditor = styled(AceEditor)`
+  height: 200px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+`;
 
 const AskQuestionPage = () => {
   const [title, setTitle] = useState('');
@@ -13,10 +126,8 @@ const AskQuestionPage = () => {
   const [titleError, setTitleError] = useState('');
   const navigate = useNavigate();
 
-  // Retrieve DID from localStorage
   const DID = localStorage.getItem('DID') || 'unknown';
 
-  // Function to count words
   const countWords = (str) => {
     return str.trim().split(/\s+/).length;
   };
@@ -67,7 +178,7 @@ const AskQuestionPage = () => {
 
       navigate('/community');
     } else {
-      alert("Please fill out the title and question text.");
+      alert('Please fill out the title and question text.');
     }
   };
 
@@ -76,49 +187,47 @@ const AskQuestionPage = () => {
   };
 
   return (
-    <div className="aq-page-container">
-      <div className="aq-form-wrapper">
-        <h2 className="aq-form-header">Ask a Question</h2>
+    <PageContainer>
+      <FormWrapper>
+        <FormHeader>Ask a Question</FormHeader>
         <form onSubmit={handleSubmit}>
-          <div className="aq-form-item">
+          <FormItem>
             <label htmlFor="title">Title:</label>
-            <input
+            <Input
               id="title"
               type="text"
               value={title}
               onChange={handleTitleChange}
               required
             />
-            {titleError && <div className="aq-error-message">{titleError}</div>}
-          </div>
-          <div className="aq-form-item">
+            {titleError && <div style={{ color: '#FF4500', marginTop: '5px' }}>{titleError}</div>}
+          </FormItem>
+          <FormItem>
             <label htmlFor="questionText">Question Text:</label>
-            <textarea
+            <Textarea
               id="questionText"
               value={questionText}
               onChange={(e) => setQuestionText(e.target.value)}
               required
             />
-          </div>
-          <div className="aq-form-item">
+          </FormItem>
+          <FormItem>
             <label htmlFor="code">Code:</label>
-            <AceEditor
+            <CodeEditor
               mode="javascript"
               theme="monokai"
               name="codeEditor"
-              className="aq-code-editor"
               value={code}
               onChange={setCode}
               fontSize={14}
               width="100%"
-              height="300px"
               setOptions={{ useWorker: false }}
             />
-          </div>
-          <div className="aq-form-item">
+          </FormItem>
+          <FormItem>
             <label>Flags:</label>
             {flags.map((flag, index) => (
-              <input
+              <Input
                 key={index}
                 type="text"
                 value={flag}
@@ -126,14 +235,14 @@ const AskQuestionPage = () => {
                 placeholder={`Flag ${index + 1}`}
               />
             ))}
-          </div>
-          <div className="aq-form-item">
-            <button type="submit" className="aq-submit-button">Submit Question</button>
-          </div>
+          </FormItem>
+          <FormItem>
+            <SubmitButton type="submit">Submit Question</SubmitButton>
+          </FormItem>
         </form>
-        <button className="aq-back-button" onClick={handleBackClick}>Back to Community</button>
-      </div>
-    </div>
+        <BackButton onClick={handleBackClick}>Back</BackButton>
+      </FormWrapper>
+    </PageContainer>
   );
 };
 

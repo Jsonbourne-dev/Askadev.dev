@@ -1,10 +1,42 @@
 import React from 'react';
-import './components_css/AsciiArt.css';
+import styled from 'styled-components';
 
-const AsciiArt = () => (
-  <div className="ascii-art-container">
-    <div className="ascii-art-wrapper">
-      <pre className="ascii-art">
+const AsciiArtContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+`;
+
+const AsciiArtWrapper = styled.div`
+  /* Optional styling for the wrapper if needed */
+`;
+
+const AsciiArt = styled.pre`
+  color: #FFFF00;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 100%;
+
+  @media (max-width: 900px) {
+    text-align: center;
+    font-size: 0.75em;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 0.60em;
+    line-height: 1.2;
+  }
+`;
+
+const AsciiArtComponent = () => (
+  <AsciiArtContainer>
+    <AsciiArtWrapper>
+      <AsciiArt>
         {`                                  ....
                                 .'' .'''
 .                             .'   :
@@ -38,9 +70,9 @@ const AsciiArt = () => (
                  '._____|'.\\......'''''''.:..'''
                             \\
         `}
-      </pre>
-    </div>
-  </div>
+      </AsciiArt>
+    </AsciiArtWrapper>
+  </AsciiArtContainer>
 );
 
-export default AsciiArt;
+export default AsciiArtComponent;

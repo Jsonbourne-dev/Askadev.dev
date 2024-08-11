@@ -1,19 +1,70 @@
 import React from 'react';
-import './components_css/Footer.css';
+import styled from 'styled-components';
+
+
+const FooterWrapper = styled.footer`
+  background-color: #000000; 
+  color: #00FFFF;
+  text-align: center; 
+  padding: 20px 0;
+  bottom: 0; 
+  width: 100%; 
+  box-shadow: 0 -2px 4px rgba(0, 255, 255, 0.5);
+  z-index: 1000; 
+`;
+
+const FooterContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const FooterLinks = styled.div`
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+`;
+
+const FooterLink = styled.a`
+  color: #00FFFF;
+  text-decoration: none; 
+  margin: 0 15px;
+  font-size: 16px; 
+  transition: color 0.2s, text-decoration 0.2s;
+
+  &:hover {
+    color: #FFFF00; 
+    text-decoration: underline; 
+  }
+`;
+
+const FooterContact = styled.p`
+  margin-top: 10px;
+  font-size: 14px; 
+  color: #00FFFF; 
+
+  @media (max-width: 768px) {
+    font-size: 12px; 
+  }
+`;
 
 const Footer = () => (
-  <footer className="footer">
-    <div className="footer-content">
+  <FooterWrapper>
+    <FooterContent>
       <p>© 2024 All Rights Reserved</p>
-      <div className="footer-links">
-        <a href="/about" className="footer-link">About Us</a>
-        <a href="/contact" className="footer-link">Contact</a>
-        <a href="/privacy" className="footer-link">Privacy Policy</a>
-        <a href="/terms" className="footer-link">Terms of Service</a>
-      </div>
-      <p className="footer-contact">Email: Support@askadev.com | Phone: (406) 589-8118</p>
-    </div>
-  </footer>
+      <FooterLinks>
+        <FooterLink href="/about">About Us</FooterLink>
+        <FooterLink href="/contact">Contact</FooterLink>
+        <FooterLink href="/privacy">Privacy Policy</FooterLink>
+        <FooterLink href="/terms">Terms of Service</FooterLink>
+      </FooterLinks>
+      <FooterContact>Email: Support@askadev.com | Phone: (406) 589-8118</FooterContact>
+    </FooterContent>
+  </FooterWrapper>
 );
 
 export default Footer;
