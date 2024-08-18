@@ -182,34 +182,34 @@ const Community = () => {
   );
 };
 
-// Styled Components
 const CommunityPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%; 
+  height: 100%; 
   background-color: #000;
   color: #fff;
-  padding-top: 60px; // Adjusted to fit content properly
+  padding-top: 60px; 
   align-items: center;
-  overflow: hidden; // Prevent overflow
 `;
 
 const QuestionPanelContainer = styled.div`
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding-bottom: 60px; // Adjusted to fit the layout properly
+  padding-bottom: 60px;
 `;
 
 const QuestionsContainer = styled.div`
   width: 100%;
-  max-width: 1200px; // Adjusted width to fit the screen better
+  max-width: 1200px; 
   padding-bottom: 60px;
   padding-left: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  flex-grow: 1; 
 `;
 
 const QuestionsSection = styled.div`
@@ -220,16 +220,15 @@ const QuestionsSection = styled.div`
 `;
 
 const PaginationContainer = styled.div`
-  position: relative; // Changed from absolute to relative
-  bottom: 20px; // Adjusted to fit properly within the viewport
   display: flex;
-  justify-content: center; // Centered pagination
+  justify-content: center;
   width: 100%;
+  margin-top: auto; 
 `;
 
 const Pagination = styled.div`
   display: flex;
-  justify-content: center; // Center pagination buttons
+  justify-content: center;
   width: auto;
   padding: 0;
   box-sizing: border-box;
@@ -256,7 +255,7 @@ const PaginationButton = styled.button`
 
 const FooterContainer = styled.div`
   width: 100%;
-  margin-top: 20px; // Adjusted to fit within the viewport
+  margin-top: auto; 
 `;
 
 export default Community;
