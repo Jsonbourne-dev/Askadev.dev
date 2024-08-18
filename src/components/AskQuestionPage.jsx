@@ -15,10 +15,17 @@ const PageContainer = styled.div`
   font-family: 'Courier New', Courier, monospace;
   padding: 20px;
   box-sizing: border-box;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    font-size: 10px;
+  }
 `;
 
 const FormWrapper = styled.div`
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   background-color: #1a1a1a;
   border: 2px solid #00FFFF;
@@ -28,16 +35,42 @@ const FormWrapper = styled.div`
   box-sizing: border-box;
   overflow-y: auto;
   max-height: 90vh;
+
+  @media (max-width: 1000px) {
+    padding: 10px;
+    box-shadow: none;
+    max-height: 100vh;
+    border-radius: 0;
+    border-width: 1px;
+  }
+`;
+
+const FormHeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @media (max-width: 1000px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const FormHeader = styled.h2`
-  text-align: center;
-  margin-bottom: 20px;
   color: #FFFF00;
+  margin: 0;
+
+  @media (max-width: 1000px) {
+    font-size: 14px;
+  }
 `;
 
 const FormItem = styled.div`
   margin-bottom: 15px;
+
+  @media (max-width: 1000px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Input = styled.input`
@@ -49,6 +82,11 @@ const Input = styled.input`
   color: #00FFFF;
   font-size: 16px;
   box-sizing: border-box;
+
+  @media (max-width: 1000px) {
+    padding: 8px;
+    font-size: 12px;
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -61,6 +99,11 @@ const Textarea = styled.textarea`
   font-size: 16px;
   box-sizing: border-box;
   resize: none;
+
+  @media (max-width: 1000px) {
+    padding: 8px;
+    font-size: 12px;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -85,6 +128,11 @@ const SubmitButton = styled.button`
     box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
     transform: translateY(2px);
   }
+
+  @media (max-width: 1000px) {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
 `;
 
 const BackButton = styled.button`
@@ -92,22 +140,25 @@ const BackButton = styled.button`
   border: 4px solid #e1b91e;
   border-radius: 6px;
   color: #000000;
-  padding: 12px 24px;
+  padding: 10px 16px;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
-  text-align: center;
+  font-size: 14px;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
-  display: inline-block;
-  margin-top: 10px;
+  box-shadow: 0 4px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  margin-right: 10px;
 
   &:active {
     background: #e1b91e;
     border-color: #d0a10d;
     box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
     transform: translateY(2px);
+  }
+
+  @media (max-width: 1000px) {
+    padding: 6px 10px;
+    font-size: 10px;
   }
 `;
 
@@ -116,8 +167,11 @@ const CodeEditor = styled(AceEditor)`
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-`;
 
+  @media (max-width: 1000px) {
+    height: 150px;
+  }
+`;
 const AskQuestionPage = () => {
   const [title, setTitle] = useState('');
   const [questionText, setQuestionText] = useState('');
@@ -189,7 +243,10 @@ const AskQuestionPage = () => {
   return (
     <PageContainer>
       <FormWrapper>
-        <FormHeader>Ask a Question</FormHeader>
+        <FormHeaderWrapper>
+          <FormHeader>Ask a Question</FormHeader>
+          <BackButton onClick={handleBackClick}>Back</BackButton>
+        </FormHeaderWrapper>
         <form onSubmit={handleSubmit}>
           <FormItem>
             <label htmlFor="title">Title:</label>
@@ -240,7 +297,6 @@ const AskQuestionPage = () => {
             <SubmitButton type="submit">Submit Question</SubmitButton>
           </FormItem>
         </form>
-        <BackButton onClick={handleBackClick}>Back</BackButton>
       </FormWrapper>
     </PageContainer>
   );

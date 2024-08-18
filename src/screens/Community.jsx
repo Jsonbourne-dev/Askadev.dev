@@ -1,19 +1,17 @@
-// src/screens/Community.jsx
 import React, { useState, useMemo, useEffect } from 'react';
 import Fuse from 'fuse.js';
+import styled from 'styled-components';
 import AppBar from '../components/AppBar.jsx';
 import QuestionsPanel from '../components/QuestionPanel.jsx';
 import QuestionContainer from '../components/QuestionContainer.jsx';
-import '../screens_css/Community.css';
 import Footer from '../components/Footer.jsx';
 
 const fuseOptions = {
   keys: ['title', 'questionText'],
   includeScore: true,
-  threshold: 0.2, 
+  threshold: 0.2,
   distance: 100,
 };
-
 
 const HARD_CODED_QUESTIONS = [
   {
@@ -62,13 +60,12 @@ const HARD_CODED_QUESTIONS = [
   },
 ];
 
-
-
 const Community = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedTab, setSelectedTab] = useState('Latest');
   const [questions, setQuestions] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const storedQuestions = JSON.parse(localStorage.getItem('questions'));
@@ -89,14 +86,13 @@ const Community = () => {
   };
 
   const handleSearch = (query) => {
-    setSearchQuery(query.toLowerCase()); 
+    setSearchQuery(query.toLowerCase());
     setCurrentPage(1);
   };
 
   const handleAskQuestionClick = () => {
     setModalVisible(true);
   };
-
 
   const filteredQuestions = useMemo(() => {
     let results = questions;
@@ -138,13 +134,15 @@ const Community = () => {
   };
 
   return (
-    <div className="community-page-container">
+    <CommunityPageContainer>
       <AppBar onSearch={handleSearch} />
-      <div className="question-panel-container">
-        <QuestionsPanel onTabChange={handleTabChange} onAskQuestion={handleAskQuestionClick} />
-      </div>
-      <div className="questions-container">
-        <div className="questions-section">
+      {searchQuery ? null : (
+        <QuestionPanelContainer>
+          <QuestionsPanel onTabChange={handleTabChange} onAskQuestion={handleAskQuestionClick} />
+        </QuestionPanelContainer>
+      )}
+      <QuestionsContainer>
+        <QuestionsSection>
           {currentQuestions.map((question) => (
             <QuestionContainer
               key={question.DID}
@@ -159,29 +157,106 @@ const Community = () => {
               DID={question.DID}
             />
           ))}
-        </div>
+        </QuestionsSection>
         {totalPages > 1 && (
-          <div className="pagination-container">
-            <div className="pagination">
+          <PaginationContainer>
+            <Pagination>
               {Array.from({ length: totalPages }, (_, index) => (
-                <button
+                <PaginationButton
                   key={index}
                   aria-label={`Page ${index + 1}`}
-                  className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                  className={currentPage === index + 1 ? 'active' : ''}
                   onClick={() => handlePageChange(index + 1)}
                 >
                   {index + 1}
-                </button>
+                </PaginationButton>
               ))}
-            </div>
-          </div>
+            </Pagination>
+          </PaginationContainer>
         )}
-      </div>
-      <div className="footer-container">
+      </QuestionsContainer>
+      <FooterContainer>
         <Footer />
-      </div>
-    </div>
+      </FooterContainer>
+    </CommunityPageContainer>
   );
 };
+
+// Styled Components
+const CommunityPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  padding-top: 60px; // Adjusted to fit content properly
+  align-items: center;
+  overflow: hidden; // Prevent overflow
+`;
+
+const QuestionPanelContainer = styled.div`
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 60px; // Adjusted to fit the layout properly
+`;
+
+const QuestionsContainer = styled.div`
+  width: 100%;
+  max-width: 1200px; // Adjusted width to fit the screen better
+  padding-bottom: 60px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+`;
+
+const QuestionsSection = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const PaginationContainer = styled.div`
+  position: relative; // Changed from absolute to relative
+  bottom: 20px; // Adjusted to fit properly within the viewport
+  display: flex;
+  justify-content: center; // Centered pagination
+  width: 100%;
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center; // Center pagination buttons
+  width: auto;
+  padding: 0;
+  box-sizing: border-box;
+`;
+
+const PaginationButton = styled.button`
+  border: none;
+  background-color: #444;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+
+  &.active {
+    background-color: #007bff;
+  }
+
+  &:hover {
+    background-color: #555;
+  }
+`;
+
+const FooterContainer = styled.div`
+  width: 100%;
+  margin-top: 20px; // Adjusted to fit within the viewport
+`;
 
 export default Community;

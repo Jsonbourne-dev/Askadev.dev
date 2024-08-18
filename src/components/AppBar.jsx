@@ -50,9 +50,10 @@ const SearchBarContainer = styled.div`
   border-radius: 20px;
   border: 2px solid #FFFF00;
   padding: 5px 10px;
-  width: 50%;
+  width: 50%; /* Adjust width as needed */
   max-width: 800px;
   box-sizing: border-box;
+  margin: auto; /* Center the search bar horizontally */
 
   @media (max-width: 1300px) {
     display: none;
@@ -126,7 +127,7 @@ const RetroKey = styled(Link)`
   background: #FFFF00;
   border: 4px solid #e1b91e;
   border-radius: 6px;
-  color: #000000;
+  color: #ffffff;
   padding: 12px 24px;
   font-family: 'Courier New', Courier, monospace;
   font-size: 16px;

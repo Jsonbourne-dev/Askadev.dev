@@ -1,20 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
-// Import retro pixelated font
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-  body {
-    font-family: 'Press Start 2P', cursive;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-`;
-
-
+// Apply the font globally for consistency
 const QuestionsPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,76 +14,157 @@ const QuestionsPanelContainer = styled.div`
   border-radius: 10px;
   background-color: #000000;
   box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive; // Apply the font here
 
-  @media (max-width: 700px) {
+  @media (max-width: 1000px) {
+    width: 95%;
+    padding: 25px;
+  }
+
+  @media (max-width: 900px) {
     width: 100%;
     padding: 15px;
   }
 `;
 
-const QuestionsHeader = styled.div`
+const HeaderAndButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
   border-bottom: 2px solid #00FFFF;
   padding-bottom: 10px;
-  margin-bottom: 20px;
 
-  @media (max-width: 700px) {
+  @media (max-width: 1000px) {
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 900px) {
     margin-bottom: 15px;
   }
 `;
 
 const QuestionsTitle = styled.div`
-  font-size: 24px;
+  font-size: 16px; // Reduced font size
   color: #00FFFF;
   text-shadow: 2px 2px 0 #000000;
+  flex-grow: 1;
+  margin-right: 20px;
+  white-space: nowrap;
+  overflow: visible; // Ensure text does not truncate
+  text-overflow: clip; // No text truncation
 
-  @media (max-width: 700px) {
-    font-size: 20px;
+  @media (max-width: 1000px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 12px;
+  }
+`;
+
+const AskQuestionButton = styled.button`
+  background: #FFFF00;
+  border: 4px solid #e1b91e;
+  border-radius: 6px;
+  color: #000000;
+  padding: 10px 20px; // Reduced padding
+  font-family: 'Press Start 2P', cursive; // Apply the font here
+  font-size: 14px; // Reduced font size
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+
+  &:active {
+    background: #E1B91E;
+    border-color: #D0A10D;
+    box-shadow: 0 2px 0 #D0A10D, inset 0 1px 2px rgba(66, 66, 66, 0.5);
+    transform: translateY(2px);
+  }
+
+  @media (max-width: 1000px) {
+    padding: 8px 16px; // Smaller padding
+    font-size: 12px; // Smaller font size
+  }
+
+  @media (max-width: 900px) {
+    padding: 6px 12px; // Even smaller padding
+    font-size: 10px; // Even smaller font size
+  }
+
+  @media (max-width: 600px) {
+    padding: 4px 8px; // Smallest padding
+    font-size: 8px; // Smallest font size
+  }
+`;
+
+
+const TabsAndCountContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  @media (max-width: 900px) {
+    margin-top: 20px;
+    padding: 0 10px;
   }
 `;
 
 const QuestionsCount = styled.div`
-  font-size: 18px;
+  font-size: 16px; // Reduced font size
   color: #FFFF00;
-  margin-top: 10px;
   text-shadow: 1px 1px 0 #000000;
+  margin-right: 20px;
+  white-space: nowrap;
+  font-family: 'Press Start 2P', cursive; // Apply the font here
 
-  @media (max-width: 700px) {
-    font-size: 16px;
+  @media (max-width: 1200px) {
+    font-size: 14px;
   }
-`;
 
-const TabsAndButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  @media (max-width: 1000px) {
+    font-size: 12px;
+    margin-right: 15px;
+  }
 
-  @media (max-width: 700px) {
-    align-items: stretch;
+  @media (max-width: 900px) {
+    font-size: 10px;
+    margin-right: 0;
+    margin-bottom: 10px;
   }
 `;
 
 const Tabs = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   border: 2px solid #00FFFF;
   border-radius: 5px;
   background: linear-gradient(145deg, #333333, #000000);
   overflow: hidden;
-  width: 100%;
   max-width: 600px;
 
-  @media (max-width: 700px) {
-    flex-direction: column; 
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 100%;
   }
 `;
 
 const Tab = styled.div`
   flex: 1;
-  padding: 12px; 
+  padding: 6px; // Reduced padding
   color: #00FFFF;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
@@ -103,7 +173,8 @@ const Tab = styled.div`
   justify-content: center;
   text-transform: uppercase;
   border-right: 1px solid #00FFFF;
-  font-size: 16px;
+  font-size: 12px; // Reduced font size
+  font-family: 'Press Start 2P', cursive; // Apply the font here
 
   &:last-child {
     border-right: none;
@@ -119,37 +190,21 @@ const Tab = styled.div`
     background-color: #00C7B6;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 1000px) {
     border-right: none;
     border-bottom: 1px solid #00FFFF;
   }
-`;
 
-const AskQuestionButton = styled.button`
-  padding: 12px 24px;
-  background: #FFFF00;
-  border: 4px solid #E1B91E;
-  border-radius: 6px;
-  color: #000000;
-  font-size: 16px; 
-  cursor: pointer;
-  text-shadow: 1px 1px 0 #000000;
-  transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
-
-  &:active {
-    background: #E1B91E;
-    border-color: #D0A10D;
-    box-shadow: 0 2px 0 #D0A10D, inset 0 1px 2px rgba(66, 66, 66, 0.5);
-    transform: translateY(2px);
+  @media (max-width: 900px) {
+    font-size: 10px;
+    padding: 4px;
   }
 
-  @media (max-width: 700px) {
-    padding: 10px 20px;
-    font-size: 14px;
+  @media (max-width: 600px) {
+    font-size: 8px; // Further reduced font size
+    padding: 2px;
   }
 `;
-
 
 const QuestionsPanel = ({ onTabChange }) => {
   const [selectedTab, setSelectedTab] = useState('Latest');
@@ -190,16 +245,18 @@ const QuestionsPanel = ({ onTabChange }) => {
 
   return (
     <>
-      <GlobalStyle />
+      <Helmet>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+      </Helmet>
       <QuestionsPanelContainer>
-        <QuestionsHeader>
+        <HeaderAndButtonContainer>
           <QuestionsTitle>
             {getTitle()}
           </QuestionsTitle>
-          <QuestionsCount>140,233 Questions</QuestionsCount>
-        </QuestionsHeader>
-        <TabsAndButtonContainer>
           <AskQuestionButton onClick={handleAskQuestion}>Ask Question</AskQuestionButton>
+        </HeaderAndButtonContainer>
+        <TabsAndCountContainer>
+          <QuestionsCount>140,233 Questions</QuestionsCount>
           <Tabs>
             {['Latest', 'Old', 'Unanswered', 'Bountied'].map((tab) => (
               <Tab
@@ -211,7 +268,7 @@ const QuestionsPanel = ({ onTabChange }) => {
               </Tab>
             ))}
           </Tabs>
-        </TabsAndButtonContainer>
+        </TabsAndCountContainer>
       </QuestionsPanelContainer>
     </>
   );
