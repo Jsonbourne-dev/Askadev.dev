@@ -50,10 +50,10 @@ const SearchBarContainer = styled.div`
   border-radius: 20px;
   border: 2px solid #FFFF00;
   padding: 5px 10px;
-  width: 50%; /* Adjust width as needed */
+  width: 50%; 
   max-width: 800px;
   box-sizing: border-box;
-  margin: auto; /* Center the search bar horizontally */
+  margin: auto; 
 
   @media (max-width: 1300px) {
     display: none;
@@ -69,7 +69,6 @@ const SearchInput = styled.input`
   font-size: 20px;
   outline: none;
   font-family: 'Press Start 2P', cursive;
-  text-shadow: 0 0 2px rgba(0, 255, 255, 0.7), 0 0 4px rgba(0, 255, 255, 0.5), 0 0 6px rgba(0, 255, 255, 0.3);
   transition: border-color 0.2s;
   position: relative;
 
@@ -253,7 +252,7 @@ const CloseButton = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #FF0000;
+  background: #ffee00;
   border: none;
   color: #ffffff;
   border-radius: 50%;
@@ -267,7 +266,7 @@ const CloseButton = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background: #cc0000;
+    background: #c0b406;
   }
 `;
 
@@ -275,14 +274,6 @@ const ModalTitle = styled.h2`
   margin: 0 0 25px;
   font-size: 24px;
   color: #333;
-`;
-
-const ModalBio = styled.p`
-  margin-bottom: 20px;
-  font-size: 16px;
-  color: #666;
-  text-align: center;
-  width: 100%;
 `;
 
 const ModalForm = styled.form`

@@ -1,3 +1,4 @@
+import { createGlobalStyle } from 'styled-components';
 import React, { useState, useMemo, useEffect } from 'react';
 import Fuse from 'fuse.js';
 import styled from 'styled-components';
@@ -5,6 +6,15 @@ import AppBar from '../components/AppBar.jsx';
 import QuestionsPanel from '../components/QuestionPanel.jsx';
 import QuestionContainer from '../components/QuestionContainer.jsx';
 import Footer from '../components/Footer.jsx';
+
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 const fuseOptions = {
   keys: ['title', 'questionText'],
@@ -134,51 +144,54 @@ const Community = () => {
   };
 
   return (
-    <CommunityPageContainer>
-      <AppBar onSearch={handleSearch} />
-      {searchQuery ? null : (
-        <QuestionPanelContainer>
-          <QuestionsPanel onTabChange={handleTabChange} onAskQuestion={handleAskQuestionClick} />
-        </QuestionPanelContainer>
-      )}
-      <QuestionsContainer>
-        <QuestionsSection>
-          {currentQuestions.map((question) => (
-            <QuestionContainer
-              key={question.DID}
-              date={question.date}
-              title={question.title}
-              questionText={question.questionText}
-              flags={question.flags || []}
-              votes={question.votes}
-              answers={question.answers}
-              views={question.views}
-              code={question.code || ''}
-              DID={question.DID}
-            />
-          ))}
-        </QuestionsSection>
-        {totalPages > 1 && (
-          <PaginationContainer>
-            <Pagination>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <PaginationButton
-                  key={index}
-                  aria-label={`Page ${index + 1}`}
-                  className={currentPage === index + 1 ? 'active' : ''}
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </PaginationButton>
-              ))}
-            </Pagination>
-          </PaginationContainer>
+    <>
+      <GlobalStyle />
+      <CommunityPageContainer>
+        <AppBar onSearch={handleSearch} />
+        {searchQuery ? null : (
+          <QuestionPanelContainer>
+            <QuestionsPanel onTabChange={handleTabChange} onAskQuestion={handleAskQuestionClick} />
+          </QuestionPanelContainer>
         )}
-      </QuestionsContainer>
-      <FooterContainer>
-        <Footer />
-      </FooterContainer>
-    </CommunityPageContainer>
+        <QuestionsContainer>
+          <QuestionsSection>
+            {currentQuestions.map((question) => (
+              <QuestionContainer
+                key={question.DID}
+                date={question.date}
+                title={question.title}
+                questionText={question.questionText}
+                flags={question.flags || []}
+                votes={question.votes}
+                answers={question.answers}
+                views={question.views}
+                code={question.code || ''}
+                DID={question.DID}
+              />
+            ))}
+          </QuestionsSection>
+          {totalPages > 1 && (
+            <PaginationContainer>
+              <Pagination>
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <PaginationButton
+                    key={index}
+                    aria-label={`Page ${index + 1}`}
+                    className={currentPage === index + 1 ? 'active' : ''}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </PaginationButton>
+                ))}
+              </Pagination>
+            </PaginationContainer>
+          )}
+        </QuestionsContainer>
+        <FooterContainer>
+          <Footer />
+        </FooterContainer>
+      </CommunityPageContainer>
+    </>
   );
 };
 
@@ -199,9 +212,11 @@ const QuestionPanelContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding-bottom: 60px;
+  padding-top: 100px;
 `;
 
 const QuestionsContainer = styled.div`
+  padding-top: 100px;
   width: 100%;
   max-width: 1200px; 
   padding-bottom: 60px;
