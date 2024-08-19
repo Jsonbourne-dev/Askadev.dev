@@ -2,9 +2,8 @@ import { createStore, combineReducers } from 'redux';
 import questionsReducer from './reducers/questionsReducer';
 
 const rootReducer = combineReducers({
-  questions: questionsReducer, 
+  questions: questionsReducer,
 });
-
 
 const store = createStore(rootReducer);
 
