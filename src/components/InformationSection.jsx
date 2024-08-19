@@ -30,7 +30,7 @@ const SectionContainer = styled.div`
   @media (max-width: 576px) {
     width: 90%;
     padding: 5px;
-    max-width: 300px; /* Ensure the container doesn't grow larger than 300px */
+    max-width: 300px; 
   }
 `;
 
@@ -39,7 +39,7 @@ const SectionTitle = styled.h2`
   font-size: 1.75rem;
   margin: 0;
   color: #FFFF00;
-  word-break: break-word; /* Ensure long words break correctly */
+  word-break: break-word; 
 
   @media (max-width: 1000px) {
     font-size: 1.5rem;
@@ -51,7 +51,7 @@ const SectionTitle = styled.h2`
 
   @media (max-width: 576px) {
     font-size: 1rem;
-    max-width: 300px; /* Ensure the text fits within the max width */
+    max-width: 300px; 
   }
 `;
 
@@ -71,7 +71,7 @@ const SectionText = styled.p`
 
   @media (max-width: 576px) {
     font-size: 0.6rem;
-    max-width: 300px; /* Ensure the text fits within the max width */
+    max-width: 300px; 
   }
 `;
 

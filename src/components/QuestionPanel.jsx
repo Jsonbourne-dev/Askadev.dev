@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
-// Apply the font globally for consistency
+
 const QuestionsPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@ const QuestionsPanelContainer = styled.div`
   border-radius: 10px;
   background-color: #000000;
   box-sizing: border-box;
-  font-family: 'Press Start 2P', cursive; // Apply the font here
+  font-family: 'Press Start 2P', cursive; 
 
   @media (max-width: 1000px) {
     width: 95%;
@@ -45,14 +45,14 @@ const HeaderAndButtonContainer = styled.div`
 `;
 
 const QuestionsTitle = styled.div`
-  font-size: 16px; // Reduced font size
+  font-size: 16px; 
   color: #00FFFF;
   text-shadow: 2px 2px 0 #000000;
   flex-grow: 1;
   margin-right: 20px;
   white-space: nowrap;
-  overflow: visible; // Ensure text does not truncate
-  text-overflow: clip; // No text truncation
+  overflow: visible; 
+  text-overflow: clip; 
 
   @media (max-width: 1000px) {
     font-size: 14px;
@@ -68,9 +68,9 @@ const AskQuestionButton = styled.button`
   border: 4px solid #e1b91e;
   border-radius: 6px;
   color: #000000;
-  padding: 10px 20px; // Reduced padding
-  font-family: 'Press Start 2P', cursive; // Apply the font here
-  font-size: 14px; // Reduced font size
+  padding: 10px 20px; 
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px; 
   text-align: center;
   cursor: pointer;
   text-decoration: none;
@@ -85,18 +85,18 @@ const AskQuestionButton = styled.button`
   }
 
   @media (max-width: 1000px) {
-    padding: 8px 16px; // Smaller padding
-    font-size: 12px; // Smaller font size
+    padding: 8px 16px; 
+    font-size: 12px;
   }
 
   @media (max-width: 900px) {
-    padding: 6px 12px; // Even smaller padding
-    font-size: 10px; // Even smaller font size
+    padding: 6px 12px; 
+    font-size: 10px; 
   }
 
   @media (max-width: 600px) {
-    padding: 4px 8px; // Smallest padding
-    font-size: 8px; // Smallest font size
+    padding: 4px 8px;
+    font-size: 8px; 
   }
 `;
 
@@ -119,12 +119,12 @@ const TabsAndCountContainer = styled.div`
 `;
 
 const QuestionsCount = styled.div`
-  font-size: 16px; // Reduced font size
+  font-size: 16px;
   color: #FFFF00;
   text-shadow: 1px 1px 0 #000000;
   margin-right: 20px;
   white-space: nowrap;
-  font-family: 'Press Start 2P', cursive; // Apply the font here
+  font-family: 'Press Start 2P', cursive; 
 
   @media (max-width: 1200px) {
     font-size: 14px;
@@ -164,7 +164,7 @@ const Tabs = styled.div`
 
 const Tab = styled.div`
   flex: 1;
-  padding: 6px; // Reduced padding
+  padding: 6px; 
   color: #00FFFF;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
@@ -173,8 +173,8 @@ const Tab = styled.div`
   justify-content: center;
   text-transform: uppercase;
   border-right: 1px solid #00FFFF;
-  font-size: 12px; // Reduced font size
-  font-family: 'Press Start 2P', cursive; // Apply the font here
+  font-size: 12px;
+  font-family: 'Press Start 2P', cursive; 
 
   &:last-child {
     border-right: none;
@@ -201,7 +201,7 @@ const Tab = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 8px; // Further reduced font size
+    font-size: 8px;
     padding: 2px;
   }
 `;
