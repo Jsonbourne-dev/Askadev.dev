@@ -118,7 +118,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(0, 255, 255, 0.3);
   display: inline-block;
   margin-top: 10px;
 
@@ -146,7 +146,7 @@ const BackButton = styled.button`
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  box-shadow: 0 4px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
+  box-shadow: 0 4px 0 #5e5e5e, inset 0 1px 2px rgba(0, 255, 255, 0.3);
   margin-right: 10px;
 
   &:active {
@@ -172,6 +172,7 @@ const CodeEditor = styled(AceEditor)`
     height: 150px;
   }
 `;
+
 const AskQuestionPage = () => {
   const [title, setTitle] = useState('');
   const [questionText, setQuestionText] = useState('');
@@ -205,35 +206,36 @@ const AskQuestionPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (title.trim() === '' || questionText.trim() === '') {
+      alert('Please fill out the title and question text.');
+      return;
+    }
+
     const filteredFlags = flags.filter(flag => flag.trim() !== '');
 
-    if (title && questionText) {
-      const newQuestion = {
-        id: Date.now(),
-        date: new Date().toISOString(),
-        title,
-        questionText,
-        code,
-        flags: filteredFlags,
-        DID,
-        votes: 0,
-        answers: 0,
-        views: 0,
-      };
+    const newQuestion = {
+      id: Date.now(),
+      date: new Date().toISOString(),
+      title,
+      questionText,
+      code,
+      flags: filteredFlags,
+      DID,
+      votes: 0,
+      answers: 0,
+      views: 0,
+    };
 
-      const existingQuestions = JSON.parse(localStorage.getItem('questions')) || [];
-      existingQuestions.push(newQuestion);
-      localStorage.setItem('questions', JSON.stringify(existingQuestions));
+    const existingQuestions = JSON.parse(localStorage.getItem('questions')) || [];
+    existingQuestions.push(newQuestion);
+    localStorage.setItem('questions', JSON.stringify(existingQuestions));
 
-      setTitle('');
-      setQuestionText('');
-      setCode('');
-      setFlags(['', '', '']);
+    setTitle('');
+    setQuestionText('');
+    setCode('');
+    setFlags(['', '', '']);
 
-      navigate('/community');
-    } else {
-      alert('Please fill out the title and question text.');
-    }
+    navigate('/community');
   };
 
   const handleBackClick = () => {
