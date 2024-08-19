@@ -17,7 +17,7 @@ const GlobalStyles = styled.div`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden; // Prevent horizontal overflow
+  overflow-x: hidden;
 `;
 
 const PageContainer = styled.div`
@@ -39,7 +39,7 @@ const ContentWrapper = styled.div`
   max-width: 900px;
   background-color: #000000;
   border: 2px solid #FFFF00;
-  border-radius: 8px; // Rounded corners
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   padding: 20px;
   box-sizing: border-box;
@@ -47,14 +47,13 @@ const ContentWrapper = styled.div`
   @media (max-width: 1000px) {
     max-width: 100%;
     height: auto;
-    border-radius: 8px; // Maintain rounded corners on small screens
   }
 `;
 
 const Button = styled.button`
   background: #FFFF00;
   border: 4px solid #e1b91e;
-  border-radius: 6px; // Rounded corners
+  border-radius: 6px;
   color: #000000;
   padding: 12px 24px;
   font-family: 'Courier New', Courier, monospace;
@@ -115,8 +114,7 @@ const SubmitAnswer = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  width: 100%; // Adjust width to prevent overflow
-  max-width: 100%; // Ensure it fits within the container
+  width: 100%;
   height: 80px;
   border: 2px solid #FFFF00;
   background-color: #1b1b1b;
@@ -124,7 +122,7 @@ const TextArea = styled.textarea`
   padding: 10px;
   font-size: 14px;
   resize: none; 
-  border-radius: 0; // No rounded corners for the textarea
+  border-radius: 0;
   box-sizing: border-box;
 `;
 
@@ -145,16 +143,6 @@ const AnswerItem = styled.div`
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   color: #FFFF00;
-
-  p {
-    margin: 0;
-  }
-
-  small {
-    display: block;
-    margin-top: 10px;
-    color: #666666;
-  }
 `;
 
 const AceEditorWrapper = styled.div`
@@ -164,19 +152,13 @@ const AceEditorWrapper = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   margin-bottom: 20px;
-  border-radius: 0; // No rounded corners for the editor container
-
-  .ace_editor {
-    border: none;
-    box-sizing: border-box;
-  }
 `;
 
 const StyledAceEditor = styled(AceEditor)`
   width: 100% !important;
   border: none;
   box-sizing: border-box;
-  border-radius: 0; // No rounded corners for the editor
+  border-radius: 0;
 `;
 
 const QuestionDetail = () => {
@@ -298,11 +280,22 @@ const QuestionDetail = () => {
           {question.answers.length > 0 && (
             <AnswersList>
               <h2>Answers</h2>
-              {question.answers.map((answer, index) => (
+              {question.answers.map((ans, index) => (
                 <AnswerItem key={index}>
-                  <p>{answer.text}</p>
-                  <pre>{answer.code}</pre>
-                  <small>{new Date(answer.date).toLocaleDateString()}</small>
+                  <p>{ans.text}</p>
+                  {ans.code && (
+                    <AceEditorWrapper>
+                      <StyledAceEditor
+                        mode="javascript"
+                        theme="monokai"
+                        value={ans.code}
+                        readOnly
+                        setOptions={{ useWorker: false }}
+                        onLoad={handleEditorLoad}
+                      />
+                    </AceEditorWrapper>
+                  )}
+                  <small>{new Date(ans.date).toLocaleDateString()}</small>
                 </AnswerItem>
               ))}
             </AnswersList>
