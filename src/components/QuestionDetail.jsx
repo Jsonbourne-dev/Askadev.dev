@@ -8,7 +8,7 @@ import { setQuestions, addAnswer } from '../redux/actions/questionsActions';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
-// Styled Components
+
 const GlobalStyles = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
   font-family: 'Press Start 2P', cursive;
@@ -161,50 +161,36 @@ const StyledAceEditor = styled(AceEditor)`
   border-radius: 0;
 `;
 
+
 const QuestionDetail = () => {
   const { did } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const questions = useSelector(state => state.questions.questions);
-  const [question, setQuestion] = useState(null);
+  const question = questions.find(q => q.DID === did) || {};
   const [answer, setAnswer] = useState('');
-  const [code, setCode] = useState(''); // Code editor state
+  const [code, setCode] = useState('');
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    const storedQuestions = JSON.parse(localStorage.getItem('questions')) || [];
-    dispatch(setQuestions(storedQuestions));
-  }, [dispatch]);
-
-  useEffect(() => {
-    const foundQuestion = questions.find(q => q.DID === did);
-    if (foundQuestion) {
-      foundQuestion.answers = Array.isArray(foundQuestion.answers) ? foundQuestion.answers : [];
-      setQuestion(foundQuestion);
+    if (questions.length === 0) {
+      const storedQuestions = JSON.parse(localStorage.getItem('questions')) || [];
+      dispatch(setQuestions(storedQuestions));
     }
-  }, [did, questions]);
+  }, [dispatch, questions]);
 
   const handleSubmitAnswer = () => {
     if (answer.trim() === '' && code.trim() === '') return;
-
+  
     const newAnswer = {
       text: answer,
       code: code,
       did: did,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
     };
-
+  
     dispatch(addAnswer(did, newAnswer));
-
-    const updatedQuestions = questions.map(q => {
-      if (q.DID === did) {
-        q.answers = Array.isArray(q.answers) ? q.answers.concat(newAnswer) : [newAnswer];
-      }
-      return q;
-    });
-
-    localStorage.setItem('questions', JSON.stringify(updatedQuestions));
-
+  
     setAnswer('');
     setCode('');
     setMessage('Answer submitted successfully!');
@@ -228,10 +214,6 @@ const QuestionDetail = () => {
   const createInitialCode = () => {
     return Array(20).fill(' ').join('\n');
   };
-
-  if (!question) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <GlobalStyles>
@@ -268,7 +250,7 @@ const QuestionDetail = () => {
               <StyledAceEditor
                 mode="javascript"
                 theme="monokai"
-                value={code || createInitialCode()} 
+                value={code || createInitialCode()}
                 onChange={(newCode) => setCode(newCode)}
                 setOptions={{ useWorker: false }}
                 onLoad={handleEditorLoad}
@@ -277,7 +259,7 @@ const QuestionDetail = () => {
             <SubmitButton onClick={handleSubmitAnswer}>Submit Answer</SubmitButton>
             {message && <p>{message}</p>}
           </SubmitAnswer>
-          {question.answers.length > 0 && (
+          {question.answers && question.answers.length > 0 && (
             <AnswersList>
               <h2>Answers</h2>
               {question.answers.map((ans, index) => (
@@ -295,7 +277,7 @@ const QuestionDetail = () => {
                       />
                     </AceEditorWrapper>
                   )}
-                  <small>{new Date(ans.date).toLocaleDateString()}</small>
+                  <p><i>{new Date(ans.date).toLocaleDateString()}</i></p>
                 </AnswerItem>
               ))}
             </AnswersList>

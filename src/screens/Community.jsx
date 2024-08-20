@@ -7,7 +7,6 @@ import QuestionsPanel from '../components/QuestionPanel.jsx';
 import QuestionContainer from '../components/QuestionContainer.jsx';
 import Footer from '../components/Footer.jsx';
 
-// Define Global Styles
 const GlobalStyle = createGlobalStyle`
   html, body {
     margin: 0;
@@ -51,6 +50,7 @@ const Community = () => {
   const filteredQuestions = useMemo(() => {
     let results = questions;
 
+    
     if (searchQuery) {
       results = fuse.search(searchQuery).map((result) => result.item);
     }
@@ -138,6 +138,7 @@ const Community = () => {
     </>
   );
 };
+
 
 
 const CommunityPageContainer = styled.div`
