@@ -140,7 +140,7 @@ const StyledFooter = styled(Footer)`
   width: 100%;
 `;
 
-const Welcome = () => {
+const WelcomePage = () => {
   const stats = [
     { number: '1,534', text: 'Questions Asked' },
     { number: '5,678', text: 'Answers Provided' },
@@ -192,4 +192,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default WelcomePage;

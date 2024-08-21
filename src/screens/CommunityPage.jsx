@@ -23,7 +23,7 @@ const fuseOptions = {
   distance: 100,
 };
 
-const Community = () => {
+const CommunityPage = () => {
   const dispatch = useDispatch();
   const questions = useSelector(state => state.questions.questions);
   const [searchQuery, setSearchQuery] = useState('');
@@ -219,4 +219,4 @@ const FooterContainer = styled.div`
   margin-top: auto; 
 `;
 
-export default Community;
+export default CommunityPage;
