@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-monokai';
 import styled from 'styled-components';
+import { addQuestion } from '../redux/actions/questionsActions'; 
 
 const PageContainer = styled.div`
   display: flex;
@@ -172,12 +174,14 @@ const CodeEditor = styled(AceEditor)`
     height: 150px;
   }
 `;
+
 const AskQuestionPage = () => {
   const [title, setTitle] = useState('');
   const [questionText, setQuestionText] = useState('');
   const [code, setCode] = useState('');
   const [flags, setFlags] = useState(['', '', '']);
   const [titleError, setTitleError] = useState('');
+  const dispatch = useDispatch(); 
   const navigate = useNavigate();
 
   const DID = localStorage.getItem('DID') || 'unknown';
@@ -221,9 +225,7 @@ const AskQuestionPage = () => {
         views: 0,
       };
 
-      const existingQuestions = JSON.parse(localStorage.getItem('questions')) || [];
-      existingQuestions.push(newQuestion);
-      localStorage.setItem('questions', JSON.stringify(existingQuestions));
+      dispatch(addQuestion(newQuestion));
 
       setTitle('');
       setQuestionText('');
@@ -276,9 +278,10 @@ const AskQuestionPage = () => {
               name="codeEditor"
               value={code}
               onChange={setCode}
-              fontSize={14}
-              width="100%"
-              setOptions={{ useWorker: false }}
+              fontSize={16}
+              setOptions={{
+                useWorker: false, 
+              }}
             />
           </FormItem>
           <FormItem>
@@ -293,9 +296,7 @@ const AskQuestionPage = () => {
               />
             ))}
           </FormItem>
-          <FormItem>
-            <SubmitButton type="submit">Submit Question</SubmitButton>
-          </FormItem>
+          <SubmitButton type="submit">Submit</SubmitButton>
         </form>
       </FormWrapper>
     </PageContainer>

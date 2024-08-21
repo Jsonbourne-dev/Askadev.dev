@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
-
+import { updateQuestionViews } from '../redux/actions/questionsActions';
 
 const QuestionBox = styled.div`
   font-family: 'Press Start 2P', cursive;
@@ -170,7 +171,7 @@ const StatsItem = styled.span`
   }
 
   .stats-value {
-    color: #00FFFF; /* Neon blue color */
+    color: #00FFFF; 
   }
 `;
 
@@ -190,18 +191,14 @@ const FlagItem = styled.span`
   white-space: nowrap;
 `;
 
+
+
 const QuestionContainer = ({ date, title, questionText, flags = [], votes, answers, views, code, DID }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    const questions = JSON.parse(localStorage.getItem('questions')) || [];
-    const updatedQuestions = questions.map(q => {
-      if (q.DID === DID) {
-        return { ...q, views: q.views + 1 };
-      }
-      return q;
-    });
-    localStorage.setItem('questions', JSON.stringify(updatedQuestions));
+    dispatch(updateQuestionViews(DID));
 
     navigate(`/question/${DID}`);
   };
