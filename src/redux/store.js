@@ -1,10 +1,12 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import questionsReducer from './reducers/questionsReducer';
 
-const rootReducer = combineReducers({
+const reducers = combineReducers({
   questions: questionsReducer,
 });
 
-const store = createStore(rootReducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducers, composeEnhancers(applyMiddleware()))
 
 export default store;
