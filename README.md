@@ -1,6 +1,6 @@
-## Welcome to Askadev.dev
+## WelcomePage to Askadev.dev
 
-Welcome to Askadev.dev, a platform designed to streamline development. Follow the instructions below to get started.
+WelcomePage to Askadev.dev, a platform designed to streamline development. Follow the instructions below to get started.
 
 
 ## Getting Started
