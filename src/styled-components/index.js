@@ -19,7 +19,7 @@ export { StatisticsContainer, StatisticItem, StatisticNumber, StatisticText, Das
 export { TitleContainer, Title, Subtitle, HighlightedText } from './TitleSectionStyles';
 export { UserPipeContainer, UserPipeTitle, UserPipeProfileBox } from './UserPipeStyles';
 export { WelcomePageGlobalStyles, WelcomePageContainer, WelcomePageContent, WelcomePageQuestionPipeContainer, WelcomePageStatisticsContainer, WelcomePageUserPipContainer, WelcomePageLeftInformationSectionContainer, WelcomePageRightInformationSectionContainer, WelcomePageFooterContainer, WelcomePageStyledFooter } from './WelcomePageStyles';
-export { CommunityGlobalStyle, CommunityPageContainer, CommunityQuestionPanelContainer, CommunityQuestionsContainer, CommunityQuestionsSection, CommunityPaginationContainer, CommunityPagination, CommunityPaginationButton, CommunityFooterContainer } from './CommunityPageStyles';
+export { CommunityGlobalStyle, CommunityPageContainer, CommunityQuestionPanelContainer, CommunityQuestionsContainer, CommunityQuestionsSection, CommunityPaginationContainer, CommunityPagination, CommunityPaginationButton, CommunityFooterContainer } from './community-styled-components/CommunityFooterContainer';
 export { QuestionDetailGlobalStyles, QuestionDetailPageContainer, QuestionDetailContentWrapper, QuestionDetailBackButton, QuestionDetailSubmitButton, QuestionDetailQuestionContainer, QuestionDetailQuestionTitle, QuestionDetailQuestionDate, QuestionDetailQuestionText, QuestionDetailSubmitAnswer, QuestionDetailTextArea, QuestionDetailAnswersList, QuestionDetailAnswerItem, QuestionDetailAceEditorWrapper, QuestionDetailStyledAceEditor } from './QuestionDetailStyles';
 
 
