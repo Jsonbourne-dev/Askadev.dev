@@ -18,7 +18,7 @@ const Container = styled.div`
   border-bottom: ${({ bottomBorderColor = '#FFFF00', hasBorder = true }) => hasBorder ? `4px solid ${bottomBorderColor}` : 'none'};
   border-left: ${({ borderLeft, hasBorder = true }) => hasBorder ? borderLeft || 'none' : 'none'};
   border-right: ${({ borderRight, hasBorder = true }) => hasBorder ? borderRight || 'none' : 'none'};
-  margin: ${({ margin = '0' }) => margin}; /* Handle margin with full flexibility */
+  margin: ${({ margin = '0' }) => margin};
 
   @media (max-width: 1000px) {
     padding: ${({ mobilePadding = '5px' }) => mobilePadding};

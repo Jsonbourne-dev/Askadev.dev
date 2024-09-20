@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// ArrowPX styled component
 const ArrowPX = styled.div`
   width: 0;
   height: 0;
@@ -30,7 +29,7 @@ const ArrowPX = styled.div`
           border-color: transparent transparent transparent ${color || '#00FFFF'};
         `;
       default:
-        return ''; // No direction provided
+        return '';
     }
   }}
   

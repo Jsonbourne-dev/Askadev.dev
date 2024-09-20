@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Theme, Container, Text, Button } from '../styled-components'; 
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCodeBranch, faShieldAlt, faUsers, faHandsHelping } from '@fortawesome/free-solid-svg-icons'; // Added helping icon
+import { faCodeBranch, faShieldAlt, faUsers, faHandsHelping } from '@fortawesome/free-solid-svg-icons';
 
 const InfoContainer = styled(Container)`
   max-width: 300px;
@@ -58,41 +58,39 @@ const InfoBoxes = () => {
           hasBorder={false}
         >
           <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: '40px' }}>
-            {/* AskaDEV Box */}
+     
             <InfoContainer>
-              <Text variant="title" fontSize="2rem" color="#FFFF00">
+              <Text variant="title" fontSize="1rem" color="#FFFF00">
                 AskaDEV
               </Text>
-              <Text variant="subtitle" fontSize=".8rem" color="#00FFFF" style={{ marginTop: '10px', marginBottom: '15px' }}>
-                We love helping people! AskaDEV is here to support developers by providing a platform where you can ask questions and get assistance from the community. Join us in fostering a collaborative environment!
+              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
+                We’re dedicated to helping developers find solutions to their challenges. Join us!
               </Text>
               <ButtonRow>
                 <Button>Get help!</Button>
-                <Icon icon={faHandsHelping} color="#00FFFF" /> {/* Helping icon */}
+                <Icon icon={faHandsHelping} color="#00FFFF" /> 
               </ButtonRow>
             </InfoContainer>
 
-            {/* Community Box */}
             <InfoContainer>
-              <Text variant="title" fontSize="2rem" color="#FFFF00">
+              <Text variant="title" fontSize="1rem" color="#FFFF00">
                 Community
               </Text>
-              <Text variant="subtitle" fontSize=".8rem" color="#00FFFF" style={{ marginTop: '10px', marginBottom: '15px' }}>
-                Asking a question has never been easier! With a supportive community, you can quickly find answers and connect with fellow developers. Don't hesitate to ask or share your knowledge!
+              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
+                A vibrant community awaits you! Connect, share, and learn together.
               </Text>
               <ButtonRow>
-                <Button>Commuinty🚀</Button>
+                <Button>Community🚀</Button>
                 <Icon icon={faUsers} color="#00FFFF" />
               </ButtonRow>
             </InfoContainer>
 
-            {/* Open Source Box */}
             <InfoContainer>
-              <Text variant="title" fontSize="2rem" color="#FFFF00">
+              <Text variant="title" fontSize="1rem" color="#FFFF00">
                 Open Source
               </Text>
-              <Text variant="subtitle" fontSize=".8rem" color="#00FFFF" style={{ marginTop: '10px', marginBottom: '15px' }}>
-                We are proudly open source! Our community works together to provide the best solutions for developers across the globe. 🌍 Contribute today and join the fun!
+              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
+                Collaborate on exciting projects and contribute to the open-source movement!
               </Text>
               <ButtonRow>
                 <Button>Learn More</Button>
@@ -100,13 +98,12 @@ const InfoBoxes = () => {
               </ButtonRow>
             </InfoContainer>
 
-            {/* Web5 Box */}
             <InfoContainer>
-              <Text variant="title" fontSize="2rem" color="#FFFF00">
+              <Text variant="title" fontSize="1rem" color="#FFFF00">
                 Web5
               </Text>
-              <Text variant="subtitle" fontSize=".8rem" color="#00FFFF" style={{ marginTop: '10px', marginBottom: '15px' }}>
-                With Web5 and decentralized identity (DID), your data is secure like never before. Experience the future of the web, where privacy is the priority. 🛡️
+              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
+                Discover the future of the web with enhanced security and privacy.
               </Text>
               <ButtonRow>
                 <Button>Learn More🚀</Button>

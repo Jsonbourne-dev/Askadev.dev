@@ -16,6 +16,7 @@ const RouterPage = () => {
         <Route path="/askquestion/:did" element={<AskQuestionPage />} />
         <Route path="/question/:did" element={<QuestionDetail />} />
         <Route path="/developer" element={<Developer />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </HashRouter>
   );

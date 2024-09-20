@@ -7,44 +7,6 @@ import { Theme, Container, Text, Button } from '../styled-components';
 import Footer from '../components/Footer.jsx';
 import styled from 'styled-components';
 
-const InfoContainer = styled(Container)`
-  max-width: 300px;
-  height: 300px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: 4px solid #FFFF00; 
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 20px;
-  position: relative;
-
-  @media (max-width: 1000px) {
-    max-width: 100%;
-    margin: 10px 0;
-  }
-`;
-
-const TitleText = styled(Text)`
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.2rem;
-  background-color: #000;
-  padding: 5px 10px;
-  border: 2px solid #FFFF00;
-  border-radius: 4px;
-  color: #FFFF00;
-`;
-
-const ButtonRow = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-`;
-
 const ButtonGrid = styled(Container)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -114,17 +76,17 @@ const Welcome = () => {
               hasBorder={false}
             >
               <div>
-                <Text
-                  variant="subtitle"
-                  fontSize="2rem"
-                  color="#FFFF00"
-                  textAlign="left"
-                  margin="0"
-                  padding="0"
-                  lineHeight="2.8rem"
-                >
-                  Welcome to AskaDEV! 🚀
-                </Text>
+              <Text
+                variant="body"
+                fontSize="2rem"
+                color="#00d9ff"
+                textAlign="left"
+                margin="0"
+                padding="10px 0 0 0"
+                lineHeight="1.8rem"
+              >
+                Welcome to AskaDEV! 🚀
+              </Text>
                 <Text
                   variant="body"
                   fontSize="1.2rem"

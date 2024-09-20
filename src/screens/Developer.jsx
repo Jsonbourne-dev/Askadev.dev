@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import AppBar from '../components/AppBar.jsx';
 import AsciiArtComponent from '../components/AsciiArt.jsx'; 
-import Background from '../components/Background.jsx';
 import inclusivity from '../assets/inclusivity.svg';
 import transparency from '../assets/transparency.svg';
 import clarity from '../assets/clarity.svg';
@@ -57,7 +56,7 @@ const Developer = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            hasBorder={false} // No border
+            hasBorder={false} 
             style={{ position: 'relative' }}
           >
             <Container
@@ -68,7 +67,7 @@ const Developer = () => {
               justifyContent="flex-start"
               alignItems="center"
               textAlign="left"
-              hasBorder={false} // No border
+              hasBorder={false} 
             >
               <div>
                 <Text
@@ -110,7 +109,7 @@ const Developer = () => {
             display="flex"
             flexDirection="column"
             alignItems="center"
-            hasBorder={false} // No border
+            hasBorder={false} 
           >
             <Container
               width="100%"
@@ -119,7 +118,7 @@ const Developer = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              hasBorder={false} // No border
+              hasBorder={false}
             >
               <div style={{ padding: '20px', backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius: '8px' }}>
                 <AsciiArtComponent />
@@ -136,7 +135,7 @@ const Developer = () => {
               display="flex"
               flexDirection="column"
               alignItems="center"
-              hasBorder={false} // No border
+              hasBorder={false} 
             >
               <div style={{ marginTop: '80px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 

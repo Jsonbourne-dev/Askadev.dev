@@ -89,7 +89,7 @@ const AppBar = ({ onSearch }) => {
               </AppbarButton>
               <AppbarButton
                 as={Link}
-                to="/docs" // Add this line for the Docs button
+                to="/docs" 
                 style={{
                   marginRight: '20px',
                 }}

@@ -1,74 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Theme, Container, Text, Button } from '../styled-components'; 
+import { Theme, Container, Text, Button } from '../styled-components';
 import styled from 'styled-components';
 
-const StyledBackground = styled.div`
-  background-color: black;
-  width: 100vw;
-  position: relative;
-  display: flex;
-  align-items: center; /* Center items vertically */
-  padding: 20px; /* Add some padding */
-`;
-
-const LeftContainer = styled.div`
-  flex: 1;
-  color: #FFFF00;
-  font-size: 2rem;
+const FullWidthContainer = styled(Container)`
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const EmailInputContainer = styled(Container)`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.7);
+  flex-direction: column;
   border: 4px solid #FFFF00;
   border-radius: 8px;
+  box-sizing: border-box;
+`;
+
+const InputWrapper = styled.div`
+  width: 100%;
+  max-width: 400px; /* Reduced width */
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-end; /* Align items to the right */
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  align-items: center;
 `;
 
 const EmailInput = styled.input`
   width: 100%;
-  padding: 10px;
-  border: 2px solid #FFFF00;
-  border-radius: 4px;
-  margin-bottom: 20px;
+  padding: 8px;
   font-size: 1rem;
+  border: 2px solid #00FFFF;
+  outline: none;
+  color: #FFFF00;
   background-color: transparent;
-  color: white;
+  border-radius: 0; /* Sharp corners */
+  margin-bottom: 10px;
+  
+  ::placeholder {
+    color: #00FFFF;
+  }
+
+  ::-webkit-input-placeholder {
+    color: #00FFFF;
+  }
 `;
 
-const SubmitButton = styled(Button)`
-  width: 100%;
-  background-color: yellow;
-  color: black;
-  font-size: 1rem;
-  padding: 10px;
+const CustomButton = styled(Button)`
+  width: 100%; /* Same width as the input */
 `;
 
 const Test = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (e) => {
+    const input = e.target.value;
+    const transformedInput = input
+      .replace(/@/, '@'.fontcolor('red'))
+      .replace(/[^@]/g, (char) => char.fontcolor('yellow'))
+      .replace(/[^a-zA-Z@]/g, (char) => char.fontcolor('neonblue')); // You may adjust this for specific text rendering
+    setInputValue(transformedInput);
+  };
+
   return (
     <>
       <Helmet>
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
       </Helmet>
       <Theme>
-        <StyledBackground>
-          <LeftContainer>
-            Join our mailing list for the latest updates!
-          </LeftContainer>
-          <EmailInputContainer>
-            <EmailInput type="email" placeholder="Enter your email" />
-            <SubmitButton>Subscribe</SubmitButton>
-          </EmailInputContainer>
-        </StyledBackground>
+        <FullWidthContainer>
+          <Text variant="title" fontSize="2rem" color="#FFFF00" textAlign="center">
+            Join Our Mailing List 🚀
+          </Text>
+          <Text variant="body" fontSize="1.2rem" color="#00FFFF" textAlign="center" padding="10px 0">
+            Stay updated with the latest news, updates, and more! 💌
+          </Text>
+          <InputWrapper>
+            <EmailInput 
+              type="email" 
+              placeholder="Enter your email..." 
+              value={inputValue} 
+              onChange={handleInputChange} 
+            />
+            <CustomButton>Submit</CustomButton>
+          </InputWrapper>
+        </FullWidthContainer>
       </Theme>
     </>
   );

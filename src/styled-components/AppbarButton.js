@@ -5,15 +5,15 @@ const AppbarButton = styled.button`
   border: none;
   color: #00ffff;
   font-family: 'Press Start 2P', Courier, monospace;
-  font-size: 14px; /* Slightly smaller font size */
+  font-size: 14px; 
   cursor: pointer;
   position: relative;
-  padding: 8px 16px; /* Slightly smaller padding */
+  padding: 8px 16px; 
   display: inline-block;
   text-align: center;
   margin-left: ${({ marginLeft }) => marginLeft || 'auto'};
   transition: color 0.3s ease;
-  text-decoration: none; /* Ensure no underline on text */
+  text-decoration: none;
 
   &:after {
     content: '';
@@ -22,7 +22,7 @@ const AppbarButton = styled.button`
     height: 4px;
     background-color: #FFFF00;
     left: 0;
-    bottom: -6px; /* Move the yellow line down a little bit */
+    bottom: -6px;
     transition: transform 0.3s ease-in-out;
     transform: ${({ onPage }) => (onPage ? 'scaleX(1)' : 'scaleX(0)')};
     transform-origin: right;

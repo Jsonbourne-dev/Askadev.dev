@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const FooterWrapper = styled.footer`
-  background-color: #FFFF00; /* Yellow background */
-  color: #000000; /* Black text */
+  background-color: #FFFF00; 
+  color: #000000;
   text-align: center;
   padding: 20px 0;
   bottom: 0;
@@ -38,7 +38,7 @@ const FooterLink = styled.a`
   transition: color 0.3s;
 
   &:hover {
-    color: #00fff2; /* Fun hover color */
+    color: #00fff2; 
   }
 `;
 
@@ -54,7 +54,7 @@ const FooterIcons = styled.div`
     transition: color 0.3s;
 
     &:hover {
-      color: #00fff2; /* Fun hover color */
+      color: #00fff2;
     }
   }
 `;

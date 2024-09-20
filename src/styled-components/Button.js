@@ -16,7 +16,6 @@ const RetroButton = styled.button`
   margin: ${({ margin }) => margin || '10px'};
   z-index: 10;
 
-  /* Adjusted shadow sizes for more balanced layers */
   box-shadow: 
     2px 2px 0 #FFFF00, 
     4px 4px 0 #FFFF00, 
@@ -27,14 +26,13 @@ const RetroButton = styled.button`
   &::after {
     content: '';
     position: absolute;
-    transition: transform 0.1s ease-out, opacity 0.1s ease-out; /* Instant squish, no smooth animation */
+    transition: transform 0.1s ease-out, opacity 0.1s ease-out;
     z-index: -1;
     border: 2px solid transparent;
     border-right-color: #FFFF00;
     border-bottom-color: #FFFF00;
   }
 
-  /* First layer (topmost) - slightly smaller */
   &::before {
     top: 0;
     right: -1px;
@@ -44,7 +42,6 @@ const RetroButton = styled.button`
     z-index: -1;
   }
 
-  /* Second layer - tighter fit */
   &::after {
     top: 0;
     right: -2px;
@@ -54,7 +51,6 @@ const RetroButton = styled.button`
     z-index: -2;
   }
 
-  /* On hover, hide the top two layers instantly */
   &:hover::before,
   &:active::before {
     opacity: 0;
@@ -65,14 +61,13 @@ const RetroButton = styled.button`
     opacity: 0;
   }
 
-  /* On hover, move the button by a smaller amount for a more subtle effect */
   &:hover,
   &:active {
-    transform: translate(2px, 2px); /* Less dramatic movement */
+    transform: translate(2px, 2px); 
     box-shadow: 
-      1px 1px 0 #FFFF00, /* Third layer */
-      3px 3px 0 #FFFF00, /* Fourth layer */
-      5px 5px 0 #FFFF00; /* Fifth layer */
+      1px 1px 0 #FFFF00,
+      3px 3px 0 #FFFF00,
+      5px 5px 0 #FFFF00; 
   }
 
   ${({ small }) =>
