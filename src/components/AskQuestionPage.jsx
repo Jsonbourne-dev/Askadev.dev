@@ -6,25 +6,7 @@ import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-monokai';
 import styled from 'styled-components';
 import { addQuestion } from '../redux/actions/questionsActions'; 
-
-const PageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #000000;
-  color: #00FFFF;
-  font-family: 'Courier New', Courier, monospace;
-  padding: 20px;
-  box-sizing: border-box;
-
-  @media (max-width: 1000px) {
-    width: 100%;
-    height: 100%;
-    padding: 5px;
-    font-size: 10px;
-  }
-`;
+import { Container, Button } from '../styled-components';
 
 const FormWrapper = styled.div`
   max-width: 900px;
@@ -108,61 +90,8 @@ const Textarea = styled.textarea`
   }
 `;
 
-const SubmitButton = styled.button`
-  background: #FFFF00;
-  border: 4px solid #e1b91e;
-  border-radius: 6px;
-  color: #000000;
-  padding: 12px 24px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
-  display: inline-block;
-  margin-top: 10px;
 
-  &:active {
-    background: #e1b91e;
-    border-color: #d0a10d;
-    box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
-    transform: translateY(2px);
-  }
 
-  @media (max-width: 1000px) {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-`;
-
-const BackButton = styled.button`
-  background: #FFFF00;
-  border: 4px solid #e1b91e;
-  border-radius: 6px;
-  color: #000000;
-  padding: 10px 16px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  box-shadow: 0 4px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
-  margin-right: 10px;
-
-  &:active {
-    background: #e1b91e;
-    border-color: #d0a10d;
-    box-shadow: 0 2px 0 #d0a10d, inset 0 1px 2px rgba(66, 66, 66, 0.5);
-    transform: translateY(2px);
-  }
-
-  @media (max-width: 1000px) {
-    padding: 6px 10px;
-    font-size: 10px;
-  }
-`;
 
 const CodeEditor = styled(AceEditor)`
   height: 200px;
@@ -243,11 +172,16 @@ const AskQuestionPage = () => {
   };
 
   return (
-    <PageContainer>
+    <Container
+      backgroundColor="#000000"
+      color="#00FFFF"
+      padding="20px"
+      fontSize="16px" // Update to only fontSize
+    >
       <FormWrapper>
         <FormHeaderWrapper>
           <FormHeader>Ask a Question</FormHeader>
-          <BackButton onClick={handleBackClick}>Back</BackButton>
+          <Button onClick={handleBackClick}>Back</Button>
         </FormHeaderWrapper>
         <form onSubmit={handleSubmit}>
           <FormItem>
@@ -280,7 +214,7 @@ const AskQuestionPage = () => {
               onChange={setCode}
               fontSize={16}
               setOptions={{
-                useWorker: false, 
+                useWorker: false,
               }}
             />
           </FormItem>
@@ -296,10 +230,10 @@ const AskQuestionPage = () => {
               />
             ))}
           </FormItem>
-          <SubmitButton type="submit">Submit</SubmitButton>
+          <Button type="submit">Submit</Button>
         </form>
       </FormWrapper>
-    </PageContainer>
+    </Container>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { Button } from '../styled-components'
 
 const QuestionsPanelContainer = styled.div`
   display: flex;
@@ -62,42 +63,7 @@ const QuestionsTitle = styled.div`
   }
 `;
 
-const AskQuestionButton = styled.button`
-  background: #FFFF00;
-  border: 4px solid #e1b91e;
-  border-radius: 6px;
-  color: #000000;
-  padding: 10px 20px; 
-  font-family: 'Press Start 2P', cursive; 
-  font-size: 14px; 
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  box-shadow: 0 6px 0 #5e5e5e, inset 0 1px 2px rgba(63, 63, 63, 0.3);
 
-  &:active {
-    background: #E1B91E;
-    border-color: #D0A10D;
-    box-shadow: 0 2px 0 #D0A10D, inset 0 1px 2px rgba(66, 66, 66, 0.5);
-    transform: translateY(2px);
-  }
-
-  @media (max-width: 1000px) {
-    padding: 8px 16px; 
-    font-size: 12px; 
-  }
-
-  @media (max-width: 900px) {
-    padding: 6px 12px; 
-    font-size: 10px; 
-  }
-
-  @media (max-width: 600px) {
-    padding: 4px 8px; 
-    font-size: 8px; 
-  }
-`;
 
 
 const TabsAndCountContainer = styled.div`
@@ -248,7 +214,7 @@ const QuestionsPanel = ({ onTabChange }) => {
           <QuestionsTitle>
             {getTitle()}
           </QuestionsTitle>
-          <AskQuestionButton onClick={handleAskQuestion}>Ask Question</AskQuestionButton>
+          <Button onClick={handleAskQuestion}>Ask Question</Button>
         </HeaderAndButtonContainer>
         <TabsAndCountContainer>
           <QuestionsCount>140,233 Questions</QuestionsCount>
