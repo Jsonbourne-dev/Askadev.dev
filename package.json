@@ -28,6 +28,7 @@
     "react-resize-aware": "^4.0.0",
     "react-responsive": "^10.0.0",
     "react-scripts": "^5.0.1",
+    "react-tooltip": "^5.28.0",
     "redux": "^5.0.1",
     "styled-components": "^6.1.12",
     "three": "^0.168.0",

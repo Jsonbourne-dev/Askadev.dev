@@ -9,7 +9,7 @@ const DashedLine = styled.div`
 `;
 
 const ContainerWrapper = styled.div`
-  width: 95vw;
+  width: calc(95vw - 2rem); /* Use calc to maintain padding from the edges */
   max-width: 900px;
   max-height: 80vh;
   overflow: hidden;
@@ -26,6 +26,7 @@ const ContainerWrapper = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   transition: transform 0.2s, box-shadow 0.2s;
+  padding: 2vw; /* Added padding for content */
 
   &:hover {
     transform: scale(1.02);
@@ -81,7 +82,7 @@ const StatsWrapper = styled.div`
 const TagsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 8px; /* Increased gap for a cooler layout */
   justify-content: flex-end;
 `;
 
@@ -93,6 +94,21 @@ const Text = styled.p`
   overflow: ${props => props.overflow || 'visible'};
   text-overflow: ${props => props.textOverflow || 'clip'};
   white-space: ${props => props.whiteSpace || 'normal'};
+`;
+
+const FlagTag = styled.div`
+  background-color: #4A4A4A;
+  color: #FFFFFF;
+  border: 1px solid #4A4A4A;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: ${props => props.fontSize || 'clamp(0.3em, 1.5vw, 1em)'};
+  box-shadow: 0 0 5px rgba(255, 255, 0, 0.5); /* Added shadow for a cooler effect */
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const getResponsiveFontSize = (baseSize, minScale, maxScale) => {
@@ -135,18 +151,9 @@ const QuestionBox = ({ date, title, flags = [], votes, answers = [], views, onCl
 
         <TagsWrapper>
           {flags.slice(0, 4).map((flag, index) => (
-            <Text
-              key={index}
-              fontSize={getResponsiveFontSize('0.3em', 0.5, '1em')}
-              backgroundColor="#4A4A4A"
-              color="#FFFFFF"
-              border="1px solid #4A4A4A"
-              borderRadius="8px"
-              padding="4px 8px"
-              whiteSpace="nowrap"
-            >
+            <FlagTag key={index} fontSize={getResponsiveFontSize('0.3em', 0.5, '1em')}>
               #{flag}
-            </Text>
+            </FlagTag>
           ))}
         </TagsWrapper>
       </ContentWrapper>

@@ -14,10 +14,10 @@ const Container = styled.div`
   padding: ${({ padding = '20px' }) => padding};
   box-sizing: border-box;
   max-height: ${({ maxHeight = 'none' }) => maxHeight};
-  border-top: ${({ borderTop, hasBorder = true }) => hasBorder ? borderTop || '4px solid #FFFF00' : 'none'};
-  border-bottom: ${({ bottomBorderColor = '#FFFF00', hasBorder = true }) => hasBorder ? `4px solid ${bottomBorderColor}` : 'none'};
-  border-left: ${({ borderLeft, hasBorder = true }) => hasBorder ? borderLeft || 'none' : 'none'};
-  border-right: ${({ borderRight, hasBorder = true }) => hasBorder ? borderRight || 'none' : 'none'};
+  border-top: ${({ borderTop, hasBorder = true }) => (hasBorder ? borderTop || '4px solid #FFFF00' : 'none')};
+  border-bottom: ${({ bottomBorderColor = '#FFFF00', hasBorder = true }) => (hasBorder ? `4px solid ${bottomBorderColor}` : 'none')};
+  border-left: ${({ borderLeft, hasBorder = true }) => (hasBorder ? borderLeft || 'none' : 'none')};
+  border-right: ${({ borderRight, hasBorder = true }) => (hasBorder ? borderRight || 'none' : 'none')};
   margin: ${({ margin = '0' }) => margin};
 
   @media (max-width: 1000px) {

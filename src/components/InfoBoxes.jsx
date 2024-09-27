@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Theme, Container, Text, Button } from '../styled-components'; 
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCodeBranch, faShieldAlt, faUsers, faHandsHelping } from '@fortawesome/free-solid-svg-icons';
+import { faCodeBranch, faShieldAlt, faUsers, faHandsHelping, faTerminal } from '@fortawesome/free-solid-svg-icons';
 
 const InfoContainer = styled(Container)`
   max-width: 300px;
@@ -13,7 +13,7 @@ const InfoContainer = styled(Container)`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between; /* Ensures button and icon are at the bottom */
   padding: 20px;
   margin: 20px;
   position: relative;
@@ -29,13 +29,26 @@ const ButtonRow = styled.div`
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  margin-top: 20px;
+  margin-top: auto; /* Keeps the button at the bottom */
+  margin-bottom: 10px; /* Set gap from bottom of container */
 `;
 
 const Icon = styled(FontAwesomeIcon)`
   margin-left: 50px; 
   font-size: 2.5rem; 
   flex-shrink: 0; 
+  margin-bottom: 10px; /* Set gap from bottom of container */
+`;
+
+const BoxesContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns on the top row */
+  gap: 20px; /* Gap between boxes */
+  margin-top: 40px;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr; /* Stack all boxes in a single column */
+  }
 `;
 
 const InfoBoxes = () => {
@@ -57,8 +70,7 @@ const InfoBoxes = () => {
           alignItems="center"
           hasBorder={false}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: '40px' }}>
-     
+          <BoxesContainer>
             <InfoContainer>
               <Text variant="title" fontSize="1rem" color="#FFFF00">
                 AskaDEV
@@ -74,6 +86,19 @@ const InfoBoxes = () => {
 
             <InfoContainer>
               <Text variant="title" fontSize="1rem" color="#FFFF00">
+                Terminal
+              </Text>
+              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
+                Access AskaDEV directly through your terminal 🚀💻! It's quick and easy!
+              </Text>
+              <ButtonRow>
+                <Button>Learn More</Button>
+                <Icon icon={faTerminal} color="#00FFFF" />
+              </ButtonRow>
+            </InfoContainer>
+
+            <InfoContainer>
+              <Text variant="title" fontSize="1rem" color="#FFFF00">
                 Community
               </Text>
               <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
@@ -81,7 +106,7 @@ const InfoBoxes = () => {
               </Text>
               <ButtonRow>
                 <Button>Community🚀</Button>
-                <Icon icon={faUsers} color="#00FFFF" />
+                <Icon icon={faUsers} />
               </ButtonRow>
             </InfoContainer>
 
@@ -94,7 +119,7 @@ const InfoBoxes = () => {
               </Text>
               <ButtonRow>
                 <Button>Learn More</Button>
-                <Icon icon={faCodeBranch} color="#00FFFF" />
+                <Icon icon={faCodeBranch} />
               </ButtonRow>
             </InfoContainer>
 
@@ -110,7 +135,7 @@ const InfoBoxes = () => {
                 <Icon icon={faShieldAlt} color="#00FFFF" />
               </ButtonRow>
             </InfoContainer>
-          </div>
+          </BoxesContainer>
         </Container>
       </Theme>
     </>

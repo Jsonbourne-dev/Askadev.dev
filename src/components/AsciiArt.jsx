@@ -22,6 +22,10 @@ const AsciiArt = styled.pre`
   padding: 0;
   font-size: 10px; 
 
+  @media (max-width: 1200) {
+    font-size: 25px;
+  }
+
   @media (max-width: 1000px) {
     font-size: 15px;
   }
