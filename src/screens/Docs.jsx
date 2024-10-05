@@ -62,7 +62,7 @@ const DocsPage = () => {
 
   const getSubDocHeight = (doc) => {
     if (openedDocs.includes(doc.title)) {
-      return doc.subDocs.length * 40;
+      return doc.subDocs.length * 40; // Adjust as needed
     }
     return 0; 
   };
@@ -185,14 +185,14 @@ const SidebarButton = styled.button`
   background: ${({ isSelected }) => (isSelected ? '#e1e100' : 'transparent')};
   color: ${({ isSelected }) => (isSelected ? '#000' : '#e1e100')};
   padding: 10px;
-  margin: 0;
+  margin: 0; 
   border: none;
   text-align: left;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   width: 100%;
-  height: 40px;
+  height: 40px;  
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -237,17 +237,20 @@ const SubDocContainer = styled.div`
 
 const SubDocItem = styled.button`
   background: transparent;
-  color: #e1e100;
-  padding: 5px;
+  color: ${({ isSelected }) => (isSelected ? '#00ffff' : '#e1e100')};  // Neon blue for selected
+  padding: 10px;  
+  margin: 0;  
   border: none;
   text-align: left;
   cursor: pointer;
-  width: 100%;
+  width: 100%;  
+  height: 40px;  
   border-radius: 5px;
+  transition: color 0.3s;  // Smooth transition for color change
 
   &:hover {
     background-color: #666; 
-    color: #00ffff;
+    color: #00ffff;  // Neon blue on hover
   }
 
   &:focus {
@@ -264,46 +267,39 @@ const ContentWrapper = styled.div`
 const ContentSection = styled.div`
   padding: 20px;
   border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+`;
+
+const ContentBox = styled.div`
+  background: #000; 
+  padding: 20px;  
+  border-radius: 5px;
 `;
 
 const Text = styled.p`
-  color: #fff; 
+  color: #fff;  
   margin: ${({ margin }) => margin || '0'};
   font-size: ${({ fontSize }) => fontSize || '1rem'};
-
-  @media (max-width: 600px) {
-    font-size: 0.9rem; 
-  }
 `;
 
 const ToggleButton = styled.button`
-  background-color: #e1e100;
+  background-color: #e1e100; 
   color: #000;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 10px;
   cursor: pointer;
+  margin-bottom: 20px; 
   border-radius: 5px;
-  margin-bottom: 20px;
+  transition: background-color 0.3s; 
 
   &:hover {
-    background-color: #666;
-    color: #00ffff;
+    background-color: #666; 
   }
 
   &:focus {
     outline: none;
   }
-
-  @media (max-width: 600px) {
-    font-size: 14px; 
-    padding: 8px 16px; 
-  }
-`;
-
-const ContentBox = styled.div`
-  padding: 20px;
-  border-radius: 10px;
 `;
 
 export default DocsPage;

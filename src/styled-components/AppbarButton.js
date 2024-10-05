@@ -12,6 +12,7 @@ const AppbarButton = styled.button`
   text-align: center;
   margin-left: ${({ marginLeft }) => marginLeft || 'auto'};
   transition: color 0.3s ease, transform 0.3s ease; // Added transform for hover effect
+  text-decoration: none; // Remove underline
 
   // Style for active button
   ${({ isActive }) =>

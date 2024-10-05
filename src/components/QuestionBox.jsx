@@ -5,33 +5,25 @@ const DashedLine = styled.div`
   height: 1px;
   width: 100%;
   border-bottom: 1px dashed #FFFF00;
-  margin: 4px 0;
+  margin: 8px 0;
 `;
 
 const ContainerWrapper = styled.div`
-  width: calc(95vw - 2rem); /* Use calc to maintain padding from the edges */
-  max-width: 900px;
+  width: calc(90vw - 2rem);
+  max-width: 850px;
   max-height: 80vh;
   overflow: hidden;
-  margin: 1vw auto;
-  padding: 1.5vw;
+  margin: 20px auto;
+  padding: 2vw;
   background-color: #000000;
   color: #00FFFF;
   border: 3px solid #FFFF00;
-  border-radius: 6px;
-  box-shadow: 0 0 0 3px #333333;
+  border-radius: 10px;
   cursor: pointer;
   font-family: 'Press Start 2P', cursive;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  transition: transform 0.2s, box-shadow 0.2s;
-  padding: 2vw; /* Added padding for content */
-
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
-  }
 `;
 
 const ContentWrapper = styled.div`
@@ -45,12 +37,12 @@ const ContentWrapper = styled.div`
 const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 `;
 
 const DateText = styled.div`
   flex-shrink: 0;
-  margin-right: 10px;
+  margin-right: 12px;
 `;
 
 const TitleWrapper = styled.div`
@@ -62,7 +54,7 @@ const TitleWrapper = styled.div`
 
 const TitleText = styled.p`
   color: #FFFF00;
-  font-size: ${props => props.fontSize || 'clamp(0.5em, 1.5vw, 1.2em)'};
+  font-size: ${props => props.fontSize || 'clamp(0.4em, 1.5vw, 1em)'}; /* Responsive title size */
   font-weight: bold;
   margin: 0;
   overflow: hidden;
@@ -74,46 +66,40 @@ const StatsWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 4px;
+  margin-top: 12px;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 8px;
 `;
 
 const TagsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px; /* Increased gap for a cooler layout */
+  gap: 8px;
   justify-content: flex-end;
 `;
 
 const Text = styled.p`
   color: ${props => props.color || '#00FFFF'};
-  font-size: ${props => props.fontSize || 'clamp(0.3em, 1.5vw, 1em)'};
+  font-size: ${props => props.fontSize || 'clamp(0.3em, 0.8vw, 0.7em)'}; /* Reduced size */
   font-weight: ${props => props.fontWeight || 'normal'};
   margin: ${props => props.margin || '0'};
-  overflow: ${props => props.overflow || 'visible'};
-  text-overflow: ${props => props.textOverflow || 'clip'};
-  white-space: ${props => props.whiteSpace || 'normal'};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Prevents overlap and ensures ellipsis */
 `;
 
 const FlagTag = styled.div`
   background-color: #4A4A4A;
   color: #FFFFFF;
   border: 1px solid #4A4A4A;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 4px 8px;
-  font-size: ${props => props.fontSize || 'clamp(0.3em, 1.5vw, 1em)'};
-  box-shadow: 0 0 5px rgba(255, 255, 0, 0.5); /* Added shadow for a cooler effect */
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: scale(1.05);
-  }
+  font-size: ${props => props.fontSize || 'clamp(0.3em, 0.7vw, 0.6em)'}; /* Small and responsive */
 `;
 
 const getResponsiveFontSize = (baseSize, minScale, maxScale) => {
   return `clamp(${baseSize}, ${minScale}vw, ${maxScale})`;
-}
+};
 
 const QuestionBox = ({ date, title, flags = [], votes, answers = [], views, onClick }) => {
   return (
@@ -121,12 +107,12 @@ const QuestionBox = ({ date, title, flags = [], votes, answers = [], views, onCl
       <ContentWrapper>
         <HeaderWrapper>
           <DateText>
-            <Text color="#666666" fontSize={getResponsiveFontSize('0.3em', 0.5, '0.8em')}>
+            <Text color="#666666" fontSize={getResponsiveFontSize('0.3em', 0.4, '0.6em')}>
               {new Date(date).toLocaleDateString()}
             </Text>
           </DateText>
           <TitleWrapper>
-            <TitleText fontSize={getResponsiveFontSize('0.5em', 1, '1.2em')}>
+            <TitleText fontSize={getResponsiveFontSize('0.5em', 1, '1.5em')}> {/* Adjusted for larger screens */}
               {title}
             </TitleText>
           </TitleWrapper>
@@ -135,23 +121,23 @@ const QuestionBox = ({ date, title, flags = [], votes, answers = [], views, onCl
         <DashedLine />
 
         <StatsWrapper>
-          <Text color="#FFFF00" fontSize={getResponsiveFontSize('0.3em', 0.5, '1em')} display="flex" alignItems="center">
-            <i className="fas fa-thumbs-up" style={{ marginRight: '2px', color: '#00FFFF' }}></i>
+          <Text color="#FFFF00" fontSize={getResponsiveFontSize('0.3em', 0.5, '0.7em')}>
+            <i className="fas fa-thumbs-up" style={{ marginRight: '4px', color: '#00FFFF' }}></i>
             <span style={{ color: '#00FFFF' }}>{votes}</span> votes
           </Text>
-          <Text color="#FFFF00" fontSize={getResponsiveFontSize('0.3em', 0.5, '1em')} display="flex" alignItems="center">
-            <i className="fas fa-reply" style={{ marginRight: '2px', color: '#00FFFF' }}></i>
+          <Text color="#FFFF00" fontSize={getResponsiveFontSize('0.3em', 0.5, '0.7em')}>
+            <i className="fas fa-reply" style={{ marginRight: '4px', color: '#00FFFF' }}></i>
             <span style={{ color: '#00FFFF' }}>{answers.length || 0}</span> answers
           </Text>
-          <Text color="#FFFF00" fontSize={getResponsiveFontSize('0.3em', 0.5, '1em')} display="flex" alignItems="center">
-            <i className="fas fa-eye" style={{ marginRight: '2px', color: '#00FFFF' }}></i>
+          <Text color="#FFFF00" fontSize={getResponsiveFontSize('0.3em', 0.5, '0.7em')}>
+            <i className="fas fa-eye" style={{ marginRight: '4px', color: '#00FFFF' }}></i>
             <span style={{ color: '#00FFFF' }}>{views}</span> views
           </Text>
         </StatsWrapper>
 
         <TagsWrapper>
           {flags.slice(0, 4).map((flag, index) => (
-            <FlagTag key={index} fontSize={getResponsiveFontSize('0.3em', 0.5, '1em')}>
+            <FlagTag key={index} fontSize={getResponsiveFontSize('0.3em', 0.5, '0.6em')}>
               #{flag}
             </FlagTag>
           ))}

@@ -7,15 +7,15 @@ import { faCodeBranch, faShieldAlt, faUsers, faHandsHelping, faTerminal } from '
 
 const InfoContainer = styled(Container)`
   max-width: 300px;
-  height: auto;
+  height: 300px; 
   background-color: rgba(0, 0, 0, 0.3);
   border: 4px solid #FFFF00; 
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures button and icon are at the bottom */
+  justify-content: space-between; 
   padding: 20px;
-  margin: 20px;
+  margin: 20px; 
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
@@ -29,25 +29,25 @@ const ButtonRow = styled.div`
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  margin-top: auto; /* Keeps the button at the bottom */
-  margin-bottom: 10px; /* Set gap from bottom of container */
+  margin-top: auto; 
+  margin-bottom: 10px; 
 `;
 
 const Icon = styled(FontAwesomeIcon)`
   margin-left: 50px; 
   font-size: 2.5rem; 
   flex-shrink: 0; 
-  margin-bottom: 10px; /* Set gap from bottom of container */
+  margin-bottom: 10px; 
 `;
 
 const BoxesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns on the top row */
-  gap: 20px; /* Gap between boxes */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 30px; 
   margin-top: 40px;
 
   @media (max-width: 1000px) {
-    grid-template-columns: 1fr; /* Stack all boxes in a single column */
+    grid-template-columns: 1fr;
   }
 `;
 

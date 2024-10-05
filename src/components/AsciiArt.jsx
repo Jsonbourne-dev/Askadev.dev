@@ -20,7 +20,7 @@ const AsciiArt = styled.pre`
   white-space: pre-wrap;
   margin: 0;
   padding: 0;
-  font-size: 10px; 
+  font-size: 13px;
 
   @media (max-width: 1200) {
     font-size: 25px;
@@ -63,7 +63,7 @@ const AsciiArt = styled.pre`
   }
 
   @media (max-width: 550px) {
-    font-size: 4px;
+    font-size: 5px;
   }
 `;
 

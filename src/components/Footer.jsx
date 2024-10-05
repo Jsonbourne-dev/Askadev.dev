@@ -75,7 +75,7 @@ const FooterContact = styled.p`
   }
 `;
 
-const Test = () => (
+const Footer = () => (
   <FooterWrapper>
     <FooterContent>
       <p style={{ margin: '10px 0', fontSize: '18px', fontWeight: 'bold' }}>© 2024 All Rights Reserved</p>
@@ -96,4 +96,4 @@ const Test = () => (
   </FooterWrapper>
 );
 
-export default Test;
+export default Footer;

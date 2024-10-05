@@ -17,7 +17,7 @@ const RouterPage = () => {
         <Route path="/community/*" element={<Community />} />
         <Route path="/askquestion/:did" element={<AskQuestionPage />} />
         <Route path="/question/:did" element={<QuestionDetail />} />
-        <Route path="/developer" element={<Developer />} />
+        <Route path="/develop" element={<Developer />} />
         <Route path="/docs" element={<Docs />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/test" element={<Test />} />

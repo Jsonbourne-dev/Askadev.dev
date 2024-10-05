@@ -103,7 +103,7 @@ const GitHubIcon = styled(FaGithub)`
   }
 `;
 
-const Test = () => {
+const AboutUs = () => {
   return (
     <>
       <Helmet>
@@ -139,4 +139,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default AboutUs;
