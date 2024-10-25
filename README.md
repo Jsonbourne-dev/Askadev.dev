@@ -7,31 +7,6 @@ Welcome to Askadev.dev, a platform designed to connect developers, collaborate o
 ## Visit askadev!
 [Visit Askadev.dev](https://www.askadev.dev)
 
-## Getting Started ON Developing AskaDEV!
-
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/Jsonbourne-dev/Askadev.dev.git
-   ```
-
-2. **Install Dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Start the Application:**
-
-   ```bash
-   npm start
-   ```
-
-4. **To open the Cypress test runner, use the following command:**
-
-   ```bash
-   yarn cypress open
-   ```
 
 ## Collaborators
 
@@ -54,10 +29,8 @@ Welcome to Askadev.dev, a platform designed to connect developers, collaborate o
   </tr>
 </table>
 
-
-
-
-
+<br><br>
+<br><br>
 
 # 🚀 Project Roadmap
 
@@ -105,6 +78,11 @@ Here's a roadmap outlining the journey of this project, highlighting key milesto
 - **Scaling & Optimization**: Prepare for high scalability and optimize performance.
 
 ---
+
+
+<br><br>
+<br><br>
+<br><br>
 
 # 🛠️ Development Policy
 
@@ -182,4 +160,33 @@ We promote a welcoming and inclusive environment for all contributors. Please ad
 
 Thank you for contributing to our project! Your efforts are what make this community great! 🙌
 
-Stay tuned as we make progress through each phase of our roadmap, bringing this project to life! 🌟
+
+<br><br>
+<br><br>
+<br><br>
+
+## Getting Started ON Developing AskaDEV!
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/Jsonbourne-dev/Askadev.dev.git
+   ```
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the Application:**
+
+   ```bash
+   npm start
+   ```
+
+4. **To open the Cypress test runner, use the following command:**
+
+   ```bash
+   yarn cypress open
+   ```Stay tuned as we make progress through each phase of our roadmap, bringing this project to life! 🌟
