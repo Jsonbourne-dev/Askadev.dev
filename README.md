@@ -172,7 +172,6 @@ Thank you for contributing to our project! Your efforts are what make this commu
 
 
 ## Getting Started ON Developing AskaDEV!
-
 1. **Clone the Repository:**
 
    ```bash
@@ -184,6 +183,54 @@ Thank you for contributing to our project! Your efforts are what make this commu
    ```bash
    npm install
    ```
+# befor we do anything else you need to get your firebase auth keys
+## 🔑 Firebase Authentication Setup
+
+We use **Firebase Authentication** for user management in our application. To get started with development, you'll need to set up your Firebase project and obtain your API keys. Follow these steps:
+
+### Step 1: Create a Firebase Project
+
+1. Go to the [Firebase Console](https://firebase.google.com/).
+2. Click on **Get Started** and sign in with your Google account if prompted.
+3. Click on **Add project** to create a new Firebase project.
+4. Enter a name for your project and follow the prompts to set up your project.
+
+### Step 2: Enable Authentication
+
+1. Once your project is created, navigate to the **Authentication** section in the left-hand menu.
+2. Click on **Get Started** to enable the authentication module.
+3. Under the **Sign-in method** tab, choose the authentication methods you want to enable (e.g., Email/Password, Google Sign-In, etc.).
+4. Click **Save** after enabling the methods you want.
+
+### Step 3: Get Your API Keys
+
+1. Navigate to the **Project settings** (gear icon) in the left-hand menu.
+2. Under the **General** tab, scroll down to the **Your apps** section.
+3. Click on **Add app** to create a web app if you haven't done so.
+4. Follow the prompts to register your app.
+5. After registration, you'll see your Firebase SDK snippet, which includes your API keys. Copy the configuration object, which looks something like this:
+
+```javascript
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+```
+
+1. Initialize Firebase in your application. In your in the firebase directory create a .env file with the generated keys:
+  ```.env
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+```
+---
 
 3. **Start the Application:**
 
