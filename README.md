@@ -7,6 +7,15 @@ Welcome to Askadev.dev, a platform designed to connect developers, collaborate o
 ## Visit askadev!
 [Visit Askadev.dev](https://www.askadev.dev)
 
+<br></br>
+## Table of Contents
+- [Welcome](#welcome-to-askadevdev)
+- [Collaborators](#collaborators)
+- [Project Roadmap](#project-roadmap)
+- [Development Policy](#development-policy)
+- [Getting Started](#getting-started-on-developing-askadev)
+<br></br>
+
 
 ## Collaborators
 
