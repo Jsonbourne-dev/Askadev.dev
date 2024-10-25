@@ -1,4 +1,4 @@
-# ![Askadev.dev](src/assets/brandmark-green.svg)
+# ![Askadev.dev](src/assets/logo-green.svg)
 
 ## Welcome to Askadev.dev
 
