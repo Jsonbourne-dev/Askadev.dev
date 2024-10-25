@@ -53,3 +53,52 @@ Welcome to Askadev.dev, a platform designed to connect developers, collaborate o
     </td>
   </tr>
 </table>
+
+# 🚀 Project Roadmap
+
+Here's a roadmap outlining the journey of this project, highlighting key milestones and features. Each stage brings us closer to our goal!
+
+---
+
+## 📅 Roadmap Overview
+
+| Phase | Description                                      | Status     |
+|-------|--------------------------------------------------|------------|
+| 🏁 **Phase 1**  | Project Initialization & Core Setup            | ✅ Completed |
+| 🛠️ **Phase 2**  | Feature Development                           | 🔄 In Progress |
+| 🔍 **Phase 3**  | Testing & Quality Assurance                   | ⏳ Upcoming   |
+| 🚀 **Phase 4**  | Final Launch & Deployment                    | ⏳ Upcoming   |
+| 📈 **Phase 5**  | Post-launch Improvements & Optimization       | ⏳ Upcoming   |
+
+---
+
+## 📌 Detailed Milestones
+
+### 🏁 Phase 1: Project Initialization & Core Setup
+- **Define objectives**: Establish project goals and user requirements.
+- **Core environment setup**: Set up tools, repos, and baseline configurations.
+- **Foundation codebase**: Start with core logic and foundational modules.
+  
+### 🛠️ Phase 2: Feature Development
+- **User Interface (UI)**: Design and implement core user interface components.
+- **Backend Development**: Set up databases, APIs, and backend logic.
+- **Authentication**: Implement user login, registration, and permissions.
+
+### 🔍 Phase 3: Testing & Quality Assurance
+- **Unit Testing**: Ensure all modules pass unit tests.
+- **Integration Testing**: Verify seamless interaction between components.
+- **User Feedback Round**: Gather early feedback for improvements.
+
+### 🚀 Phase 4: Final Launch & Deployment
+- **Deploy to production**: Publish a stable, full-feature version.
+- **Performance Optimization**: Ensure smooth, efficient operation.
+- **Documentation**: Finalize all documentation for end-users and developers.
+
+### 📈 Phase 5: Post-launch Improvements & Optimization
+- **User Feedback Integration**: Implement valuable feedback for improvements.
+- **New Features**: Plan and develop additional features based on user needs.
+- **Scaling & Optimization**: Prepare for high scalability and optimize performance.
+
+---
+
+Stay tuned as we make progress through each phase of our roadmap, bringing this project to life! 🌟
