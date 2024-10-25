@@ -1,9 +1,5 @@
-export { default as Container } from './Container';
-export { default as Button } from './Button';
-export { default as Text } from './Text';
-export { default as TextInput } from './TextInput';
-export { default as Wrapper } from './Wrapper';
-export { default as Theme } from './Theme';
-export { default as Tabs } from './Tabs';
-export { default as ArrowPX } from './ArrowPX'
-export { default as AppbarButton } from './AppbarButton';
+export { default as Button } from './button';
+export { default as Container } from './container';
+export { default as Line } from './line';
+export { default as InputField } from './InputField'; 
+export { default as Flag } from './flags'

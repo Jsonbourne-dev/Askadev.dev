@@ -1,13 +1,7 @@
-html, body, #root {
-  background-color: #000000;
-  color: #FFFFFF;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Courier New', Courier, monospace;
-  overflow-x: hidden; 
-}
-
-* {
-  box-sizing: border-box;
+body {
+    background-color: #11141A;
+    color: #FFFFFF;
+    overflow-x: hidden; 
+    padding: 0;
+    margin: 0;
 }

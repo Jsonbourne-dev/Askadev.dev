@@ -1,145 +1,160 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import { Theme, Container, Text, Button } from '../styled-components'; 
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCodeBranch, faShieldAlt, faUsers, faHandsHelping, faTerminal } from '@fortawesome/free-solid-svg-icons';
+import { Container, Line, Button } from '../styled-components';
 
-const InfoContainer = styled(Container)`
-  max-width: 300px;
-  height: 300px; 
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 4px solid #FFFF00; 
-  border-radius: 8px;
+
+const InfoBoxWrapper = styled(Container)`
+  width: 300px;
+  height: 316px;
+  border: 2px solid #BEE239; 
+  border-radius: 8px; 
+  padding: 20px; 
+  box-sizing: border-box; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-  padding: 20px;
-  margin: 20px; 
-  position: relative;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  justify-content: flex-start;
+  position: relative; 
 
-  @media (max-width: 1000px) {
-    max-width: 90%;
-    margin: 10px auto;
+  @media (max-width: 800px) {
+    width: 320px; 
+    height: 250px; 
   }
 `;
 
-const ButtonRow = styled.div`
+const Title = styled.h3`
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 30px; 
+  margin: 0;
+
+  @media (max-width: 800px) {
+    font-size: 24px;
+  }
+`;
+
+const NormalText = styled.span`
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px; 
+
+  @media (max-width: 800px) {
+    font-size: 20px; 
+  }
+`;
+
+const ContentText = styled.p`
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  margin: 20px 0 0; 
+
+  @media (max-width: 800px) {
+    font-size: 16px; 
+    margin: 10px 0 0; 
+  }
+`;
+
+const InfoLine = styled(Line)`
+  width: 100%; 
+  height: 2px; 
+  background-color: #BEE239;
+  margin: 10px 0; 
+`;
+
+const ButtonContainer = styled.div`
+  width: 100%; 
+  position: absolute; 
+  bottom: 20px; 
+  left: 0;
   display: flex;
-  justify-content: space-between; 
-  align-items: center;
-  margin-top: auto; 
-  margin-bottom: 10px; 
+  justify-content: center; 
 `;
 
-const Icon = styled(FontAwesomeIcon)`
-  margin-left: 50px; 
-  font-size: 2.5rem; 
-  flex-shrink: 0; 
-  margin-bottom: 10px; 
-`;
-
-const BoxesContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 30px; 
-  margin-top: 40px;
+const TopRow = styled.div`
+  display: flex;
+  justify-content: center; 
+  gap: 50px;
+  margin-bottom: 50px; 
 
   @media (max-width: 1000px) {
-    grid-template-columns: 1fr;
+    flex-direction: column; 
+    align-items: center; 
   }
 `;
 
-const InfoBoxes = () => {
+const BottomRow = styled.div`
+  display: flex;
+  justify-content: center; 
+  gap: 50px; 
+
+  @media (max-width: 1000px) {
+    flex-direction: column; 
+    align-items: center; 
+  }
+`;
+
+function InfoBox() {
   return (
     <>
-      <Helmet>
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-      </Helmet>
-      <Theme>
-        <Container
-          width="100%"
-          height="auto"
-          maxWidth="1400px"
-          backgroundColor="transparent"
-          color="transparent"
-          margin="0 auto"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          hasBorder={false}
-        >
-          <BoxesContainer>
-            <InfoContainer>
-              <Text variant="title" fontSize="1rem" color="#FFFF00">
-                AskaDEV
-              </Text>
-              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
-                We’re dedicated to helping developers find solutions to their challenges. Join us!
-              </Text>
-              <ButtonRow>
-                <Button>Get help!</Button>
-                <Icon icon={faHandsHelping} color="#00FFFF" /> 
-              </ButtonRow>
-            </InfoContainer>
+      <TopRow>
+        <InfoBoxWrapper>
+          <Title>Ask a question</Title>
+          <InfoLine />
+          <ContentText>
+            We're here to support developers in solving their challenges. Ask a question and get an answer.
+          </ContentText>
+          <ButtonContainer>
+            <Button variant="desktop-filled" width="85%">Get Help</Button> 
+          </ButtonContainer>
+        </InfoBoxWrapper>
 
-            <InfoContainer>
-              <Text variant="title" fontSize="1rem" color="#FFFF00">
-                Terminal
-              </Text>
-              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
-                Access AskaDEV directly through your terminal 🚀💻! It's quick and easy!
-              </Text>
-              <ButtonRow>
-                <Button>Learn More</Button>
-                <Icon icon={faTerminal} color="#00FFFF" />
-              </ButtonRow>
-            </InfoContainer>
+        <InfoBoxWrapper>
+          <Title>Terminal</Title>
+          <InfoLine />
+          <ContentText>
+            Access AskADev directly through your terminal. It’s quick and it’s easy.
+          </ContentText>
+          <ButtonContainer>
+            <Button variant="desktop-filled" width="85%">Learn More</Button> 
+          </ButtonContainer>
+        </InfoBoxWrapper>
 
-            <InfoContainer>
-              <Text variant="title" fontSize="1rem" color="#FFFF00">
-                Community
-              </Text>
-              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
-                A vibrant community awaits you! Connect, share, and learn together.
-              </Text>
-              <ButtonRow>
-                <Button>Community🚀</Button>
-                <Icon icon={faUsers} />
-              </ButtonRow>
-            </InfoContainer>
+        <InfoBoxWrapper>
+          <Title>Community</Title>
+          <InfoLine />
+          <ContentText>
+            A vibrant community awaits you! Connect, share, and learn together.
+          </ContentText>
+          <ButtonContainer>
+            <Button variant="desktop-filled" width="85%">Go Now</Button> 
+          </ButtonContainer>
+        </InfoBoxWrapper>
+      </TopRow>
 
-            <InfoContainer>
-              <Text variant="title" fontSize="1rem" color="#FFFF00">
-                Open Source
-              </Text>
-              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
-                Collaborate on exciting projects and contribute to the open-source movement!
-              </Text>
-              <ButtonRow>
-                <Button>Learn More</Button>
-                <Icon icon={faCodeBranch} />
-              </ButtonRow>
-            </InfoContainer>
+      <BottomRow>
+        <InfoBoxWrapper>
+          <Title>Open Source</Title>
+          <InfoLine />
+          <ContentText>
+            Collab on exciting projects and contribute to the open-source movement.
+          </ContentText>
+          <ButtonContainer>
+            <Button variant="desktop-filled" width="85%">Learn More</Button> 
+          </ButtonContainer>
+        </InfoBoxWrapper>
 
-            <InfoContainer>
-              <Text variant="title" fontSize="1rem" color="#FFFF00">
-                Web5
-              </Text>
-              <Text noFont={true} variant="subtitle" fontSize="1.2rem" color="#00FFFF" sharp={true} style={{ marginTop: '10px', marginBottom: '15px' }}>
-                Discover the future of the web with enhanced security and privacy.
-              </Text>
-              <ButtonRow>
-                <Button>Learn More🚀</Button>
-                <Icon icon={faShieldAlt} color="#00FFFF" />
-              </ButtonRow>
-            </InfoContainer>
-          </BoxesContainer>
-        </Container>
-      </Theme>
+        <InfoBoxWrapper>
+          <Title>
+            Web<NormalText>5</NormalText>
+          </Title>
+          <InfoLine />
+          <ContentText>
+            Discover the future of the internet with real security and privacy.
+          </ContentText>
+          <ButtonContainer>
+            <Button variant="desktop-filled" width="85%">Learn More</Button> 
+          </ButtonContainer>
+        </InfoBoxWrapper>
+      </BottomRow>
     </>
   );
-};
+}
 
-export default InfoBoxes;
+export default InfoBox;

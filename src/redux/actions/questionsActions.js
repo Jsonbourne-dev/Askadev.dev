@@ -12,7 +12,7 @@ export const setQuestions = (questions) => ({
 
 export const addQuestion = (question) => ({
   type: ADD_QUESTION,
-  payload: { ...question, DID: uuidv4() }, // Add UUID here
+  payload: { ...question, DID: uuidv4() }, 
 });
 
 export const addAnswer = (did, answer) => ({
@@ -22,5 +22,5 @@ export const addAnswer = (did, answer) => ({
 
 export const updateQuestionViews = (did) => ({
   type: UPDATE_QUESTION_VIEWS,
-  payload: { did }, // Wrap in an object
+  payload: { did }, 
 });
