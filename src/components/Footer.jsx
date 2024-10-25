@@ -1,74 +1,128 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'; 
 import styled from 'styled-components';
+import { Button } from '../styled-components'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { faFacebookF, faGithub, faTwitter, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons'; 
 
 const FooterWrapper = styled.footer`
-  background-color: #000000;
-  color: #00FFFF;
-  text-align: center;
-  padding: 20px 0;
-  bottom: 0;
   width: 100%;
-  box-shadow: 0 -2px 4px rgba(0, 255, 255, 0.5);
-  z-index: 1000;
-`;
-
-const FooterContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  height: 150px;
+  box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.5);
+  color: #ECF0F1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;  
+  text-align: center;
+  position: relative;
+  padding: 10px 0;
+  
+  @media (max-width: 800px) {
+    height: 200px;
+  }
 `;
 
-const FooterLinks = styled.div`
-  margin: 10px 0;
+const ButtonContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; 
+  align-items: center; 
   justify-content: center;
+  gap: 10px; 
+  margin-bottom: 10px;
+  padding-top: 10px; 
+
+  @media (min-width: 800px) {
+    flex-direction: row; 
+  }
 `;
 
-const FooterLink = styled.a`
-  color: #00FFFF;
-  text-decoration: none;
-  margin: 0 10px;
+const TopButtonGroup = styled.div`
+  display: flex; 
+  gap: 5px;
+  
+  @media (max-width: 800px) {
+    flex-direction: row;
+  }
+`;
+
+const BottomButtonGroup = styled.div`
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px; 
+
+  @media (min-width: 800px) {
+    flex-direction: row; 
+    gap: 10px; 
+  }
+`;
+
+const IconButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; 
+`;
+
+const IconButton = styled(Button)`
+  width: 35px; 
+  height: 35px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
-  transition: color 0.2s, text-decoration 0.2s;
-
-  &:hover {
-    color: #FFFF00;
-    text-decoration: underline;
-  }
+  margin: 0 5px; 
 `;
 
-const FooterContact = styled.p`
-  margin-top: 10px;
-  font-size: 14px;
-  color: #00FFFF;
+const Footer = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 800);
 
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth < 800);
+  };
 
-  @media (max-width: 480px) {
-    font-size: 10px;
-    margin-top: 5px;
-  }
-`;
+  useEffect(() => {
+    handleResize(); 
 
-const Footer = () => (
-  <FooterWrapper>
-    <FooterContent>
-      <p style={{ margin: '10px 0', fontSize: '14px' }}>© 2024 All Rights Reserved</p>
-      <FooterLinks>
-        <FooterLink href="/about">About Us</FooterLink>
-        <FooterLink href="/contact">Contact</FooterLink>
-        <FooterLink href="/privacy">Privacy Policy</FooterLink>
-        <FooterLink href="/terms">Terms of Service</FooterLink>
-      </FooterLinks>
-      <FooterContact>Email: Support@askadev.com | Phone: (406) 589-8118</FooterContact>
-    </FooterContent>
-  </FooterWrapper>
-);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const buttonVariant = isSmallScreen ? "phone-transparent" : "desktop-transparent";
+
+  return (
+    <FooterWrapper>
+      <ButtonContainer>
+        <TopButtonGroup>
+          <Button variant={buttonVariant} lineBelowText={true}>About Us</Button>
+          <Button variant={buttonVariant} lineBelowText={true}>Connect Us</Button>
+        </TopButtonGroup>
+        <BottomButtonGroup>
+          <Button variant={buttonVariant} lineBelowText={true}>Privacy Policy</Button>
+          <Button variant={buttonVariant} lineBelowText={true}>Terms of Service</Button>
+        </BottomButtonGroup>
+      </ButtonContainer>
+      <IconButtonContainer>
+        <IconButton variant="desktop-transparent">
+          <FontAwesomeIcon icon={faFacebookF} />
+        </IconButton>
+        <IconButton variant="desktop-transparent">
+          <FontAwesomeIcon icon={faGithub} />
+        </IconButton>
+        <IconButton variant="desktop-transparent">
+          <FontAwesomeIcon icon={faTwitter} />
+        </IconButton>
+        <IconButton variant="desktop-transparent">
+          <FontAwesomeIcon icon={faLinkedinIn} />
+        </IconButton>
+        <IconButton variant="desktop-transparent">
+          <FontAwesomeIcon icon={faInstagram} />
+        </IconButton>
+      </IconButtonContainer>
+    </FooterWrapper>
+  );
+};
 
 export default Footer;

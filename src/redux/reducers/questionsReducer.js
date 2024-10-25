@@ -34,7 +34,7 @@ const questionsReducer = (state = initialState, action) => {
       return {
         ...state,
         questions: state.questions.map(question => {
-          if (question.DID === action.payload) {
+          if (question.DID === action.payload.did) {
             return { ...question, views: (question.views || 0) + 1 };
           }
           return question;
