@@ -30,7 +30,6 @@ Welcome to Askadev.dev, a platform designed to connect developers, collaborate o
 </table>
 
 <br><br>
-<br><br>
 
 # 🚀 Project Roadmap
 
@@ -76,13 +75,12 @@ Here's a roadmap outlining the journey of this project, highlighting key milesto
 - **User Feedback Integration**: Implement valuable feedback for improvements.
 - **New Features**: Plan and develop additional features based on user needs.
 - **Scaling & Optimization**: Prepare for high scalability and optimize performance.
-
+Stay tuned as we make progress through each phase of our roadmap, bringing this project to life! 🌟
 ---
 
 
 <br><br>
-<br><br>
-<br><br>
+
 
 # 🛠️ Development Policy
 
@@ -162,8 +160,7 @@ Thank you for contributing to our project! Your efforts are what make this commu
 
 
 <br><br>
-<br><br>
-<br><br>
+
 
 ## Getting Started ON Developing AskaDEV!
 
@@ -189,4 +186,4 @@ Thank you for contributing to our project! Your efforts are what make this commu
 
    ```bash
    yarn cypress open
-   ```Stay tuned as we make progress through each phase of our roadmap, bringing this project to life! 🌟
+   ```
