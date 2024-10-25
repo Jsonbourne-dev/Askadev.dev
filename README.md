@@ -106,4 +106,80 @@ Here's a roadmap outlining the journey of this project, highlighting key milesto
 
 ---
 
+# 🛠️ Development Policy
+
+Welcome to our project's development policy! This document outlines our expectations and guidelines for contributing, coding standards, and project management to ensure a smooth and collaborative environment.
+
+---
+
+## 📋 Contribution Guidelines
+
+1. **Fork the Repository**
+   - Create a personal copy of the repository on your GitHub account.
+   - Work on your changes in this forked repository.
+
+2. **Create a Branch**
+   - Always create a new branch for your feature or bug fix. Use descriptive names for your branches.
+     ```
+     git checkout -b feature/your-feature-name
+     ```
+
+3. **Write Clear Commit Messages**
+   - Commit messages should be concise yet descriptive.
+   - Follow the format: `TYPE: Short description (e.g., Fix: correct spelling error)`
+
+4. **Open a Pull Request**
+   - Once your changes are ready, submit a pull request (PR) to the main repository.
+   - Include a description of the changes, the issue being addressed, and any relevant context.
+
+5. **Review Process**
+   - Each PR will be reviewed by at least one collaborator.
+   - Be open to feedback and willing to make changes based on suggestions.
+
+---
+
+## 🧑‍💻 Coding Standards
+
+1. **Language Conventions**
+   - Follow the coding conventions for the specific programming language used in the project.
+   - Maintain consistency with existing code.
+
+2. **Commenting and Documentation**
+   - Write comments where necessary to explain complex logic.
+   - Document your code using clear, meaningful comments and ensure functions and methods are well-documented.
+
+3. **Code Formatting**
+   - Use consistent formatting (indentation, line spacing, etc.).
+   - Consider using a linter and formatter to automate this process.
+
+4. **Testing**
+   - Write tests for new features and bug fixes.
+   - Ensure all tests pass before submitting a PR.
+
+---
+
+## 📅 Project Management
+
+1. **Issue Tracking**
+   - Use GitHub Issues to report bugs or propose new features.
+   - Tag issues appropriately (e.g., `bug`, `enhancement`, `discussion`).
+
+2. **Milestones and Roadmap**
+   - Familiarize yourself with the project roadmap and milestones.
+   - Contribute to ongoing discussions regarding future features and improvements.
+
+3. **Meetings and Communication**
+   - Join regular meetings (if applicable) to discuss progress and roadblocks.
+   - Utilize our communication channels (e.g., Slack, Discord, etc.) for questions and collaboration.
+
+---
+
+## 🎉 Code of Conduct
+
+We promote a welcoming and inclusive environment for all contributors. Please adhere to our [Code of Conduct](link-to-code-of-conduct) to ensure a positive experience for everyone involved.
+
+---
+
+Thank you for contributing to our project! Your efforts are what make this community great! 🙌
+
 Stay tuned as we make progress through each phase of our roadmap, bringing this project to life! 🌟
