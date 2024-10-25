@@ -1,9 +1,14 @@
+# ![Askadev.dev](src/assets/desktoplogo.svg)
+
 ## Welcome to Askadev.dev
 
-Welcome to Askadev.dev, a platform designed to streamline development. Follow the instructions below to get started.
+Welcome to Askadev.dev, a platform designed to connect developers, collaborate on solving problems! Join Askadev to share knowledge, tackle challenges, and build solutions together!
 
+## Visit askadev!
+[Visit Askadev.dev](https://www.askadev.dev)
 
-## Getting Started
+## Getting Started ON Developing AskaDEV!
+
 1. **Clone the Repository:**
 
    ```bash
@@ -28,10 +33,23 @@ Welcome to Askadev.dev, a platform designed to streamline development. Follow th
    yarn cypress open
    ```
 
-## To-Do List
+## Collaborators
 
-- **Fix Redux Store:** Ensure the Redux store is working correctly.
-  
-- **CSS Cleanup:** Reorganize CSS files to follow a consistent order, color palette, and font sizes.
-  
-- **Cypress Tests:** Complete and properly implement Cypress tests; some tests are currently incomplete or incorrectly configured.
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/duncannevin">
+        <img src="https://github.com/duncannevin.png" width="100px;" alt="Duncan Nevin"/>
+        <br />
+        <sub><b>Duncan Nevin</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/jsonbourne-dev">
+        <img src="https://github.com/jsonbourne-dev.png" width="100px;" alt="jsonbourne-dev"/>
+        <br />
+        <sub><b>jsonbourne-dev</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
