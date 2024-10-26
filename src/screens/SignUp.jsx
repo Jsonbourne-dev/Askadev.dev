@@ -149,6 +149,13 @@ const GitHubErrorText = styled.p`
   text-align: center;
 `;
 
+const ForgotPasswordContainer = styled.div`
+  width: 100%;
+  display: flex; 
+  justify-content: center; 
+  margin-top: 10px; // Adjust the spacing as needed
+`;
+
 const SignUp = () => {
   const dispatch = useDispatch(); 
   const [username, setUsername] = useState("");
@@ -259,18 +266,24 @@ const SignUp = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <Spacer />
                 <InputField
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <Spacer />
                 {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
                 <StyledButton variant="desktop-filled" onClick={handleEmailSignIn}>
                   Sign In
                 </StyledButton>
+                <Spacer />
+                {/* Forgot Password link centered below the Sign In button */}
+                <ForgotPasswordContainer>
+                  <Link to="/#/forgotpassword" style={{ color: '#fff', textDecoration: 'underline' }}>
+                    Forgot Password?
+                  </Link>
+                </ForgotPasswordContainer>
+
                 <Spacer />
                 <SignInButton isSignUp={false} onClick={handleGoogleSignIn}>
                   <LogoImageWrapper src={GoogleLogo} alt="Google logo" />
@@ -282,24 +295,15 @@ const SignUp = () => {
                 </SignInButton>
                 {githubErrorMessage && <GitHubErrorText>{githubErrorMessage}</GitHubErrorText>}
                 <Spacer />
-                <SwitchLink onClick={() => setIsSignIn(false)}>Create an account</SwitchLink>
+                <SwitchLink onClick={() => setIsSignIn(false)}>Sign Up</SwitchLink>
               </InputContainer>
             </>
           ) : (
             <>
               {isAccountCreated ? (
-                <>
-                  <p style={{ color: "#ff0000", textAlign: "center" }}>
-                    Account created successfully! You can now log in.
-                  </p>
-                  <ContinueButtonContainer>
-                    <Link to="/#/community" style={{ textDecoration: 'none' }}>
-                      <StyledButton variant="desktop-filled">
-                        Continue
-                      </StyledButton>
-                    </Link>
-                  </ContinueButtonContainer>
-                </>
+                <p style={{ color: 'white', textAlign: 'center' }}>
+                  An email has been sent to verify your account.
+                </p>
               ) : (
                 <>
                   <FormTitle>Sign Up</FormTitle>
@@ -311,32 +315,36 @@ const SignUp = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                       />
-                      <Spacer />
                       <InputField
                         type="email"
                         placeholder="Email Address"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
-                      <Spacer />
                       <InputField
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                      <Spacer />
                       {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
                       <StyledButton variant="desktop-filled" onClick={handleCreateAccount}>
                         Sign Up
                       </StyledButton>
+                      <Spacer />
+                      {/* Forgot Password link centered below the Sign Up button */}
+                      <ForgotPasswordContainer>
+                        <Link to="/#/forgotpassword" style={{ color: '#fff', textDecoration: 'underline' }}>
+                          Forgot Password?
+                        </Link>
+                      </ForgotPasswordContainer>
+
                     </InputContainer>
                   </UserAuthSection>
                   <SignInButton isSignUp onClick={handleGoogleSignIn}>
                     <LogoImageWrapper src={GoogleLogo} alt="Google logo" />
                     Sign Up with Google
                   </SignInButton>
-
                   <SignInButton isGitHub isSignUp onClick={handleGitHubSignIn}>
                     <LogoImageWrapper src={GitHubLogo} alt="GitHub logo" />
                     Sign Up with GitHub
