@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux"; 
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Link } from "react-router-dom"; 
-import { setUser } from '../redux/actions/userActions'; 
-import { InputField } from "../styled-components"; 
-import StyledButton from '../styled-components/button'; 
+import { Link } from "react-router-dom";
+import { setUser } from '../redux/actions/userActions';
+import { InputField } from "../styled-components";
+import StyledButton from '../styled-components/button';
 import SignInLeftSection from '../components/SignInLeftSection';
-import Logo from '../assets/logo-green.svg'; 
-import { auth, provider } from '../firebase/firebase'; 
-import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"; 
-import GoogleLogo from '../assets/googlelogo.png'; 
+import Logo from '../assets/logo-green.svg';
+import { auth, googleProvider, githubProvider } from '../firebase/firebase'; 
+import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import GoogleLogo from '../assets/googlelogo.png';
+import GitHubLogo from '../assets/githublogo.png';
 
 const Body = styled.div`
   display: flex;
@@ -117,27 +118,35 @@ const UserAuthSection = styled.div`
   margin-bottom: 30px;
 `;
 
-const GoogleSignInButton = styled.button`
-  background-color: #f4f4f4; /* Whitish-grey background */
-  color: black; /* Black text */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for button */
-  display: flex; /* Flex display to align items */
-  align-items: center; /* Center align items vertically */
-  cursor: pointer; /* Pointer cursor on hover */
-  width: 100%; /* Full width of the container */
-  margin-top: 10px; /* Spacing above the button */
-  font-size: 16px; /* Adjust font size as needed */
+const SignInButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ isGitHub }) => (isGitHub ? '#333' : '#f4f4f4')};
+  color: ${({ isGitHub }) => (isGitHub ? 'white' : 'black')};
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  width: 100%;
+  margin-top: 10px; 
+  margin-right: ${({ isSignUp }) => (isSignUp ? '-20px' : '0')}; 
+  font-size: 16px;
+  cursor: pointer;
 
   &:hover {
-    background-color: #e0e0e0; /* Slightly darker on hover */
+    background-color: ${({ isGitHub }) => (isGitHub ? '#444' : '#e0e0e0')};
   }
 `;
 
-const GoogleLogoImage = styled.img`
-  width: 20px; /* Logo width */
-  margin-right: 10px; /* Space between logo and text */
+const LogoImageWrapper = styled.img`
+  width: 20px;
+  margin-right: 10px;
+`;
+
+const GitHubErrorText = styled.p`
+  color: yellow; 
+  font-size: 14px;
+  text-align: center;
 `;
 
 const SignUp = () => {
@@ -148,6 +157,7 @@ const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isAccountCreated, setIsAccountCreated] = useState(false);
   const [isSignIn, setIsSignIn] = useState(false); 
+  const [githubErrorMessage, setGithubErrorMessage] = useState("");
 
   const handleCreateAccount = async () => {
     if (username.length > 10) {
@@ -164,7 +174,6 @@ const SignUp = () => {
       return;
     }
 
-    // Check for password length
     if (password.length < 10) {
       setErrorMessage("Password must be at least 10 characters long.");
       return;
@@ -174,7 +183,6 @@ const SignUp = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Dispatch user creation action
       dispatch(setUser(username, user.email, password, user.uid)); 
       setIsAccountCreated(true);
       console.log("Account created:", username, user.email);
@@ -185,14 +193,29 @@ const SignUp = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      const username = user.displayName.split(' ')[0]; // Get first name as username
-
-      // Dispatch user creation action
+      const username = user.displayName.split(' ')[0];
       dispatch(setUser(username, user.email, "", user.uid)); 
       console.log("Signed in with Google:", username, user.email);
+
+      window.location.href = '/#/community'; 
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  const handleGitHubSignIn = async () => {
+    setGithubErrorMessage("GitHub auth is not set up till production.");
+    return; 
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+      const user = result.user;
+
+      const username = user.displayName.split(' ')[0];
+      dispatch(setUser(username, user.email, "", user.uid)); 
+      console.log("Signed in with GitHub:", username, user.email);
 
       window.location.href = '/#/community'; 
     } catch (error) {
@@ -205,7 +228,6 @@ const SignUp = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Dispatch user login action
       dispatch(setUser(user.displayName, user.email, "", user.uid)); 
       console.log("Signed in with email:", user.email);
 
@@ -250,10 +272,15 @@ const SignUp = () => {
                   Sign In
                 </StyledButton>
                 <Spacer />
-                <GoogleSignInButton onClick={handleGoogleSignIn}>
-                  <GoogleLogoImage src={GoogleLogo} alt="Google logo" />
+                <SignInButton isSignUp={false} onClick={handleGoogleSignIn}>
+                  <LogoImageWrapper src={GoogleLogo} alt="Google logo" />
                   Sign In with Google
-                </GoogleSignInButton>
+                </SignInButton>
+                <SignInButton isGitHub isSignUp={false} onClick={handleGitHubSignIn}>
+                  <LogoImageWrapper src={GitHubLogo} alt="GitHub logo" />
+                  Sign In with GitHub
+                </SignInButton>
+                {githubErrorMessage && <GitHubErrorText>{githubErrorMessage}</GitHubErrorText>}
                 <Spacer />
                 <SwitchLink onClick={() => setIsSignIn(false)}>Create an account</SwitchLink>
               </InputContainer>
@@ -301,17 +328,22 @@ const SignUp = () => {
                       <Spacer />
                       {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
                       <StyledButton variant="desktop-filled" onClick={handleCreateAccount}>
-                        Create Account
+                        Sign Up
                       </StyledButton>
-                      <Spacer />
-                      <GoogleSignInButton onClick={handleGoogleSignIn}>
-                        <GoogleLogoImage src={GoogleLogo} alt="Google logo" />
-                        Sign In with Google
-                      </GoogleSignInButton>
-                      <Spacer />
-                      <SwitchLink onClick={() => setIsSignIn(true)}>Log in</SwitchLink>
                     </InputContainer>
                   </UserAuthSection>
+                  <SignInButton isSignUp onClick={handleGoogleSignIn}>
+                    <LogoImageWrapper src={GoogleLogo} alt="Google logo" />
+                    Sign Up with Google
+                  </SignInButton>
+
+                  <SignInButton isGitHub isSignUp onClick={handleGitHubSignIn}>
+                    <LogoImageWrapper src={GitHubLogo} alt="GitHub logo" />
+                    Sign Up with GitHub
+                  </SignInButton>
+                  {githubErrorMessage && <GitHubErrorText>{githubErrorMessage}</GitHubErrorText>}
+                  <Spacer />
+                  <SwitchLink onClick={() => setIsSignIn(true)}>Sign In</SwitchLink>
                 </>
               )}
             </>
