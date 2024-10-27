@@ -1,6 +1,100 @@
-import React from 'react';
+import React, { useState } from 'react'; // Import useState
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import styled, { ThemeProvider } from 'styled-components';
+
+const truncateText = (text, maxLength) => {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + '...';
+  }
+  return text;
+};
+
+const formatTimeAgo = (createdAt) => {
+  const now = new Date();
+  const createdDate = new Date(createdAt);
+  const diffInMilliseconds = now - createdDate;
+
+  const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInDays > 0) {
+    return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+  } else if (diffInHours > 0) {
+    return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+  } else {
+    return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+  }
+};
+
+const QuestionCard = ({ onQuestionClick }) => {
+  const [clickedQuestionId, setClickedQuestionId] = useState(null); // State for clicked question ID
+  const questions = useSelector((state) => state.questions.questions);
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  const handleQuestionClick = (uuid) => {
+    setClickedQuestionId(uuid); // Set the clicked question ID
+    console.log(`Clicked Question UUID: ${uuid}`); // Print the UUID
+    if (onQuestionClick) {
+      onQuestionClick(uuid); // Call the external click handler if provided
+    }
+    navigate(`/answerquestion/${uuid}`); // Navigate to the answer question route
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container>
+        {questions.map((questionData, index) => (
+          <React.Fragment key={questionData.uuid}>
+            <CardContainer onClick={() => handleQuestionClick(questionData.uuid)}> {/* Updated click handler */}
+              <ContentContainer>
+                <LeftSection>
+                  <StatsContainer>
+                    <Stat>
+                      <StatNumber>{questionData.views}</StatNumber>
+                      <StatLabel>Views</StatLabel>
+                    </Stat>
+                    <Stat>
+                      <StatNumber>{questionData.votes}</StatNumber>
+                      <StatLabel>Votes</StatLabel>
+                    </Stat>
+                    <Stat>
+                      <StatNumber>{questionData.answers}</StatNumber>
+                      <StatLabel>Answers</StatLabel>
+                    </Stat>
+                  </StatsContainer>
+                </LeftSection>
+                <MiddleSection>
+                  <Title>{truncateText(questionData.title, 60)}</Title>
+                  <Subtitle>{truncateText(questionData.subtitle, 100)}</Subtitle>
+                  <Question>{questionData.question}</Question>
+                  <Flags>
+                    {questionData.flags?.map((flag, flagIndex) => (
+                      <FlagBox key={flagIndex}>{flag}</FlagBox>
+                    ))}
+                  </Flags>
+                </MiddleSection>
+                <RightSection>
+                  <UserTimeContainer>
+                    <Time>{formatTimeAgo(questionData.createdAt)}</Time>
+                    <Spacer />
+                    <UserBox>
+                      <User>{questionData.username}</User>
+                    </UserBox>
+                  </UserTimeContainer>
+                </RightSection>
+              </ContentContainer>
+            </CardContainer>
+            {index < questions.length - 1 && <LineSpacer />}
+          </React.Fragment>
+        ))}
+      </Container>
+    </ThemeProvider>
+  );
+};
+
+export default QuestionCard;
 
 const theme = {
   fontSizes: {
@@ -52,89 +146,6 @@ const theme = {
     phone: '600px',
   },
 };
-
-const truncateText = (text, maxLength) => {
-  if (text.length > maxLength) {
-    return text.substring(0, maxLength) + '...';
-  }
-  return text;
-};
-
-const formatTimeAgo = (createdAt) => {
-  const now = new Date();
-  const createdDate = new Date(createdAt);
-  const diffInMilliseconds = now - createdDate;
-
-  const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  const diffInDays = Math.floor(diffInHours / 24);
-
-  if (diffInDays > 0) {
-    return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
-  } else if (diffInHours > 0) {
-    return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
-  } else {
-    return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
-  }
-};
-
-const QuestionCard = () => {
-  const questions = useSelector((state) => state.questions.questions);
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        {questions.map((questionData, index) => (
-          <React.Fragment key={index}>
-            <CardContainer>
-              <ContentContainer>
-                <LeftSection>
-                  <StatsContainer>
-                    <Stat>
-                      <StatNumber>{questionData.views}</StatNumber>
-                      <StatLabel>Views</StatLabel>
-                    </Stat>
-                    <Stat>
-                      <StatNumber>{questionData.votes}</StatNumber>
-                      <StatLabel>Votes</StatLabel>
-                    </Stat>
-                    <Stat>
-                      <StatNumber>{questionData.answers}</StatNumber>
-                      <StatLabel>Answers</StatLabel>
-                    </Stat>
-                  </StatsContainer>
-                </LeftSection>
-                <MiddleSection>
-                  <Title>{truncateText(questionData.title, 60)}</Title>
-                  <Subtitle>{truncateText(questionData.subtitle, 100)}</Subtitle>
-                  <Question>{questionData.question}</Question>
-                  <Flags>
-                    {questionData.flags?.map((flag, index) => (
-                      <FlagBox key={index}>{flag}</FlagBox>
-                    ))}
-                  </Flags>
-                </MiddleSection>
-                <RightSection>
-                  <UserTimeContainer>
-                    <Time>{formatTimeAgo(questionData.createdAt)}</Time>
-                    <Spacer />
-                    <UserBox>
-                      <User>{questionData.username}</User>
-                    </UserBox>
-                  </UserTimeContainer>
-                </RightSection>
-
-              </ContentContainer>
-            </CardContainer>
-            {index < questions.length - 1 && <LineSpacer />}
-          </React.Fragment>
-        ))}
-      </Container>
-    </ThemeProvider>
-  );
-};
-
-export default QuestionCard;
 
 
 const Container = styled.div`

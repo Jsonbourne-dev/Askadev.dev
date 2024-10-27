@@ -6,7 +6,8 @@ import Test from './screens/Test';
 import Developer from './screens/Developer';
 import Docs from './screens/Docs';
 import Profile from './screens/Profile';
-import SignUp from './screens/SignUp';
+import SignUp from './screens/SignUp'
+import AnswerQuesion from './screens/AnswerQuestion';
 
 const RouterPage = () => {
   return (
@@ -19,6 +20,8 @@ const RouterPage = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/test" element={<Test />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/answerquestion/:uuid" element={<AnswerQuesion />} />
+
       </Routes>
     </HashRouter>
   );

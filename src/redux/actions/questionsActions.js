@@ -12,15 +12,15 @@ export const setQuestions = (questions) => ({
 
 export const addQuestion = (question) => ({
   type: ADD_QUESTION,
-  payload: { ...question, DID: uuidv4() }, 
+  payload: { ...question, uuid: uuidv4() }, 
 });
 
-export const addAnswer = (did, answer) => ({
+export const addAnswer = (uuid, answer) => ({ 
   type: ADD_ANSWER,
-  payload: { did, answer },
+  payload: { uuid, answer }, 
 });
 
-export const updateQuestionViews = (did) => ({
+export const updateQuestionViews = (uuid) => ({ 
   type: UPDATE_QUESTION_VIEWS,
-  payload: { did }, 
+  payload: { uuid }, 
 });

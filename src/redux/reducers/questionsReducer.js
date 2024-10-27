@@ -22,7 +22,7 @@ const questionsReducer = (state = initialState, action) => {
       return {
         ...state,
         questions: state.questions.map(question => {
-          if (question.DID === action.payload.did) {
+          if (question.uuid === action.payload.uuid) { 
             const updatedAnswers = question.answers ? [...question.answers, action.payload.answer] : [action.payload.answer];
             return { ...question, answers: updatedAnswers };
           }
@@ -34,7 +34,7 @@ const questionsReducer = (state = initialState, action) => {
       return {
         ...state,
         questions: state.questions.map(question => {
-          if (question.DID === action.payload.did) {
+          if (question.uuid === action.payload.uuid) { 
             return { ...question, views: (question.views || 0) + 1 };
           }
           return question;
