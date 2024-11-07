@@ -16,25 +16,44 @@ const LeftHalf = styled.div`
   width: 50%;
   position: absolute;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Default: Vertically center content */
+  justify-content: center;
+
+  /* Media query for smaller screens: Shift all content down */
+  @media (max-width: 768px) {
+    justify-content: flex-start;  /* Move content to top */
+    padding-top: 150px;  /* Increased padding to move everything down */
+  }
+
+  @media (max-width: 480px) {
+    justify-content: flex-start;  /* Move content to top */
+    padding-top: 200px;  /* Even more padding for very small screens */
+  }
 `;
 
 const PlanetContainer = styled.div`
   border-radius: 50%;
   box-shadow: 5px -3px 10px 3px #5e90f1;
-  height: 500px;
-  width: 500px;
+  height: 40vw;  /* Earth size as a percentage of viewport width */
+  width: 40vw;  /* Same for width */
+  max-height: 600px;  /* Limit max size */
+  max-width: 600px;   /* Limit max size */
   overflow: hidden;
-  position: absolute;
+  position: relative;
   z-index: 1;
-  transform: translate(100px, 350px); 
+  margin-top: 20px;  /* Adjusted to make planet a bit further down from text */
 `;
 
 const Night = styled.div`
   animation: ${rotateNight} 80s linear infinite;
   background-image: url(${nightMap});
   background-size: 200%;
-  height: 500px;
-  width: 500px;
+  height: 100%;
+  width: 100%;
   position: absolute;
   z-index: 2;
 `;
@@ -43,8 +62,8 @@ const InnerShadow = styled.div`
   background: transparent;
   border-radius: 50%;
   box-shadow: -5px 0 10px 1px #152b57 inset, 5px 0 10px 1px #040615 inset;
-  height: 500px;
-  width: 500px;
+  height: 100%;
+  width: 100%;
   position: absolute;
   z-index: 5;
 `;
@@ -59,27 +78,19 @@ const CenterLine = styled.div`
 `;
 
 const TitleText = styled.h1`
-  width: 1000px; /* Adjust the width as necessary */
-  position: absolute;
-  top: calc(50% - 250px); 
-  left: 50%;  /* Move title to the right */
-  transform: translate(-50%, -50%); 
   color: #fff;
-  font-size: 50px; 
-  z-index: 10; 
-  text-align: center; 
+  font-size: 50px;
+  text-align: center;
+  z-index: 10;
+  margin: 0;  /* Remove margin to eliminate gap between title and subtitle */
 `;
 
 const SubtitleText = styled.h2`
-  width: 1000px;
-  position: absolute;
-  top: calc(50% - 180px); 
-  left: 50%;  /* Move subtitle to the right */
-  transform: translate(-50%, -50%); 
-  color: #fff; 
+  color: #fff;
   font-size: 25px;
-  z-index: 10; 
-  text-align: center; 
+  text-align: center;
+  z-index: 10;
+  margin: 0;  /* Remove margin to eliminate gap between subtitle and title */
 `;
 
 const LogoImage = styled.img`
@@ -93,15 +104,15 @@ const LogoImage = styled.img`
 const SignInLeftSection = () => {
   return (
     <LeftHalf>
-      <PlanetContainer>
-        <Night />
-        <InnerShadow />
-      </PlanetContainer>
       <a href="/" style={{ position: "absolute", top: "20px", left: "20px", zIndex: 10 }}>
         <LogoImage src={Logo} alt="Logo" />
       </a>
       <TitleText>Code. Collaborate. Connect.</TitleText>
       <SubtitleText>Collaborate globally, solve problems together.</SubtitleText>
+      <PlanetContainer>
+        <Night />
+        <InnerShadow />
+      </PlanetContainer>
       <CenterLine />
     </LeftHalf>
   );

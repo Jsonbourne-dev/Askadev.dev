@@ -29,69 +29,74 @@ const formatTimeAgo = (createdAt) => {
 };
 
 const QuestionCard = ({ onQuestionClick }) => {
-  const [clickedQuestionId, setClickedQuestionId] = useState(null); // State for clicked question ID
+  const [clickedQuestionId, setClickedQuestionId] = useState(null); 
   const questions = useSelector((state) => state.questions.questions);
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
   const handleQuestionClick = (uuid) => {
-    setClickedQuestionId(uuid); // Set the clicked question ID
-    console.log(`Clicked Question UUID: ${uuid}`); // Print the UUID
+    setClickedQuestionId(uuid); 
+    console.log(`Clicked Question UUID: ${uuid}`); 
     if (onQuestionClick) {
-      onQuestionClick(uuid); // Call the external click handler if provided
+      onQuestionClick(uuid); 
     }
-    navigate(`/answerquestion/${uuid}`); // Navigate to the answer question route
+    navigate(`/answerquestion/${uuid}`); 
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        {questions.map((questionData, index) => (
-          <React.Fragment key={questionData.uuid}>
-            <CardContainer onClick={() => handleQuestionClick(questionData.uuid)}> {/* Updated click handler */}
-              <ContentContainer>
-                <LeftSection>
-                  <StatsContainer>
-                    <Stat>
-                      <StatNumber>{questionData.views}</StatNumber>
-                      <StatLabel>Views</StatLabel>
-                    </Stat>
-                    <Stat>
-                      <StatNumber>{questionData.votes}</StatNumber>
-                      <StatLabel>Votes</StatLabel>
-                    </Stat>
-                    <Stat>
-                      <StatNumber>{questionData.answers}</StatNumber>
-                      <StatLabel>Answers</StatLabel>
-                    </Stat>
-                  </StatsContainer>
-                </LeftSection>
-                <MiddleSection>
-                  <Title>{truncateText(questionData.title, 60)}</Title>
-                  <Subtitle>{truncateText(questionData.subtitle, 100)}</Subtitle>
-                  <Question>{questionData.question}</Question>
-                  <Flags>
-                    {questionData.flags?.map((flag, flagIndex) => (
-                      <FlagBox key={flagIndex}>{flag}</FlagBox>
-                    ))}
-                  </Flags>
-                </MiddleSection>
-                <RightSection>
-                  <UserTimeContainer>
-                    <Time>{formatTimeAgo(questionData.createdAt)}</Time>
-                    <Spacer />
-                    <UserBox>
-                      <User>{questionData.username}</User>
-                    </UserBox>
-                  </UserTimeContainer>
-                </RightSection>
-              </ContentContainer>
-            </CardContainer>
-            {index < questions.length - 1 && <LineSpacer />}
-          </React.Fragment>
-        ))}
+        {questions.length > 0 ? (
+          questions.map((questionData, index) => (
+            <React.Fragment key={questionData.uuid}>
+              <CardContainer onClick={() => handleQuestionClick(questionData.uuid)}>
+                <ContentContainer>
+                  <LeftSection>
+                    <StatsContainer>
+                      <Stat>
+                        <StatNumber>{questionData.views}</StatNumber>
+                        <StatLabel>Views</StatLabel>
+                      </Stat>
+                      <Stat>
+                        <StatNumber>{questionData.votes}</StatNumber>
+                        <StatLabel>Votes</StatLabel>
+                      </Stat>
+                      <Stat>
+                        <StatNumber>{questionData.answers.length}</StatNumber> 
+                        <StatLabel>Answers</StatLabel>
+                      </Stat>
+                    </StatsContainer>
+                  </LeftSection>
+                  <MiddleSection>
+                    <Title>{truncateText(questionData.title, 60)}</Title>
+                    <Subtitle>{truncateText(questionData.subtitle, 100)}</Subtitle>
+                    <Question>{questionData.question}</Question>
+                    <Flags>
+                      {questionData.flags?.map((flag, flagIndex) => (
+                        <FlagBox key={flagIndex}>{flag.name || flag || 'Unnamed Flag'}</FlagBox>
+                      ))}
+                    </Flags>
+                  </MiddleSection>
+                  <RightSection>
+                    <UserTimeContainer>
+                      <Time>{formatTimeAgo(questionData.createdAt)}</Time>
+                      <Spacer />
+                      <UserBox>
+                        <User>{questionData.username}</User>
+                      </UserBox>
+                    </UserTimeContainer>
+                  </RightSection>
+                </ContentContainer>
+              </CardContainer>
+              {index < questions.length - 1 && <LineSpacer />}
+            </React.Fragment>
+          ))
+        ) : (
+          <p>No questions yet, Be the first!</p>
+        )}
       </Container>
     </ThemeProvider>
   );
+  
 };
 
 export default QuestionCard;
@@ -358,10 +363,10 @@ const UserBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.primary};  /* Sets background color */
-  padding: 8px 15px;  /* Adds some padding for better spacing */
-  border-radius: 5px;  /* Optional, adds rounded corners */
-  color: white;  /* Text color */
+  background-color: ${({ theme }) => theme.colors.primary};  
+  padding: 8px 15px;  
+  border-radius: 5px; 
+  color: white; 
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: ${({ theme }) => theme.fontSizes.desktop.small};
 

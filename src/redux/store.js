@@ -1,44 +1,49 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import questionsReducer from './reducers/questionsReducer'; 
-import userReducer from './reducers/userReducer'; 
+import questionsReducer from './reducers/questionsReducer';
+import userReducer from './reducers/userReducer';
+import axios from 'axios';
 
-const reducers = combineReducers({
-  questions: questionsReducer,
-  user: userReducer, 
+const SET_QUESTIONS = 'SET_QUESTIONS';
+const INIT_STORE = 'INIT_STORE';
+
+const setQuestions = (questions) => ({
+  type: SET_QUESTIONS,
+  payload: questions,
 });
 
-const saveStateToLocalStorage = (store) => (next) => (action) => {
-  const result = next(action);
-  try {
-    const state = store.getState();
-    localStorage.setItem('reduxState', JSON.stringify(state));
-  } catch (error) {
-    console.error('Could not save state', error);
-  }
-  return result;
-};
-
-const loadStateFromLocalStorage = () => {
-  try {
-    const serializedState = localStorage.getItem('reduxState');
-    if (serializedState === null) {
-      return undefined;
+const apiMiddleware = (store) => (next) => async (action) => {
+  if (action.type === INIT_STORE) {
+    try {
+      const response = await axios.get('http://localhost:5000/api/questions');
+      store.dispatch(setQuestions(response.data));
+      console.log('Fetched questions successfully:', response.data);
+    } catch (error) {
+      console.error('Error fetching questions:', error);
     }
-    return JSON.parse(serializedState);
-  } catch (error) {
-    console.error('Could not load state', error);
-    return undefined;
   }
+  
+  return next(action);
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const persistedState = loadStateFromLocalStorage();
+const rootReducer = combineReducers({
+  questions: questionsReducer,
+  user: userReducer,
+});
 
 const store = createStore(
-  reducers,
-  persistedState,
-  composeEnhancers(applyMiddleware(saveStateToLocalStorage))
+  rootReducer,
+  composeEnhancers(applyMiddleware(apiMiddleware))
 );
+
+const fetchQuestionsPeriodically = () => {
+  store.dispatch({ type: INIT_STORE });
+  setInterval(() => {
+    store.dispatch({ type: INIT_STORE });
+  }, 10000); 
+};
+
+fetchQuestionsPeriodically();
 
 export default store;

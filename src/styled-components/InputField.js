@@ -7,22 +7,38 @@ const InputField = ({
   value,
   onChange,
   rows,
-  isResizable = false,
   disabled = false,
   onEnter,
-  title // Title prop for the label
+  title,
+  height = '40px',
+  titleFontSize = '18px', 
+  hintFontSize = '14px',
+  fontFamily = 'Space Grotesk, sans-serif',
+  color = 'lightgrey',
+  titleDistance = '10px'
 }) => {
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && onEnter) {
+    if (e.key === 'Enter' && onEnter && height === '40px') {
       e.preventDefault();
       onEnter(value);
     }
   };
 
+  const isMultiline = parseInt(height, 10) > 40;
+
   return (
     <InputContainer>
-      {title && <Title>{title}</Title>} {/* Render title/label above the input */}
-      {isResizable ? (
+      {title && (
+        <Title
+          fontSize={titleFontSize} 
+          fontFamily={fontFamily}
+          color={color}
+          titleDistance={titleDistance}
+        >
+          {title}
+        </Title>
+      )}
+      {isMultiline ? (
         <ResizableInput
           placeholder={placeholder}
           value={value}
@@ -30,6 +46,10 @@ const InputField = ({
           rows={rows}
           disabled={disabled}
           onKeyDown={handleKeyDown}
+          height={height}
+          fontFamily={fontFamily}
+          color={color}
+          hintFontSize={hintFontSize} 
         />
       ) : (
         <StyledInput
@@ -39,6 +59,10 @@ const InputField = ({
           onChange={onChange}
           disabled={disabled}
           onKeyDown={handleKeyDown}
+          height={height}
+          fontFamily={fontFamily}
+          color={color}
+          hintFontSize={hintFontSize} 
         />
       )}
     </InputContainer>
@@ -46,33 +70,36 @@ const InputField = ({
 };
 
 const InputContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  font-family: 'Space Grotesk', sans-serif; /* Set the global font for the container */
-  margin-bottom: 15px; /* Add some space below the input field */
+  margin-bottom: 15px;
 `;
 
 const Title = styled.label`
-  margin-bottom: 8px; /* Space between title and input */
-  font-size: 18px; /* Hardcoded font-size */
-  font-family: 'Space Grotesk', sans-serif; /* Use 'Space Grotesk' font */
-  color: ${({ theme }) => theme.colors?.primary || '#000'}; /* Default color for title */
+  position: absolute;
+  top: ${({ titleDistance }) => `-${titleDistance}`}; 
+  left: 0px;
+  padding: 0 5px;
+  font-size: ${({ fontSize }) => fontSize}; 
+  font-family: ${({ fontFamily }) => fontFamily};
+  color: ${({ color }) => color}; 
 `;
 
 const StyledInput = styled.input`
   border: 1px solid darkgrey;
   border-radius: 8px;
-  padding: 5px 10px;
-  height: 40px;
-  font-size: 14px; /* Hardcoded font-size */
-  font-family: 'Space Grotesk', sans-serif; /* Updated font-family */
-  color: lightgrey;
-  background: transparent;
+  padding: 10px;
+  height: ${({ height }) => height}; 
+  font-size: ${({ hintFontSize }) => hintFontSize};
+  font-family: ${({ fontFamily }) => fontFamily};
+  color: ${({ color }) => color}; 
+  background: transparent; 
   outline: none;
 
   &::placeholder {
     color: #808080;
-    font-size: 14px; /* Hardcoded font-size */
+    font-size: ${({ hintFontSize }) => hintFontSize}; 
   }
 
   &:focus {
@@ -83,19 +110,18 @@ const StyledInput = styled.input`
 const ResizableInput = styled.textarea`
   border: 1px solid darkgrey;
   border-radius: 8px;
-  padding: 5px 10px;
+  padding: 10px;
   resize: vertical;
-  font-size: 14px; /* Hardcoded font-size */
-  font-family: 'Space Grotesk', sans-serif; /* Updated font-family */
-  color: lightgrey;
-  background: transparent;
+  min-height: ${({ height }) => height}; 
+  font-size: ${({ hintFontSize }) => hintFontSize}; 
+  font-family: ${({ fontFamily }) => fontFamily};
+  color: ${({ color }) => color}; 
+  background: transparent; 
   outline: none;
-  min-height: 40px;
-  max-height: 100px;
 
   &::placeholder {
-    color: #808080;
-    font-size: 14px; /* Hardcoded font-size */
+    color: #808080; 
+    font-size: ${({ hintFontSize }) => hintFontSize};
   }
 
   &:focus {

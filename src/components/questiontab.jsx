@@ -3,21 +3,18 @@ import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import { Button } from '../styled-components';
 import AskAQuestion from './Askaquestion';
-import { useSelector } from 'react-redux'; // Import useSelector for accessing Redux store
+import { useSelector } from 'react-redux';
 
 function QuestionTab() {
   const [activeTab, setActiveTab] = useState('Newest');
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  // Access isSignedIn from the Redux store
-  const isSignedIn = useSelector((state) => state.user.isSignedIn); // Ensure the path matches your Redux structure
+  const isSignedIn = useSelector((state) => state.user.isSignedIn); 
 
   const openModal = () => {
     if (!isSignedIn) {
-      // If not signed in, redirect to signup page
       window.location.href = '/#/signup';
     } else {
-      // If signed in, open the modal
       setIsModalOpen(true);
     }
   };
@@ -71,7 +68,6 @@ function QuestionTab() {
         </StyledButton>
       </ButtonAndTabsContainer>
 
-      {/* Conditionally render the AskAQuestion modal */}
       {isModalOpen && <AskAQuestion onClose={closeModal} />}
     </SearchAndTabsContainer>
   );
@@ -97,7 +93,7 @@ const SearchContainer = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 800px) {
-    padding: 0 20px; /* Reduced padding for smaller screens */
+    padding: 0 20px; 
   }
 `;
 
@@ -112,7 +108,7 @@ const SearchBar = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 800px) {
-    height: 35px; /* Slightly smaller height for mobile */
+    height: 35px;
   }
 `;
 
@@ -149,8 +145,8 @@ const ButtonAndTabsContainer = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 800px) {
-    flex-direction: column; /* Stack button below search bar */
-    padding: 0 20px; /* Reduced padding for smaller screens */
+    flex-direction: column; 
+    padding: 0 20px; 
     align-items: stretch; 
   }
 `;

@@ -8,6 +8,9 @@ import Docs from './screens/Docs';
 import Profile from './screens/Profile';
 import SignUp from './screens/SignUp'
 import AnswerQuesion from './screens/AnswerQuestion';
+import UserProfile from './screens/UserProfile';
+import MultiplayerConnect from './screens/MultiplayerConnect'
+import Multiplayer from './screens/Multiplayer';
 
 const RouterPage = () => {
   return (
@@ -21,7 +24,9 @@ const RouterPage = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/answerquestion/:uuid" element={<AnswerQuesion />} />
-
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/multiplayerconnect" element={<MultiplayerConnect />} />
+        <Route path="/multiplayer/:uuid" element={<Multiplayer />} />
       </Routes>
     </HashRouter>
   );

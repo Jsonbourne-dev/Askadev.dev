@@ -34,6 +34,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh; 
+  overflow: hidden;
 `;
 
 const AppBarContainer = styled.div`
@@ -45,7 +46,7 @@ const ContentContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center; 
-
+  overflow-y: auto; 
 `;
 
 const FooterContainer = styled.div`

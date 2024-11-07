@@ -11,6 +11,7 @@ import { auth, googleProvider, githubProvider } from '../firebase/firebase';
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import GoogleLogo from '../assets/googlelogo.png';
 import GitHubLogo from '../assets/githublogo.png';
+import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 for generating unique IDs
 
 const Body = styled.div`
   display: flex;
@@ -190,22 +191,28 @@ const SignUp = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      dispatch(setUser(username, user.email, password, user.uid)); 
+      // Generate a unique user ID (UUID) for the new user
+      const userId = uuidv4();
+
+      // Dispatch the action with the UUID
+      dispatch(setUser(username, user.email, password, user.uid, userId)); // passing the UUID to setUser
+
       setIsAccountCreated(true);
-      console.log("Account created:", username, user.email);
+      console.log("Account created:", username, user.email, userId); // Log the UUID as well
     } catch (error) {
       setErrorMessage(error.message);
     }
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignUp = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
       const username = user.displayName.split(' ')[0];
-      dispatch(setUser(username, user.email, "", user.uid)); 
-      console.log("Signed in with Google:", username, user.email);
+      const userId = uuidv4();  // Generate UUID for Google user
+      dispatch(setUser(username, user.email, "", user.uid, userId)); 
+      console.log("Account created with Google:", username, user.email, userId);
 
       window.location.href = '/#/community'; 
     } catch (error) {
@@ -213,16 +220,15 @@ const SignUp = () => {
     }
   };
 
-  const handleGitHubSignIn = async () => {
-    setGithubErrorMessage("GitHub auth is not set up till production.");
-    return; 
+  const handleGitHubSignUp = async () => {
     try {
       const result = await signInWithPopup(auth, githubProvider);
       const user = result.user;
 
       const username = user.displayName.split(' ')[0];
-      dispatch(setUser(username, user.email, "", user.uid)); 
-      console.log("Signed in with GitHub:", username, user.email);
+      const userId = uuidv4();  // Generate UUID for GitHub user
+      dispatch(setUser(username, user.email, "", user.uid, userId)); 
+      console.log("Account created with GitHub:", username, user.email, userId);
 
       window.location.href = '/#/community'; 
     } catch (error) {
@@ -235,8 +241,9 @@ const SignUp = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      dispatch(setUser(user.displayName, user.email, "", user.uid)); 
-      console.log("Signed in with email:", user.email);
+      const userId = uuidv4();  // Generate UUID for email login user
+      dispatch(setUser(user.displayName, user.email, "", user.uid, userId)); 
+      console.log("Signed in with email:", user.email, userId);
 
       window.location.href = '/#/community'; 
     } catch (error) {
@@ -277,83 +284,68 @@ const SignUp = () => {
                   Sign In
                 </StyledButton>
                 <Spacer />
-                {/* Forgot Password link centered below the Sign In button */}
                 <ForgotPasswordContainer>
                   <Link to="/#/forgotpassword" style={{ color: '#fff', textDecoration: 'underline' }}>
                     Forgot Password?
                   </Link>
                 </ForgotPasswordContainer>
-
                 <Spacer />
-                <SignInButton isSignUp={false} onClick={handleGoogleSignIn}>
-                  <LogoImageWrapper src={GoogleLogo} alt="Google logo" />
-                  Sign In with Google
-                </SignInButton>
-                <SignInButton isGitHub isSignUp={false} onClick={handleGitHubSignIn}>
-                  <LogoImageWrapper src={GitHubLogo} alt="GitHub logo" />
-                  Sign In with GitHub
-                </SignInButton>
-                {githubErrorMessage && <GitHubErrorText>{githubErrorMessage}</GitHubErrorText>}
-                <Spacer />
-                <SwitchLink onClick={() => setIsSignIn(false)}>Sign Up</SwitchLink>
+                <SwitchLink onClick={() => setIsSignIn(false)}>
+                  Don't have an account? Sign up.
+                </SwitchLink>
+                <ContinueButtonContainer>
+                  <SignInButton onClick={handleGoogleSignUp}>
+                    <LogoImageWrapper src={GoogleLogo} alt="Google logo" />
+                    Sign up with Google
+                  </SignInButton>
+                  <SignInButton isGitHub onClick={handleGitHubSignUp}>
+                    <LogoImageWrapper src={GitHubLogo} alt="GitHub logo" />
+                    Sign up with GitHub
+                  </SignInButton>
+                </ContinueButtonContainer>
               </InputContainer>
             </>
           ) : (
             <>
-              {isAccountCreated ? (
-                <p style={{ color: 'white', textAlign: 'center' }}>
-                  An email has been sent to verify your account.
-                </p>
-              ) : (
-                <>
-                  <FormTitle>Sign Up</FormTitle>
-                  <UserAuthSection>
-                    <InputContainer>
-                      <InputField
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                      />
-                      <InputField
-                        type="email"
-                        placeholder="Email Address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                      <InputField
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                      {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
-                      <StyledButton variant="desktop-filled" onClick={handleCreateAccount}>
-                        Sign Up
-                      </StyledButton>
-                      <Spacer />
-                      {/* Forgot Password link centered below the Sign Up button */}
-                      <ForgotPasswordContainer>
-                        <Link to="/#/forgotpassword" style={{ color: '#fff', textDecoration: 'underline' }}>
-                          Forgot Password?
-                        </Link>
-                      </ForgotPasswordContainer>
-
-                    </InputContainer>
-                  </UserAuthSection>
-                  <SignInButton isSignUp onClick={handleGoogleSignIn}>
+              <FormTitle>Create Account</FormTitle>
+              <InputContainer>
+                <InputField
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <InputField
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <InputField
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+                <StyledButton variant="desktop-filled" onClick={handleCreateAccount}>
+                  Create Account
+                </StyledButton>
+                <Spacer />
+                <SwitchLink onClick={() => setIsSignIn(true)}>
+                  Already have an account? Sign in.
+                </SwitchLink>
+                <ContinueButtonContainer>
+                  <SignInButton onClick={handleGoogleSignUp}>
                     <LogoImageWrapper src={GoogleLogo} alt="Google logo" />
-                    Sign Up with Google
+                    Sign up with Google
                   </SignInButton>
-                  <SignInButton isGitHub isSignUp onClick={handleGitHubSignIn}>
+                  <SignInButton isGitHub onClick={handleGitHubSignUp}>
                     <LogoImageWrapper src={GitHubLogo} alt="GitHub logo" />
-                    Sign Up with GitHub
+                    Sign up with GitHub
                   </SignInButton>
-                  {githubErrorMessage && <GitHubErrorText>{githubErrorMessage}</GitHubErrorText>}
-                  <Spacer />
-                  <SwitchLink onClick={() => setIsSignIn(true)}>Sign In</SwitchLink>
-                </>
-              )}
+                </ContinueButtonContainer>
+              </InputContainer>
             </>
           )}
         </RightContent>

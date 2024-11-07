@@ -1,7 +1,10 @@
 body {
-    background-color: #11141A;
+    background-color: #11131a;
     color: #FFFFFF;
     overflow-x: hidden; 
     padding: 0;
     margin: 0;
-}
+    font-family: 'Roboto', sans-serif; /* Add the Roboto font */
+    font-weight: 700; /* Set the font weight to bold */
+  }
+  

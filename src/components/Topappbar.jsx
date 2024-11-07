@@ -4,7 +4,7 @@ import { Button, Container } from "../styled-components";
 import DesktopLogo from '../assets/desktoplogo.svg';
 import PhoneLogo from '../assets/phonelogo.svg';
 import SmallLogo from '../assets/smalllogo.svg';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; 
 import { useHistory } from 'react-router-dom'; 
 
 const AppBarContainer = styled(Container)`
@@ -74,6 +74,10 @@ const AppBar = () => {
     window.location.href = '/#/community'; 
   };
 
+  const handleMultiplayerClick = () => {
+    window.location.href = '/#/multiplayerconnect'; 
+  };
+
   const handleSignUpClick = () => {
     window.location.href = '/#/signup'; 
   };
@@ -100,7 +104,13 @@ const AppBar = () => {
             <Button variant={`${buttonVariant}-outlined`} width={docButtonWidth}>
               Doc
             </Button> 
-            
+            <Button 
+              variant={`${buttonVariant}-outlined`} 
+              width={buttonWidth} 
+              onClick={handleMultiplayerClick} 
+            >
+              Multiplayer
+            </Button> 
             {isSignedIn ? (
               <UserButton
                 variant={`${buttonVariant}-filled`} 
