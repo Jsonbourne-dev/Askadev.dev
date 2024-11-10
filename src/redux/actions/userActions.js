@@ -1,14 +1,14 @@
 export const SET_USER = "SET_USER";
 export const CLEAR_USER = "CLEAR_USER";
 export const SET_SIGN_IN_STATUS = "SET_SIGN_IN_STATUS";
-export const SIGN_IN_WITH_UUID = "SIGN_IN_WITH_UUID"; // Changed action type to use userUuid
+export const SIGN_IN_WITH_UUID = "SIGN_IN_WITH_UUID"; 
 export const SET_PROFILE_PICTURE = "SET_PROFILE_PICTURE";
-export const UPDATE_USERNAME = "UPDATE_USERNAME"; // New action type
+export const UPDATE_USERNAME = "UPDATE_USERNAME";
 
 export const setUser = (username, email, password, userUuid, profilePic = "") => {
   return {
     type: SET_USER,
-    payload: { username, email, password, userUuid, profilePic }, // Replaced token with userUuid
+    payload: { username, email, password, userUuid, profilePic }, 
   };
 };
 
@@ -25,10 +25,10 @@ export const setSignInStatus = (isSignedIn) => {
   };
 };
 
-export const signInWithUuid = (username, userUuid) => { // Renamed to use userUuid instead of token
+export const signInWithUuid = (username, userUuid) => { 
   return {
     type: SIGN_IN_WITH_UUID,
-    payload: { username, userUuid }, // Replaced token with userUuid
+    payload: { username, userUuid }, 
   };
 };
 
@@ -39,7 +39,6 @@ export const setProfilePicture = (profilePic) => {
   };
 };
 
-// Action to update username
 export const updateUsername = (username) => {
   return {
     type: UPDATE_USERNAME,

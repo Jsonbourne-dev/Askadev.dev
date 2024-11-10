@@ -4,3 +4,4 @@ export { default as Line } from './line';
 export { default as InputField } from './InputField'; 
 export { default as Flag } from './flags'
 export { default as SpacerLine } from './SpacerLine';
+export { default as Tooltip } from './toolTip';

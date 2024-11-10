@@ -12,8 +12,8 @@ const BackgroundImage = styled.img`
 position: absolute; 
 top: 0; 
 right: 0; 
-height: 100%;  // Set height to match the TopContainer's height
-width: auto;   // Maintain the aspect ratio by allowing width to adjust automatically
+height: 100%; 
+width: auto;  
 z-index: -1; 
 
 @media (max-width: 1024px) {

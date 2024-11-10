@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import AppBar from '../components/Topappbar';
-import { FaEdit } from 'react-icons/fa'; // Edit icon import
+import { FaEdit } from 'react-icons/fa';
 import { setProfilePicture, updateUsername } from '../redux/actions/userActions';
-import defaultProfilePic1 from '../assets/greenlogo.png'; // Default profile picture
+import defaultProfilePic1 from '../assets/greenlogo.png';
 import defaultProfilePic2 from '../assets/plantpfp.webp';
-import { InputField } from "../styled-components"; // Importing InputField
-import { updateProfile } from "firebase/auth"; // Import updateProfile from Firebase
-import { auth } from "../firebase/firebase"; // Import Firebase auth instance
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase storage functions
+import { InputField } from "../styled-components"; 
+import { updateProfile } from "firebase/auth"; 
+import { auth } from "../firebase/firebase"; 
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; 
 
 function UserProfile() {
     const user = useSelector((state) => state.user);
@@ -24,15 +24,13 @@ function UserProfile() {
     const [userQuestions, setUserQuestions] = useState([]);
     const [currentProfilePic, setCurrentProfilePic] = useState('');
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-    const [isEditingUsername, setIsEditingUsername] = useState(false); // To toggle username edit mode
+    const [isEditingUsername, setIsEditingUsername] = useState(false); 
 
     const fileInputRef = useRef(null);
     const modalRef = useRef(null);
 
-    // Default profile picture array
-    const defaultProfilePics = [defaultProfilePic1, defaultProfilePic2]; // Add more as needed
+    const defaultProfilePics = [defaultProfilePic1, defaultProfilePic2]; 
 
-    // Function to get a random default profile picture
     const getRandomProfilePic = () => {
         const randomIndex = Math.floor(Math.random() * defaultProfilePics.length);
         return defaultProfilePics[randomIndex];
@@ -45,11 +43,9 @@ function UserProfile() {
             setToken(user.token);
             setIsSignedIn(user.isSignedIn);
             
-            // Filter questions based on the user's UUID
-            const filteredQuestions = questions.filter(q => q.userUuid === user.userUuid); // Use 'userUuid' to match user's questions
+            const filteredQuestions = questions.filter(q => q.userUuid === user.userUuid);
             setUserQuestions(filteredQuestions);
 
-            // Set profile pic: random if not set by user
             if (!user.profilePic) {
                 setCurrentProfilePic(getRandomProfilePic());
             } else {
@@ -66,17 +62,13 @@ function UserProfile() {
             if (userId) {
                 const storageRef = ref(storage, `profile_pics/${userId}.jpg`);
 
-                // Upload the file to Firebase Storage
                 uploadBytes(storageRef, file).then(async (snapshot) => {
-                    // Get the download URL of the uploaded image
                     const downloadURL = await getDownloadURL(storageRef);
                     
-                    // Update the profile picture in Firebase Authentication
                     await updateProfile(auth.currentUser, { photoURL: downloadURL });
 
-                    // Update the profile picture state and Redux
                     setCurrentProfilePic(downloadURL);
-                    dispatch(setProfilePicture(downloadURL)); // Save to Redux
+                    dispatch(setProfilePicture(downloadURL));
                 }).catch((error) => {
                     console.error('Error uploading profile picture:', error);
                 });
@@ -85,7 +77,7 @@ function UserProfile() {
     };
 
     const handleProfilePicClick = () => {
-        fileInputRef.current.click(); // Trigger file input
+        fileInputRef.current.click(); 
     };
 
     const handleSignOut = () => {
@@ -104,23 +96,20 @@ function UserProfile() {
     };
 
     const handleUsernameChange = (e) => {
-        setUsernameState(e.target.value); // Update username as it's being typed
+        setUsernameState(e.target.value);
     };
 
     const handleUsernameSave = async () => {
         try {
-            // Update username in Redux
             dispatch(updateUsername(username));
-            setIsEditingUsername(false); // Close the edit field
+            setIsEditingUsername(false);
 
-            // Update username in Firebase user profile
-            const currentUser = auth.currentUser; // Get the current user from Firebase
+            const currentUser = auth.currentUser;
             if (currentUser) {
                 await updateProfile(currentUser, { displayName: username });
                 console.log("Firebase username updated successfully:", username);
             }
 
-            // Update username in each of user's questions and send to backend
             userQuestions.forEach(async (question) => {
                 const updatedQuestion = { ...question, username };
                 try {
@@ -140,27 +129,25 @@ function UserProfile() {
     };
     
     const handleUsernameEditClick = () => {
-        setIsEditingUsername(true); // Enable editing when the edit button is clicked
+        setIsEditingUsername(true); 
     };
 
     const handleUsernameEnter = (e) => {
         if (e.key === 'Enter') {
-            handleUsernameSave(); // Save on Enter key
+            handleUsernameSave(); 
         }
     };
 
     const handleClickOutside = (e) => {
         if (modalRef.current && !modalRef.current.contains(e.target)) {
-            setIsEditingUsername(false); // Close modal if clicked outside
+            setIsEditingUsername(false); 
         }
     };
 
     useEffect(() => {
-        // Add event listener to detect clicks outside the modal
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-            // Clean up the event listener when the component is unmounted
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
@@ -192,7 +179,7 @@ function UserProfile() {
                             <span style={styles.usernameText}>{username}</span>
                             <FaEdit 
                                 style={styles.usernameEditIcon} 
-                                onClick={handleUsernameEditClick} // Edit button click
+                                onClick={handleUsernameEditClick}
                             />
                         </div>
                         
@@ -203,7 +190,7 @@ function UserProfile() {
                                     value={username} 
                                     onChange={handleUsernameChange} 
                                     placeholder="Enter new username"
-                                    onKeyPress={handleUsernameEnter} // Listen for Enter key press
+                                    onKeyPress={handleUsernameEnter} 
                                     height="40px"
                                     hintFontSize="14px"
                                 />

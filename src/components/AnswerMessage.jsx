@@ -106,7 +106,7 @@ const IconContainer = styled.div`
 
 const AnsweredMessage = ({ 
     message = "This is a long default message that is displayed below the spacer line.", 
-    answer, // Pass the answer object
+    answer, 
     user = "User", 
     votes, 
     setVotes 
@@ -114,7 +114,7 @@ const AnsweredMessage = ({
     const [likeCount, setLikeCount] = useState(0);
     const [isHearted, setIsHearted] = useState(false);
     const [timeAgo, setTimeAgo] = useState('');
-    const theme = useContext(ThemeContext); // Get the theme from context
+    const theme = useContext(ThemeContext); 
 
     const toggleHeart = () => {
         setIsHearted(!isHearted);
@@ -124,7 +124,7 @@ const AnsweredMessage = ({
     useEffect(() => {
         if (!answer || !answer.createdAt) {
             setTimeAgo("Error: Answer data is missing.");
-            return; // Early exit if answer is missing
+            return; 
         }
 
         const messageDate = new Date(answer.createdAt); 

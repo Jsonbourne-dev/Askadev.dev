@@ -7,11 +7,10 @@ export const UPDATE_QUESTION_VIEWS = 'UPDATE_QUESTION_VIEWS';
 export const UPDATE_QUESTION_VOTES = 'UPDATE_QUESTION_VOTES';
 export const UPDATE_ANSWER_VOTES = 'UPDATE_ANSWER_VOTES'; 
 
-// Action to set all questions (filtered by user UUID if necessary)
 export const setQuestions = (questions, userUuid) => ({
     type: SET_QUESTIONS,
     payload: questions
-        .filter(question => question.userUuid === userUuid)  // Filter by user UUID
+        .filter(question => question.userUuid === userUuid) 
         .map(question => ({
             ...question,
             answers: question.answers || [], 
@@ -20,20 +19,18 @@ export const setQuestions = (questions, userUuid) => ({
         })),
 });
 
-// Action to add a new question (with user UUID)
 export const addQuestion = (question, userUuid) => ({
     type: ADD_QUESTION,
     payload: { 
         ...question, 
         uuid: uuidv4(), 
-        userUuid,  // Adding user UUID to the question
+        userUuid,  
         answers: [], 
         views: 0, 
         votes: 0, 
     },
 });
 
-// Action to add an answer to a question (with user UUID)
 export const addAnswerMessage = (questionUuid, user, answerMessage) => {
     return {
         type: ADD_ANSWER_MESSAGE,
@@ -50,13 +47,11 @@ export const addAnswerMessage = (questionUuid, user, answerMessage) => {
     };
 };
 
-// Action to update the number of views on a question
 export const updateQuestionViews = (uuid) => ({
     type: UPDATE_QUESTION_VIEWS,
     payload: { uuid },
 });
 
-// Action to update the number of votes on a question
 export const updateQuestionVotes = (uuid, newVoteCount) => ({
     type: UPDATE_QUESTION_VOTES,
     payload: {
@@ -65,7 +60,6 @@ export const updateQuestionVotes = (uuid, newVoteCount) => ({
     },
 });
 
-// Action to update the number of votes on an answer
 export const updateAnswerVotes = (questionUuid, answerUuid, newVoteCount) => ({
     type: UPDATE_ANSWER_VOTES,
     payload: {

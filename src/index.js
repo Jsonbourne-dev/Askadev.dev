@@ -8,7 +8,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 const baseTheme = {
   colors: {
       primary: '#BEE239',
-      text: 'black',
+      text: 'bee239',
       clipboardBorder: '#ccc',
       copyMessage: '#bee239',
       whiteText: 'white',

@@ -112,7 +112,7 @@ const AnswerQuestion = () => {
             console.error('Error updating question:', error);
         }
 
-        setAnswer(''); // Reset answer field
+        setAnswer(''); 
     };
 
     return (
@@ -164,7 +164,7 @@ const AnswerQuestion = () => {
 
                 <AnswersHeader>
                     <h1 style={styles.answersCount}>
-                        {questionData?.answers?.length || 0} answer{(questionData?.answers?.length !== 1) ? 's' : ''}
+                        {questionData?.answers?.length || 0} Answer{(questionData?.answers?.length !== 1) ? 's' : ''}
                     </h1>
                 </AnswersHeader>
                 <SpacerLine />
@@ -181,7 +181,7 @@ const AnswerQuestion = () => {
                         />
                     ))
                 ) : (
-                    <p>No answers yet.</p>
+                    null
                 )}
 
                 <Spacer />

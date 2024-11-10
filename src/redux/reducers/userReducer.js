@@ -2,22 +2,20 @@ import {
   SET_USER, 
   CLEAR_USER, 
   SET_SIGN_IN_STATUS, 
-  SIGN_IN_WITH_UUID,  // Changed action type to SIGN_IN_WITH_UUID
+  SIGN_IN_WITH_UUID,  
   SET_PROFILE_PICTURE, 
   UPDATE_USERNAME 
-} from '../actions/userActions'; // Import the new action type for updating username
+} from '../actions/userActions'; 
 
-// Initial state for the user reducer
 const initialState = {
   username: "",
   email: "",
   password: "",
-  userUuid: "",  // Replaced token with userUuid
+  userUuid: "", 
   profilePic: "",
   isSignedIn: false,
 };
 
-// User reducer to handle the actions
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
@@ -26,7 +24,7 @@ const userReducer = (state = initialState, action) => {
         username: action.payload.username,
         email: action.payload.email,
         password: action.payload.password,
-        userUuid: action.payload.userUuid, // Replace token with userUuid
+        userUuid: action.payload.userUuid, 
         isSignedIn: true,
       };
     case CLEAR_USER:
@@ -36,11 +34,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isSignedIn: action.payload,
       };
-    case SIGN_IN_WITH_UUID: // Updated to use userUuid
+    case SIGN_IN_WITH_UUID: 
       return {
         ...state,
         username: action.payload.username,
-        userUuid: action.payload.userUuid, // Store userUuid instead of token
+        userUuid: action.payload.userUuid, 
         isSignedIn: true,
       };
     case SET_PROFILE_PICTURE:
@@ -48,10 +46,10 @@ const userReducer = (state = initialState, action) => {
         ...state,
         profilePic: action.payload,
       };
-    case UPDATE_USERNAME:  // Handle the username update action
+    case UPDATE_USERNAME: 
       return {
         ...state,
-        username: action.payload, // Update username in Redux store
+        username: action.payload, 
       };
     default:
       return state;

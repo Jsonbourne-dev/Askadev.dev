@@ -108,11 +108,10 @@ app.post('/api/questions', async (req, res, next) => {
   const { uuid } = data;
 
   try {
-    // Use findOneAndUpdate to upsert (update if exists, insert if not)
     const updatedQuestion = await Question.findOneAndUpdate(
-      { uuid },        // Find question by uuid
-      data,            // Update with new data
-      { new: true, upsert: true } // Options: return updated document and create if not found
+      { uuid },        
+      data,            
+      { new: true, upsert: true }
     );
 
     // Logging success
@@ -129,19 +128,16 @@ app.post('/api/questions', async (req, res, next) => {
 app.post('/api/users', async (req, res, next) => {
   const data = req.body;
 
-  // Validate required fields: uuid, username, and optional profilePic
   const { uuid, username, profilePic } = data;
 
   if (!uuid || !username) {
     return next({ status: 400, message: "UUID and Username are required" });
   }
 
-  // Validate the profilePic, if provided
   if (profilePic && typeof profilePic !== 'string') {
     return next({ status: 400, message: "Profile picture must be a valid string (URL or base64)" });
   }
 
-  // Check if user already exists based on uuid
   if (userUUIDMap.has(uuid)) {
     logger.warn(`User with uuid ${uuid} already exists, skipping insertion.`);
     return next({ status: 409, message: "User already exists" });
@@ -150,17 +146,14 @@ app.post('/api/users', async (req, res, next) => {
   logger.info("Received user data:", data);
 
   try {
-    // Create a new User instance with the data
     const newUser = new User({
       uuid,
       username,
-      profilePic: profilePic || null, // If no profilePic is provided, store null or a default value
+      profilePic: profilePic || null, 
     });
 
-    // Save the new user to the database
     await newUser.save();
 
-    // Add the uuid to the userUUIDMap to prevent future duplicates
     userUUIDMap.set(uuid, true);
 
     logger.info("User added successfully:", newUser);

@@ -11,7 +11,7 @@ import { auth, googleProvider, githubProvider } from '../firebase/firebase';
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import GoogleLogo from '../assets/googlelogo.png';
 import GitHubLogo from '../assets/githublogo.png';
-import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 for generating unique IDs
+import { v4 as uuidv4 } from 'uuid'; 
 
 const Body = styled.div`
   display: flex;
@@ -154,7 +154,7 @@ const ForgotPasswordContainer = styled.div`
   width: 100%;
   display: flex; 
   justify-content: center; 
-  margin-top: 10px; // Adjust the spacing as needed
+  margin-top: 10px; 
 `;
 
 const SignUp = () => {
@@ -191,14 +191,12 @@ const SignUp = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Generate a unique user ID (UUID) for the new user
       const userId = uuidv4();
 
-      // Dispatch the action with the UUID
-      dispatch(setUser(username, user.email, password, user.uid, userId)); // passing the UUID to setUser
+      dispatch(setUser(username, user.email, password, user.uid, userId)); 
 
       setIsAccountCreated(true);
-      console.log("Account created:", username, user.email, userId); // Log the UUID as well
+      console.log("Account created:", username, user.email, userId);
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -210,7 +208,7 @@ const SignUp = () => {
       const user = result.user;
 
       const username = user.displayName.split(' ')[0];
-      const userId = uuidv4();  // Generate UUID for Google user
+      const userId = uuidv4();  
       dispatch(setUser(username, user.email, "", user.uid, userId)); 
       console.log("Account created with Google:", username, user.email, userId);
 
@@ -226,7 +224,7 @@ const SignUp = () => {
       const user = result.user;
 
       const username = user.displayName.split(' ')[0];
-      const userId = uuidv4();  // Generate UUID for GitHub user
+      const userId = uuidv4();  
       dispatch(setUser(username, user.email, "", user.uid, userId)); 
       console.log("Account created with GitHub:", username, user.email, userId);
 
@@ -241,7 +239,7 @@ const SignUp = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      const userId = uuidv4();  // Generate UUID for email login user
+      const userId = uuidv4();  
       dispatch(setUser(user.displayName, user.email, "", user.uid, userId)); 
       console.log("Signed in with email:", user.email, userId);
 

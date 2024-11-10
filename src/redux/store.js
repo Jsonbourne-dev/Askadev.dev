@@ -32,10 +32,36 @@ const rootReducer = combineReducers({
   user: userReducer,
 });
 
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('reduxState');
+    if (serializedState) {
+      return JSON.parse(serializedState);
+    }
+  } catch (e) {
+    console.error('Could not load state from localStorage:', e);
+  }
+  return undefined; 
+};
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('reduxState', serializedState);
+  } catch (e) {
+    console.error('Could not save state to localStorage:', e);
+  }
+};
+
 const store = createStore(
   rootReducer,
+  loadState(),
   composeEnhancers(applyMiddleware(apiMiddleware))
 );
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 const fetchQuestionsPeriodically = () => {
   store.dispatch({ type: INIT_STORE });

@@ -10,7 +10,7 @@ const Container = styled.div`
     background-color: #11131a;
     color: black;
     width: 250px;
-    height: 100vh;
+    height: ${({ height }) => height || '100vh'}; /* Accept height prop */
     border: 2px solid #BEE239;
     border-radius: 4px;
     padding: 10px;
@@ -125,8 +125,7 @@ const FileNameInput = styled.input`
     margin-left: 10px;
 `;
 
-
-const FileManager = () => {
+const FileManager = ({ height }) => { // Accept height prop here
     const [openFolders, setOpenFolders] = useState({});
     const [selectedFile, setSelectedFile] = useState(null);
     const [folders, setFolders] = useState({
@@ -333,7 +332,7 @@ const FileManager = () => {
     const closeTooltip = () => setTooltip({ show: false, x: 0, y: 0, itemName: '', type: '' });
 
     return (
-        <Container>
+        <Container height={height}> {/* Pass height prop to Container */}
             {renderFolders(folders)}
             
             {/* Tooltip component */}

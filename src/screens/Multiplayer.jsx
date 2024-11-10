@@ -1,217 +1,209 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled, { ThemeProvider } from "styled-components"; 
-import { Terminal } from 'xterm';
-import { FitAddon } from 'xterm-addon-fit';
-import 'xterm/css/xterm.css'; 
-import Editor from "../components/Editor"; 
-import { FaPlus, FaTrashAlt, FaFileCode, FaTerminal, FaBug } from 'react-icons/fa'; // Importing icons
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import AppBar from '../components/Topappbar';
+import { Editor, useMonaco } from '@monaco-editor/react';
+import FileManager from '../components/FileManager';
+import Xterm from '../components/Xterm';
 
-// Theme data
-const themeData = {
-  fontSizes: {
-    large: '40px',
-    medium: '30px',
-    small: '20px',
-    xsmall: '18px',
-  },
-  fontWeights: {
-    bold: 'bold',
-    thin: '300',
-    normal: '400',
-  },
-  fonts: {
-    thin: "'Roboto Thin', sans-serif",
-    bold: "'Roboto Bold', sans-serif",
-    regular: "'Roboto', sans-serif",
-  },
-  colors: {
-    primary: '#BEE239',
-    text: 'black',
-    outlined: '#BEE239',
-    white: 'white',
-    error: 'red',
-    background: '#11141A',
-    overlay: 'rgba(17, 20, 26, 0.7)',
-    sidebar: '#1F2328',
-    terminal: '#1E2126',
-  },
-};
+const Multiplayer = ({ username = "Guest" }) => {
+    const appBarHeight = 200;
+    const paddingBottom = 17;
+    const bottomContainerHeight = 1;
 
-// Styled components
-const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  background-color: ${props => props.theme.colors.background};
-`;
+    const monaco = useMonaco();
+    const [editor, setEditor] = useState(null);
+    const [cursorBoxColor, setCursorBoxColor] = useState('#bee239');
+    const widgetRef = useRef(null);
 
-const Sidebar = styled.div`
-  width: 250px;
-  padding: 15px;
-  background-color: ${props => props.theme.colors.sidebar};
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-  color: ${props => props.theme.colors.text};
-`;
-
-const EditorContainer = styled.div`
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  color: ${props => props.theme.colors.text};
-`;
-
-const TerminalContainer = styled.div`
-  width: 300px;
-  padding: 10px;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-`;
-
-const TerminalTabs = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
-`;
-
-const TerminalOutput = styled.div`
-  flex: 1;
-  border: 1px solid #ccc;
-  background-color: ${props => props.theme.colors.terminal};
-  color: ${props => props.theme.colors.text};
-`;
-
-const FileList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-`;
-
-const FileItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const AddFileButton = styled.button`
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-  background-color: ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.white};
-  border: none;
-  padding: 8px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: ${props => props.theme.colors.primary}CC; /* Slightly transparent on hover */
-  }
-
-  svg {
-    margin-right: 5px; /* Space between icon and text */
-  }
-`;
-
-const DeleteButton = styled.button`
-  background: none;
-  border: none;
-  color: ${props => props.theme.colors.error};
-  cursor: pointer;
-
-  &:hover {
-    color: ${props => props.theme.colors.error}CC; /* Slightly transparent on hover */
-  }
-`;
-
-// Terminal component using xterm.js
-const TerminalComponent = () => {
-    const terminalRef = useRef(null);
-    const fitAddon = new FitAddon();
-    const terminal = new Terminal();
+    const loadThemeFromLocalStorage = () => {
+        const storedTheme = localStorage.getItem('editorTheme');
+        return storedTheme || 'cobalt2';
+    };
 
     useEffect(() => {
-        terminal.open(terminalRef.current);
-        fitAddon.fit();
-        terminal.loadAddon(fitAddon);
+        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        setCursorBoxColor(randomColor);
 
-        terminal.writeln('Welcome to xterm.js!');
-        terminal.writeln('Type "help" for a list of commands.');
+        if (monaco) {
+            monaco.editor.defineTheme('cobalt2', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [
+                    { token: '', foreground: 'FFFFFF', background: '#1B2B34' },
+                    { token: 'comment', foreground: '#6A8D92', fontStyle: 'italic' },
+                    { token: 'keyword', foreground: '#F9A825' },
+                    { token: 'variable', foreground: '#E8E8E8' },
+                    { token: 'constant', foreground: '#F9A825' },
+                    { token: 'number', foreground: '#E8E8E8' },
+                    { token: 'string', foreground: '#87D7A5' },
+                    { token: 'operator', foreground: '#FFB9B9' },
+                    { token: 'function', foreground: '#60D0F5' },
+                    { token: 'class', foreground: '#F7D9B6' },
+                    { token: 'type', foreground: '#D1F7F7' },
+                ],
+                colors: {
+                    'editor.background': '#1B2B34',
+                    'editor.foreground': '#E8E8E8',
+                    'editor.lineHighlightBackground': '#2C3C4B',
+                    'editor.selectionBackground': '#FFB9B9',
+                    'editorCursor.foreground': randomColor,
+                },
+            });
 
-        window.addEventListener('resize', fitAddon.fit);
+            const currentTheme = loadThemeFromLocalStorage();
+            monaco.editor.setTheme(currentTheme);
+        }
+    }, [monaco]);
 
-        return () => {
-            terminal.dispose();
-            window.removeEventListener('resize', fitAddon.fit);
-        };
-    }, []);
+    const handleEditorDidMount = useCallback((editorInstance, monacoInstance) => {
+        setEditor(editorInstance);
+
+        const widgetId = "username-widget";
+
+        editorInstance.updateOptions({
+            cursorBlinking: 'solid',
+        });
+
+        class UsernameWidget {
+            constructor() {
+                this.domNode = document.createElement('div');
+                this.domNode.style.backgroundColor = cursorBoxColor;
+                this.domNode.style.color = '#FFFFFF';
+                this.domNode.style.padding = '4px 8px';
+                this.domNode.style.fontSize = '11px';
+                this.domNode.style.borderRadius = '10px 6px 6px 0';
+                this.domNode.style.pointerEvents = 'none';
+                this.domNode.style.position = 'absolute';
+                this.domNode.style.whiteSpace = 'nowrap';
+                this.domNode.innerText = username;
+            }
+
+            getId() {
+                return widgetId;
+            }
+
+            getDomNode() {
+                return this.domNode;
+            }
+
+            getPosition() {
+                const position = editorInstance.getPosition();
+                const layoutInfo = editorInstance.getLayoutInfo();
+                const top = layoutInfo.contentTop + (position.lineNumber - 1) * layoutInfo.lineHeight;
+                return {
+                    position: {
+                        lineNumber: position.lineNumber,
+                        column: position.column,
+                    },
+                    preference: [monacoInstance.editor.ContentWidgetPositionPreference.ABOVE],
+                };
+            }
+
+            updateColor(newColor) {
+                this.domNode.style.backgroundColor = newColor;
+            }
+        }
+
+        const widget = new UsernameWidget();
+        widgetRef.current = widget;
+        editorInstance.addContentWidget(widget);
+
+        editorInstance.onDidChangeCursorPosition(() => {
+            editorInstance.layoutContentWidget(widget);
+        });
+    }, [cursorBoxColor, username]);
+
+    useEffect(() => {
+        if (widgetRef.current) {
+            widgetRef.current.updateColor(cursorBoxColor);
+        }
+    }, [cursorBoxColor]);
 
     return (
-        <TerminalOutput ref={terminalRef} />
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100vh',
+                minHeight: '100vh',
+                overflow: 'hidden',
+            }}
+        >
+            <AppBar />
+
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flex: 1,
+                    overflow: 'hidden',
+                    minHeight: `calc(100vh - ${appBarHeight}px - ${bottomContainerHeight}px - ${paddingBottom}px)`,
+                    paddingBottom: `${paddingBottom}px`,
+                }}
+            >
+                <div
+                    style={{
+                        width: '265px',
+                        padding: '8px',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        overflowY: 'auto',
+                        paddingTop: '16px',
+                    }}
+                >
+                    <FileManager height="100%" />
+                </div>
+
+                <div
+                    style={{
+                        flex: 1,
+                        padding: '16px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                        overflow: 'hidden',
+                    }}
+                >
+                    <div
+                        style={{
+                            flex: 1,
+                            border: `2px solid ${cursorBoxColor}`,
+                            borderRadius: '4px',
+                            height: '100%',
+                            display: 'flex',
+                            position: 'relative',
+                        }}
+                    >
+                        <Editor
+                            height="100%"
+                            defaultLanguage="javascript"
+                            defaultValue="// Start typing your code here"
+                            theme={loadThemeFromLocalStorage()}
+                            onMount={handleEditorDidMount}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    style={{
+                        marginTop: '16px',
+                        width: '500px',
+                        height: 'calc(100%)',
+                    }}
+                >
+                    <Xterm />
+                </div>
+            </div>
+
+            <div
+                style={{
+                    height: `${bottomContainerHeight}px`,
+                    backgroundColor: 'transparent',
+                    padding: '20px',
+                }}
+            ></div>
+        </div>
     );
 };
-
-// Main Multiplayer component
-function Multiplayer() {
-    const [files, setFiles] = useState(['File1.js', 'File2.js']);
-    const [currentFile, setCurrentFile] = useState(null);
-
-    const addFile = () => {
-        const newFileName = prompt("Enter new file name:", "NewFile.js");
-        if (newFileName) {
-            setFiles([...files, newFileName]);
-        }
-    };
-
-    const deleteFile = (fileName) => {
-        setFiles(files.filter(file => file !== fileName));
-        if (currentFile === fileName) {
-            setCurrentFile(null);
-        }
-    };
-
-    return (
-        <ThemeProvider theme={themeData}>
-            <Container>
-                <Sidebar>
-                    <h2>Files & Directories</h2>
-                    <AddFileButton onClick={addFile}>
-                        <FaPlus /> Add File
-                    </AddFileButton>
-                    <FileList>
-                        {files.map(file => (
-                            <FileItem key={file}>
-                                <span onClick={() => setCurrentFile(file)}>
-                                    <FaFileCode style={{ marginRight: '5px' }} />
-                                    {file}
-                                </span>
-                                <DeleteButton onClick={() => deleteFile(file)}>
-                                    <FaTrashAlt />
-                                </DeleteButton>
-                            </FileItem>
-                        ))}
-                    </FileList>
-                </Sidebar>
-                <EditorContainer>
-                    <Editor fileName={currentFile} />
-                </EditorContainer>
-                <TerminalContainer>
-                    <TerminalTabs>
-                        <button>
-                            <FaTerminal /> Console
-                        </button>
-                        <button>
-                            <FaTerminal /> Shell
-                        </button>
-                        <button>
-                            <FaBug /> Debug
-                        </button>
-                    </TerminalTabs>
-                    <TerminalComponent />
-                </TerminalContainer>
-            </Container>
-        </ThemeProvider>
-    );
-}
 
 export default Multiplayer;
